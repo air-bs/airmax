@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Air Max</title>
+<link rel="icon" href="/icon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png"><link rel="apple-touch-icon" href="/icon-192.png"><link rel="manifest" href="/manifest.json">
+<style>
+  :root { --slate:#34495e; --btn:#b6d4e7; --btnText:#2c3e50; --green:#c7ebcf; --greenText:#1e7b34; --red:#f8b4b8; --redText:#c0392b; --line:#d5dde5; --sel:#3c8dbc; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; font-family:'Segoe UI', Roboto, Arial, sans-serif; color:#2c3e50; background:#eef2f5; }
+  #app { display:grid; grid-template-rows:44px 1fr 30px; height:100vh; }
+  .top { background:var(--slate); color:#fff; display:flex; align-items:center; gap:12px; padding:0 14px; }
+  .top .topset { border:0; color:#fff; font:inherit; font-size:13px; font-weight:700; padding:4px 12px; background:#2e86c1; cursor:pointer; white-space:nowrap; } .top .topset:hover { background:#3498db; } .top .topset kbd { margin-left:4px; font-size:11px; padding:0 5px; }
+  .top b { font-size:18px; } .top .sub { opacity:.75; font-size:13px; } .top .sp { flex:1; }
+  .pill { padding:3px 10px; border-radius:999px; font-size:12px; font-weight:600; background:#5d6d7e; cursor:default; }
+  .pill.ok { background:#1e8449; } .pill.bad { background:#c0392b; } .pill.warn { background:#b9770e; }
+  .wrap { display:grid; grid-template-columns:var(--lw,172px) 1fr var(--rw,270px); min-height:0; }
+  .actions { background:#e3eaf0; border-right:1px solid var(--line); display:flex; flex-direction:column; min-height:0; }
+  .actions h2 { margin:0; background:var(--slate); color:#fff; font-size:20px; padding:10px 14px; }
+  .actions .list { flex:1; overflow:auto; padding:6px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); align-content:start; gap:5px; } /* reflows with the panel width */
+  .abtn { display:flex; align-items:center; gap:9px; border:0; border-radius:5px; padding:6px 9px; background:var(--btn); color:var(--btnText); text-align:left; cursor:pointer; box-shadow:0 2px 0 #8fb3c9; min-height:42px; font:inherit; }
+  .abtn .ic { width:20px; text-align:center; font-size:16px; } .abtn .t { font-weight:700; font-size:14px; line-height:1.1; } .abtn .k { display:block; font-size:10.5px; font-weight:500; opacity:.8; }
+  .abtn.green { background:var(--green); color:var(--greenText); box-shadow:0 2px 0 #9fd3ab; } .abtn.red { background:var(--red); color:var(--redText); box-shadow:0 2px 0 #e38d93; }
+  .abtn:active, .rbtn:active { transform:translateY(2px); box-shadow:none; }
+  .na { opacity:.42; filter:grayscale(1); cursor:not-allowed !important; }
+  .center { display:grid; grid-template-rows:auto 1fr auto; min-height:0; padding:8px; gap:8px; }
+  .tiles { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; } /* top row: Customers | Items | Payment */
+  .tiles .tile { height:clamp(72px, 10.5vh, 104px); font-size:clamp(15px, 1.15vw, 20px); } .tiles .tile .ic { font-size:clamp(24px, 2vw, 34px); }
+  .tile { background:#fff; border:2px solid #dfe6ec; border-radius:4px; height:84px; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; font-weight:600; position:relative; }
+  .tile .ic { font-size:28px; } .tile.active { border-color:#d63031; } .tile .info { font-size:11.5px; font-weight:500; color:#566573; margin-top:2px; } .tile .k { position:absolute; top:4px; right:7px; font-size:10px; color:#95a5a6; }
+  .gridbox { background:#fff; border:1px solid var(--line); overflow:auto; min-height:0; }
+  .gridhead { display:flex; justify-content:space-between; padding:5px 8px; color:#566573; font-size:13px; border-bottom:1px solid var(--line); font-weight:600; }
+  .gridhead.ret { background:#fdecea; color:#c0392b; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th { background:#f4f7f9; text-align:left; font-weight:600; padding:7px 8px; border-bottom:1px solid var(--line); color:#566573; font-size:12.5px; white-space:nowrap; }
+  td { padding:8px; border-bottom:1px solid #edf1f4; } td.n, th.n { text-align:right; }
+  tr.row { cursor:pointer; } tr.row.sel td { background:var(--sel); color:#fff; }
+  .empty { text-align:center; color:#7f8c8d; padding:60px 10px; font-size:16px; }
+  kbd { background:#eef2f5; border:1px solid #cfd8df; border-radius:4px; padding:1px 6px; font-size:12px; color:#2c3e50; }
+  .bottom { display:grid; grid-template-columns:1fr 470px; gap:10px; align-items:start; }
+  .scanrow input { width:100%; font-size:18px; padding:9px 12px; border:1px solid #b9c7d2; border-radius:4px; }
+  .totals { display:grid; grid-template-columns:1fr 1fr; background:#fff; border:1px solid var(--line); font-size:16px; }
+  .totals div { display:flex; justify-content:space-between; padding:5px 10px; border-bottom:1px solid #edf1f4; } .totals div span:last-child { font-weight:700; }
+  .totals .pretax { font-weight:700; } .totals .taxoffline { color:#c0392b; font-weight:700; }
+  .totals .total { grid-column:1 / -1; font-weight:800; font-size:30px; padding:8px 12px; background:#f4f7f9; }
+  .msg { font-size:14px; margin-top:6px; min-height:20px; font-weight:600; } .msg.err { color:#c0392b; } .msg.ok { color:#1e7b34; }
+  .right { background:#e3eaf0; border-left:1px solid var(--line); overflow:auto; padding:8px; }
+  .right h3 { margin:10px 2px 5px; font-size:12px; text-transform:uppercase; letter-spacing:.6px; color:#566573; }
+  .rgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(116px, 1fr)); gap:6px; } /* 1 column when narrow, 2, 3+ when wider */
+  .rbtn { border:0; background:#fff; border-radius:5px; padding:8px 6px; min-height:52px; font:inherit; font-size:12.5px; font-weight:600; color:#2c3e50; cursor:pointer; box-shadow:0 1px 0 #c3ced8; }
+  .rbtn small { display:block; font-weight:500; color:#7f8c8d; font-size:10.5px; } .rbtn.red { color:var(--redText); }
+  .status { background:#2c3e50; color:#d5dde5; font-size:12px; display:flex; align-items:center; gap:16px; padding:0 12px; white-space:nowrap; overflow:hidden; }
+  /* login */
+  #login { position:fixed; inset:0; background:linear-gradient(135deg,#34495e,#1f2d3a); display:none; align-items:center; justify-content:center; z-index:40; }
+  #login .card { background:#fff; border-radius:12px; padding:28px 32px; width:380px; box-shadow:0 20px 60px #0007; }
+  #login h1 { margin:0 0 4px; font-size:24px; } #login p { margin:0 0 18px; color:#7f8c8d; font-size:13px; }
+  label.f { display:block; font-size:13px; color:#566573; margin:10px 0 4px; font-weight:600; }
+  input.f, select.f { width:100%; font-size:17px; padding:9px 11px; border:1px solid #b9c7d2; border-radius:6px; }
+  .pbtn { border:0; border-radius:6px; padding:10px 16px; font:inherit; font-weight:700; font-size:15px; cursor:pointer; background:#2e86c1; color:#fff; }
+  .pbtn.g { background:#1e8449; } .pbtn.r { background:#c0392b; } .pbtn.s { background:#dfe6ec; color:#2c3e50; }
+  .full { width:100%; margin-top:18px; }
+  /* modal */
+  .el-overlay { position:fixed; inset:0; background:#0007; display:flex; align-items:center; justify-content:center; z-index:60; }
+  .modal { background:#fff; border-radius:10px; padding:18px 22px; min-width:420px; max-width:92vw; max-height:88vh; overflow:auto; box-shadow:0 20px 60px #0007; }
+  .modal h2 { margin:0 0 10px; font-size:20px; } .modal .row2 { display:flex; gap:8px; margin-top:14px; justify-content:flex-end; flex-wrap:wrap; }
+  .big { font-size:28px; font-weight:800; } .due { display:flex; justify-content:space-between; font-size:18px; margin:6px 0; }
+  .quick { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; } .quick button { font-size:16px; padding:8px 12px; border:0; border-radius:6px; background:var(--btn); cursor:pointer; font-weight:700; }
+  .note { font-size:12.5px; color:#7f8c8d; margin-top:8px; }
+  .banner { background:#fdebd0; color:#9c640c; padding:6px 10px; border-radius:6px; font-size:13px; margin-bottom:8px; }
+  /* v1.1: payment, member, return lines */
+  .paytop { display:grid; grid-template-columns:1fr 1fr 1.3fr; gap:8px; margin-bottom:8px; }
+  .paytop div { background:#f4f6f8; border-radius:6px; padding:8px 10px; } .paytop span { display:block; font-size:12px; color:#566573; } .paytop b { font-size:20px; }
+  .paytop .left { background:#e8f6ec; } .paytop .left b { color:#1e7b34; font-size:26px; }
+  .tabs { display:flex; gap:4px; margin:6px 0; flex-wrap:wrap; } .tab { padding:9px 14px; border:1px solid #ccd; background:#fff; border-radius:6px; cursor:pointer; font-weight:600; }
+  .tab.on { background:#2d6cdf; border-color:#2d6cdf; color:#fff; }
+  /* 1.2.0: full-screen payment view. Adjust the layout here (sizes, column widths, colours) without touching app.js. */
+  :root { --pay-nums-w: 38%; --pay-num-size: 44px; --pay-due-size: 64px; --pay-tab-h: 76px; --pay-tab-size: 22px; --pay-input-size: 30px; --pay-bill-size: 22px; --pay-gap: 14px; }
+  .fullpay-ov { align-items:stretch; justify-content:stretch; }
+  .modal.fullpay { width:100vw; max-width:100vw; height:100vh; max-height:100vh; border-radius:0; padding:14px 20px; display:flex; flex-direction:column; box-sizing:border-box; }
+  .fullpay .payhead { display:flex; align-items:baseline; gap:14px; background:var(--slate); color:#fff; margin:-14px -20px 12px; padding:10px 20px; } .fullpay .payhead .note { color:#dfe6ec; } .fullpay .payhead h2 { margin:0; font-size:26px; } .fullpay .payhead .note { margin:0; font-size:16px; }
+  .fullpay #payBody { flex:1; min-height:0; }
+  /* side panel (work copy): payment on the LEFT, the sale screen (cart + big totals) stays visible and tappable on the right */
+  :root { --pay-side-w: 44vw; --pay-pop-w: min(900px, calc(100vw - 48px)); }
+  .sidepay-ov { justify-content:center !important; align-items:center !important; background:rgba(15,23,42,.55); pointer-events:auto; } /* 1.0.8 pop-up: centred window, sale dimmed behind and blocked (tapping outside does nothing) */
+  .modal.fullpay.sidepay { width:var(--pay-pop-w); max-width:var(--pay-pop-w); height:auto; max-height:calc(100vh - 32px); border-radius:6px; overflow:hidden; pointer-events:auto; box-shadow:0 12px 48px #0008; --pay-num-size: 32px; --pay-due-size: 46px; --pay-tab-h: 64px; --pay-tab-size: 20px; --pay-input-size: 26px; --pay-bill-size: 19px; --pay-gap: 10px; }
+  .sidepay .paygrid { flex-direction:row; align-items:stretch; }
+  .refpanel .payhead { background:#c0392b; } .refpanel .pline.off { opacity:.55; } .refpanel .pamt { background:#fff; color:#c0392b; } /* refund = same panel, red header */
+  .sidepay .paynums { width:clamp(230px, 30%, 290px); display:flex; flex-direction:column; flex:none; } .sidepay .payact { flex:1; min-width:0; display:flex; flex-direction:column; }
+  .sidepay .paynums .pn { padding:8px 14px; }
+  .sidepay .quick button { min-width:84px; padding:12px 12px; }
+  /* 1.0.8 pop-up: the sale screen keeps its normal layout behind the window (side-panel squeeze rules removed) */
+  #softNotes { position:fixed; left:12px; bottom:44px; z-index:5000; display:flex; flex-direction:column; gap:6px; pointer-events:none; max-width:46vw; } /* K/L: small fading notes, never block */
+  .softnote { background:#333d; color:#fff; padding:8px 14px; border-radius:8px; font-size:15px; box-shadow:0 2px 8px #0003; transition:opacity .9s; }
+  .softnote.warn { background:#b9770ee6; } .softnote.err { background:#c0392be6; } .softnote.fade { opacity:0; }
+  .paygrid { display:flex; gap:var(--pay-gap); height:100%; }
+  .paynums { width:var(--pay-nums-w); display:flex; flex-direction:column; gap:var(--pay-gap); }
+  .paynums .pn { flex:1; background:#f4f6f8; border-radius:10px; padding:10px 18px; display:flex; flex-direction:column; justify-content:center; }
+  .paynums .pn span { font-size:18px; color:#566573; font-weight:600; } .paynums .pn b { font-size:var(--pay-num-size); font-weight:800; line-height:1.1; }
+  .paynums .pn.left { background:var(--slate); flex:1.4; } .paynums .pn.left span { color:#dfe6ec; } .paynums .pn.left b { font-size:var(--pay-due-size); color:#fff; }
+  .paynums .pn.left.zero { background:#1e8449; } /* worker 2: Balance turns green at $0.00 (Enter finishes) */
+  .paynums .pn.chg { background:#e8f6ec; } .paynums .pn.chg b { color:#1e7b34; }
+  .payact { flex:1; display:flex; flex-direction:column; overflow:auto; }
+  .payact > .msg { flex-shrink:0; } /* 1.2.3: a long message (e.g. the AR-16 stock warning + "Take payment anyway") never shrinks under the Back / Pay row; the panel scrolls instead */
+  .fullpay .tabs { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; margin:0 0 12px; }
+  .fullpay .tab { height:var(--pay-tab-h); font-size:var(--pay-tab-size); font-weight:800; border-radius:10px; border-width:2px; }
+  .fullpay input.f { font-size:var(--pay-input-size); padding:10px 12px; } .fullpay label.f { font-size:16px; }
+  .fullpay .quick { gap:10px; } .fullpay .quick button { font-size:var(--pay-bill-size); padding:16px 18px; min-width:110px; border-radius:10px; }
+  .fullpay .row2 { margin-top:auto; padding-top:12px; } .fullpay .row2 .pbtn { font-size:22px; padding:16px 28px; min-height:64px; }
+  .plist { display:flex; flex-direction:column; gap:8px; }
+  .pline { display:flex; align-items:center; gap:12px; min-height:var(--pay-tab-h); padding:0 16px; border:2px solid #ccd; border-radius:10px; background:#fff; cursor:pointer; }
+  .pline.on { border-color:var(--slate); background:#edf1f4; box-shadow:0 0 0 3px #34495e33; } .pline.on .plbl::before { content:'▶ '; color:var(--slate); }
+  .pline .plbl { flex:1; font-size:var(--pay-tab-size); font-weight:800; }
+  .pline .pamt { width:40%; font-size:var(--pay-input-size); font-weight:700; text-align:right; padding:8px 12px; border:1px solid #ccd; border-radius:8px; }
+  .pextra { display:flex; gap:8px; flex-wrap:wrap; padding:0 0 0 16px; } .pextra input.f { flex:1; font-size:20px; }
+  .fullpay table.mini { font-size:17px; } .fullpay .cardbox .big { font-size:40px; }
+  .cardbox { border:2px solid #2d6cdf; border-radius:8px; padding:14px; text-align:center; margin:8px 0; } .cardbox.bad { border-color:#c0392b; color:#c0392b; }
+  table.mini { width:100%; font-size:14px; } table.mini td { padding:3px 6px; border-bottom:1px solid #eef; } .st-done { color:#1e7b34; } .st-waiting { color:#2d6cdf; } .st-declined, .st-cancelled { color:#c0392b; }
+  .memchip { background:#e8f0fe; color:#1a4fb0; border-radius:12px; padding:1px 10px; cursor:pointer; }
+  .tag { font-size:11px; background:#fff3cd; color:#8a6d3b; border-radius:3px; padding:0 4px; }
+  #retLines { padding:6px 8px; border-bottom:1px solid var(--line); font-size:13px; background:#fff8f7; }
+  #retLines .rl { margin:2px; padding:5px 8px; border:1px solid #e6b0aa; border-radius:5px; background:#fff; cursor:pointer; } #retLines .rl.na { opacity:.45; cursor:not-allowed; }
+  #hwPill { cursor:pointer; }
+  /* v1.1 extras */
+  .scanrow { display:flex; gap:8px; } .scanrow input { flex:1; }
+  .drawerbtn { border:0; border-radius:6px; background:#1e8449; color:#fff; font:inherit; font-weight:800; font-size:16px; padding:0 18px; cursor:pointer; white-space:nowrap; box-shadow:0 2px 0 #145a32; }
+  .drawerbtn:active { transform:translateY(2px); box-shadow:none; } .drawerbtn:disabled { opacity:.6; }
+  #flash { position:fixed; left:50%; top:70px; transform:translateX(-50%); z-index:90; padding:14px 26px; border-radius:10px; font-size:20px; font-weight:800; color:#fff; background:#1e8449; box-shadow:0 10px 30px #0005; pointer-events:none; }
+  #flash.bad { background:#c0392b; }
+  .net { color:#7dcea0; font-weight:700; } .net.off { color:#f1948a; }
+  .noteline.giftline { background:#eef7ee; border-color:#b8dcb8; }
+  #cart .odisc { color:#1e7b34; font-size:12px; font-weight:700; white-space:nowrap; }
+  [data-a="gift-receipt"].gifton { outline:3px solid #1e7b34; }
+  .actions .asidemenu { margin-top:6px; width:100%; background:#fff3cd; } /* owner 3:49 PM: only while sales are parked */
+  .noteline { font-size:13px; background:#fff8dc; border:1px solid #f0e0a0; border-radius:4px; padding:3px 8px; margin-top:4px; cursor:pointer; }
+  .sfield { border:1px solid #b9c7d2; border-radius:6px; padding:11px; background:#fff; text-align:left; min-height:44px; }
+  .calc { display:grid; grid-template-columns:repeat(4,64px); gap:6px; } .calc button { font-size:20px; padding:12px 0; border:0; border-radius:6px; background:#dfe6ec; cursor:pointer; font-weight:700; }
+  .calc button.op { background:var(--btn); } .calc button.eq { background:#1e8449; color:#fff; }
+  .pcard { border:2px solid #2d6cdf; border-radius:8px; padding:12px; margin-top:10px; } .pcard .big { font-size:34px; }
+  .custcard { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin:8px 0; } .custcard div { background:#f4f6f8; border-radius:6px; padding:6px 9px; } .custcard span { display:block; font-size:11.5px; color:#566573; } .custcard b { font-size:16px; }
+
+  /* 1.1 hardening + touch */
+  body.busy .abtn, body.busy .rbtn, body.busy .tile { pointer-events:none; opacity:.7; }
+  .retrybtn { margin-left:10px; padding:4px 12px; font-size:13px; }
+  #reconn { position:fixed; inset:0; background:#0008; z-index:9998; display:flex; align-items:center; justify-content:center; }
+  #reconn > div { background:#fff; border-radius:10px; padding:22px 28px; font-size:20px; font-weight:700; text-align:center; }
+  #reconn small { display:block; font-size:14px; font-weight:400; margin-top:6px; color:#555; }
+  /* AirMax 1.0.4: remote help ID (ID only) next to the version and clock; the right-hand items never shrink, the left ones do */
+  .status #stZoom, .status #stRdid, .status #stVer, .status #stTime { flex-shrink:0; } .status > span { min-width:0; overflow:hidden; text-overflow:ellipsis; }
+  .status #stRdid { font-weight:700; letter-spacing:.3px; } .status #stRdid.on + #stVer::before, .status #stVer + #stTime::before { content:'· '; }
+  #reconn .rdid-big { display:block; margin-top:16px; padding:10px 16px; border:2px solid #146cff; border-radius:8px; font-size:26px; font-weight:800; color:#0b3d91; letter-spacing:1px; }
+  .notice { display:flex; gap:10px; align-items:center; background:#fff4d6; border:1px solid #e0b84a; border-radius:6px; padding:8px 12px; margin:6px 0; font-weight:600; }
+  .notice span { flex:1; } .notice .pbtn { padding:6px 12px; font-size:13px; }
+  #exitCorner { position:fixed; left:0; top:0; width:28px; height:28px; z-index:9999; }
+  label.chk { display:flex; gap:8px; align-items:center; margin-top:10px; } label.chk input { width:20px; height:20px; }
+  .rhid { font-size:30px; font-weight:800; letter-spacing:2px; font-family:Consolas,monospace; }
+  #airPad { position:fixed; left:50%; bottom:8px; transform:translateX(-50%); z-index:10000; background:#2c3e50; padding:8px; border-radius:10px; box-shadow:0 10px 40px #0008; user-select:none; touch-action:manipulation; }
+  #airPad .pr { display:flex; gap:6px; margin:6px 0; justify-content:center; }
+  #airPad button { min-width:58px; height:58px; font-size:22px; font-weight:700; border:0; border-radius:8px; background:#ecf0f1; color:#2c3e50; }
+  #airPad button.w { min-width:90px; font-size:17px; } #airPad.txt button { min-width:52px; height:52px; } #airPad.txt button[data-k=SPACE] { min-width:260px; }
+  /* 1.2.0 */
+  .tile.on, .rbtn.on { border-color:#c0392b; background:#fdecea; } .taxoff { background:#c0392b; color:#fff; border-radius:4px; padding:1px 8px; font-weight:800; margin-right:6px; }
+  .scanrow input.bad { border-color:#c0392b; background:#fdecea; }
+  .scanmsg { font-size:15px; font-weight:700; color:#c0392b; margin-top:4px; }
+  .side { background:#fff; border:1px solid var(--line); border-radius:6px; padding:6px; margin-bottom:8px; }
+  .side h3 { margin:2px 2px 6px !important; display:flex; justify-content:space-between; } .side input { width:100%; font-size:15px; padding:7px 9px; border:1px solid #b9c7d2; border-radius:5px; }
+  .qsres { max-height:30vh; overflow:auto; margin-top:4px; } .qsres div { display:flex; justify-content:space-between; gap:6px; padding:6px; border-bottom:1px solid #edf1f4; cursor:pointer; font-size:13px; }
+  .qsres div.sel, .qsres div:hover { background:#e8f0fe; } .qsres small { color:#7f8c8d; display:block; font-size:11px; }
+  .bulkgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(116px, 1fr)); gap:6px; } .bulkgrid .rbtn { min-height:46px; background:#c7ebcf; color:#1e7b34; }
+  .bulkrow { display:grid; grid-template-columns:1.2fr 1.6fr auto auto; gap:6px; align-items:center; margin:4px 0; } .bulkrow input.f { font-size:15px; padding:6px 8px; }
+  .gmList { max-height:260px; overflow:auto; margin-top:8px; } .gmRow { display:flex; justify-content:space-between; padding:4px 2px; border-bottom:1px solid #ecf0f1; font-size:15px; font-variant-numeric:tabular-nums; } .gmTot { margin-top:6px; }
+  /* resizable side panels: drag the edge (double-click = default width); widths are remembered on this PC */
+  .wrap { position:relative; } .sizer { position:absolute; top:0; bottom:0; width:9px; cursor:col-resize; z-index:5; touch-action:none; }
+  .sizer:hover, .sizer.drag { background:rgba(52,73,94,.18); } #sizeL { left:calc(var(--lw,172px) - 4px); } #sizeR { right:calc(var(--rw,270px) - 5px); }
+  #cart tr.neg td { color:#c0392b; font-weight:600; } .totals .negline span, .totals .neg span { color:#c0392b; }
+  .refl { display:flex; justify-content:space-between; align-items:center; font-size:22px; padding:16px 20px; margin:8px 0; border:2px solid var(--line); border-radius:8px; background:#fff; cursor:pointer; }
+  .refl.hi { border-color:var(--slate); background:#eaf0f5; font-weight:700; } .refbig { font-size:40px; font-weight:800; color:#c0392b; margin:6px 0 14px; }
+  /* 1.2.0 round 3: dialog button keys, bulk keys, the 2x2 hold group, hide sidebars (Ctrl+B) */
+  .modal button kbd.dk { margin-left:6px; font:600 10.5px Segoe UI,Arial,sans-serif; opacity:.75; background:none; padding:0; }
+  .rbtn .bk { display:block; font-size:10.5px; font-weight:500; opacity:.8; }
+  .actions .list .hgrp { grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:5px; } .hgrp .abtn { padding:6px 7px; } .hgrp .abtn .ic { display:none; }
+  body.nosides .wrap { grid-template-columns:1fr !important; } body.nosides .wrap > aside, body.nosides .sizer { display:none !important; }
+  /* 1.2.0: full-screen tabbed Settings page (settings.js) and the Buttons tab */
+  .stpage-ov { align-items:stretch; justify-content:stretch; }
+  .modal.stpage { width:100vw; max-width:100vw; height:100vh; max-height:100vh; border-radius:0; padding:0; display:flex; flex-direction:column; box-sizing:border-box; overflow:hidden; }
+  .stpage .sthead { display:flex; align-items:center; gap:16px; background:var(--slate); color:#fff; padding:10px 20px; } .stpage .sthead h1 { margin:0; font-size:22px; flex:1; }
+  .stpage #stFlash { color:#b7f5c6; font-weight:700; font-size:14px; opacity:0; transition:opacity .3s; } .stpage #stFlash.on { opacity:1; }
+  .sttabs { display:flex; gap:4px; flex-wrap:wrap; background:#dfe6ec; padding:6px 16px 0; border-bottom:1px solid var(--line); }
+  .sttabs button { border:0; background:transparent; padding:10px 14px; font:inherit; font-weight:700; font-size:14px; color:#2c3e50; cursor:pointer; border-radius:6px 6px 0 0; }
+  .sttabs button.on { background:#fff; color:#1e3f73; box-shadow:0 -2px 0 #2e86c1 inset; } .sttabs button kbd { font-size:11px; margin-left:4px; }
+  .stpage .stbody { flex:1; min-height:0; overflow:auto; padding:12px 24px 20px; } .stpage .stbody > * { max-width:860px; }
+  .stpage p.note:not(.keep), .stpage .sthide, .stpage .rhnote { display:none !important; }
+  .stpage .stbody h3 { margin:16px 0 6px; font-size:13px; text-transform:uppercase; letter-spacing:.6px; color:#566573; }
+  .btlist { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:4px 16px; }
+  .btrow { display:flex; align-items:center; gap:10px; padding:6px 8px; border-radius:6px; background:#f4f7f9; font-size:14px; cursor:pointer; } .btrow input { width:20px; height:20px; }
+  .btrow .btname { flex:1; font-weight:600; } .btrow .btkey { color:#566573; font-size:12px; } .btrow.lk { cursor:default; color:#566573; } .btlock { font-size:14px; }
+  .btrow { position:relative; cursor:default; } .btrow input { cursor:pointer; flex:none; }
+  .btsel { flex:1; display:flex; align-items:center; gap:6px; min-width:0; padding:4px 8px; border:1px solid #c5d0d8; border-radius:6px; background:#fff; font:inherit; text-align:left; cursor:pointer; } .btsel:focus { outline:2px solid #2e86c1; }
+  .btsel .btname { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .btcar { color:#566573; font-size:12px; }
+  .btdrop { position:absolute; z-index:30; top:calc(100% + 2px); left:36px; right:8px; max-height:280px; overflow-y:auto; background:#fff; border:1px solid #9fb3c2; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.18); padding:4px; }
+  .btdrop button { display:flex; width:100%; justify-content:space-between; gap:10px; padding:7px 10px; border:0; border-radius:5px; background:none; font:inherit; font-size:14px; text-align:left; cursor:pointer; } .btdrop button:hover, .btdrop button:focus { background:#e8f1f8; outline:none; } .btdrop button.cur { font-weight:700; background:#d6eaf8; }
+
+  /* ===== AIR POS look (modelled on AIR POS 1.9.11 "Order Checkout"). Look only: every id, data-a, key and API call is unchanged. ===== */
+  :root { --ap-blue:#146cff; --ap-blue-l:#488afd; --ap-blue-bg:#ecf5ff; --ap-blue-bd:#c0d8ff; --ap-orange:#ff8800; --ap-orange-bd:#ffd8a8; --ap-green:#18bea4; --ap-green-bg:#1ab394; --ap-red:#ff0849; --ap-red-bd:#ffcecf; --ap-red-bg:#fff2f2;
+          --ap-text:#262626; --ap-text2:#666; --ap-text3:#999; --ap-line:#e7eaec; --ap-line2:#f2f3f4; --ap-gray:#f7f8f9; --ap-bg:#f0f2f5; --sel:#146cff; }
+  html, body { color:var(--ap-text); background:var(--ap-bg); }
+  #app { grid-template-rows:52px 1fr 26px; }
+  .top { background:#fff; color:var(--ap-text); border-bottom:1px solid var(--ap-line); gap:12px; padding:0 16px; box-shadow:0 1px 4px rgba(0,0,0,.04); }
+  .top .aplogo { display:inline-flex; align-items:baseline; color:var(--ap-blue); font-weight:900; line-height:1; user-select:none; }
+  .top .aplogo .air { font-size:25px; font-style:italic; letter-spacing:-1px; } .top .aplogo small { font-size:11px; font-weight:800; margin-left:2px; }
+  .top b.apname { font-size:15px; font-weight:700; color:var(--ap-text); }
+  .top .look { font-size:10.5px; font-weight:700; color:var(--ap-blue); border:1px solid var(--ap-blue-bd); background:var(--ap-blue-bg); padding:1px 6px; border-radius:2px; letter-spacing:.3px; }
+  .top .apnav { align-self:stretch; display:flex; align-items:center; color:var(--ap-blue); font-weight:700; font-size:13px; letter-spacing:.4px; border-bottom:2px solid var(--ap-blue); padding:0 4px; margin-left:10px; white-space:nowrap; }
+  .top .sub { opacity:1; color:var(--ap-text2); font-weight:600; font-size:12.5px; }
+  .pill { background:#f4f4f5; color:var(--ap-text2); border:1px solid var(--ap-line); border-radius:2px; font-weight:600; font-size:11.5px; }
+  .pill.ok { background:#f0f9eb; color:#1a8a5a; border-color:#c2e7b0; } .pill.bad { background:var(--ap-red-bg); color:var(--ap-red); border-color:var(--ap-red-bd); } .pill.warn { background:#fdf6ec; color:#d97a00; border-color:#f5dab1; }
+  .top .topset { background:#fff; color:var(--ap-blue); border:1px solid var(--ap-blue); border-radius:2px; font-size:12.5px; } .top .topset:hover { background:var(--ap-blue-bg); }
+  .top .topset kbd { background:var(--ap-blue-bg); border-color:var(--ap-blue-bd); color:var(--ap-blue); }
+  kbd { background:var(--ap-gray); border-color:var(--ap-line); border-radius:2px; color:var(--ap-text2); }
+  .modal button.pbtn kbd.dk { color:inherit; border-color:currentColor; opacity:.95; } /* 1.0.6 Team Kit: Alt+letter label readable on blue/green/red buttons (was grey on blue) */
+  /* left: small outlined blue buttons, one per line */
+  .actions { background:#fff; border-right:1px solid var(--ap-line); }
+  .actions h2 { background:none; color:var(--ap-text3); font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:12px 12px 0; }
+  .actions .list { padding:8px 10px; gap:7px; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); }
+  .abtn { background:#fff; color:var(--ap-blue); border:1px solid var(--ap-blue-bd); border-radius:2px; box-shadow:none; min-height:32px; padding:5px 9px; gap:6px; }
+  .abtn .ic { display:none; } .abtn .t { font-weight:500; font-size:12.5px; } .abtn .k { font-size:10px; color:var(--ap-text3); opacity:1; }
+  .abtn:hover { background:var(--ap-blue-bg); border-color:var(--ap-blue); }
+  .abtn.red { background:#fff; color:var(--ap-red); border-color:var(--ap-red-bd); box-shadow:none; } .abtn.red:hover { background:var(--ap-red-bg); }
+  .abtn.green { background:#fff; color:var(--ap-green-bg); border-color:#a8e6d6; box-shadow:none; }
+  .abtn:active, .rbtn:active { transform:none; box-shadow:none; background:var(--ap-blue-bg); }
+  /* centre: ORDER CHECKOUT title, SCANNING INPUT bar, table, one small totals line, footer buttons */
+  .center { grid-template-rows:auto auto 1fr auto auto; gap:0; padding:12px 14px 10px; background:#fff; margin:10px; border:1px solid var(--ap-line); }
+  .cotitle { display:flex; align-items:center; gap:8px; font-size:18px; font-weight:800; letter-spacing:.2px; padding:0 0 10px; }
+  .cotitle .coico { width:20px; height:20px; border-radius:3px; background:var(--ap-green); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:12px; }
+  .scanbar { background:var(--ap-gray); padding:9px 14px; border:1px solid var(--ap-line2); }
+  .scanrow { display:flex; align-items:center; gap:12px; } .scanrow label { font-size:12.5px; font-weight:600; color:var(--ap-text); white-space:nowrap; }
+  .scanrow input { max-width:440px; font-size:14px; padding:7px 10px; border:1px solid var(--ap-blue); border-radius:2px; outline:none; background:#fff; } .scanrow input:focus { box-shadow:0 0 0 2px var(--ap-blue-bg); }
+  .paystuck { display:flex; gap:8px; align-items:center; flex-wrap:wrap; background:#fdecea; border:2px solid #c0392b; color:#8e1b10; font-weight:700; padding:8px 10px; margin:8px 0 0; border-radius:2px; } .paystuck span { flex:1 1 220px; } /* 1.0.6 (1.2.3.1 hotfix): paid, sale not finished */
+  .scanmsg { font-size:13.5px; } .msg { font-size:13px; margin-top:4px; min-height:0; } .msg:empty { display:none; }
+  .gridbox { border:0; margin-top:8px; }
+  .gridhead { font-size:12.5px; color:var(--ap-text2); border-bottom:1px solid var(--ap-line); padding:5px 10px; font-weight:600; }
+  th { background:var(--ap-gray); color:var(--ap-text); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.2px; padding:10px; border-bottom:1px solid var(--ap-line); }
+  td { padding:9px 10px; border-bottom:1px solid var(--ap-line2); font-size:13.5px; }
+  tr.row:hover td { background:#fafafc; }
+  tr.row.sel td { background:var(--ap-blue-bg); color:var(--ap-text); } tr.row.sel td:first-child { box-shadow:inset 3px 0 0 var(--ap-blue); }
+  #cart .discline { color:#1e7b34; font-size:12.5px; font-weight:600; line-height:1.25; margin-top:2px; white-space:nowrap; } /* AirMax #18: item discount line under the item (display only) */
+  #cart .promo { color:#1e7b34; font-weight:600; white-space:nowrap; } /* AirMax Step 0b C1: Sale / Multi-buy / promo-code discount in the Discount cell, same green as .discline */
+  #cart .dc { display:flex; justify-content:flex-end; gap:4px; contain:inline-size; overflow:hidden; white-space:nowrap; } /* AirMax Step 0b C1: the Discount text never widens its column (columns stay where 1.0.11 has them, see .dsz); too long = the name gets "…" first, dollars stay whole, full text on hover */
+  #cart .dc > span { min-width:0; overflow:hidden; text-overflow:ellipsis; flex:0 1 auto; } #cart .dc > .pn { flex-shrink:3; } #cart .dc > .pa { flex:none; }
+  #cart .dsz { height:0; overflow:hidden; visibility:hidden; white-space:nowrap; } /* AirMax Step 0b C1: invisible copy of the old "−$x" text so the column is sized as in 1.0.11 */
+  #cart td.cedon { position:relative; color:transparent; } #cart td.cedon > :not(input.ced) { visibility:hidden; } #cart input.ced { position:absolute; inset:2px 0; width:100%; height:calc(100% - 4px); box-sizing:border-box; margin:0; padding:0 4px; font:inherit; color:#222; text-align:right; border:1px solid var(--ap-blue); border-radius:2px; outline:none; background:#fff; } #cart input.ced:focus { box-shadow:0 0 0 2px var(--ap-blue-bg); } /* Batch 11: Qty / Price edited in the cell, laid over the cell (same blue focus as the scanning input); nothing moves */
+  #cart tr.row.pend td { color:#8a94a0; font-style:italic; } /* 1.0.11 instant scan: line not yet confirmed by AIR POS */
+  .empty { color:var(--ap-text3); font-size:13px; padding:40px 10px; }
+  .totals { display:flex; flex-wrap:wrap; justify-content:flex-end; align-items:baseline; gap:4px 18px; background:none; border:0; border-top:1px solid var(--ap-line); padding:9px 4px 4px; font-size:12.5px; }
+  .totals div { padding:0; border:0; gap:6px; justify-content:flex-start; }
+  .totals div span:first-child { color:var(--ap-text); font-variant-caps:all-small-caps; font-size:14px; font-weight:600; letter-spacing:.3px; }
+  .totals div span:last-child { color:var(--ap-blue); font-weight:700; }
+  .totals .pretax { font-weight:inherit; }
+  .totals .total { grid-column:auto; font-size:12.5px; font-weight:700; padding:0; background:none; } .totals .total span:last-child { font-size:17px; font-weight:800; }
+  .totals .taxoffline span, .totals .negline span, .totals .neg span, .totals .taxoffline span:last-child, .totals .negline span:last-child, .totals .neg span:last-child { color:#c0392b; }
+  .apfoot { display:flex; justify-content:flex-end; align-items:center; gap:10px; padding:10px 2px 0; flex-wrap:wrap; }
+  .tiles { display:contents; }
+  .tiles .tile { height:36px; min-width:104px; padding:0 12px; display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:6px; border:1px solid; border-radius:2px; background:#fff; font:inherit; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.3px; cursor:pointer; position:static; }
+  .tiles .tile .ic { display:none; } .tiles .tile .k { position:static; order:3; font-size:10px; font-weight:600; color:inherit; opacity:.6; text-transform:none; }
+  .tiles .tile .info { order:2; margin:0; font-size:11px; font-weight:600; color:inherit; opacity:.9; text-transform:none; } .tiles .tile .info:empty, .tiles .tile[data-a="customer"] .info:not(.has) { display:none; }
+  .tiles .tile[data-a="customer"] { order:1; color:var(--ap-blue); border-color:var(--ap-blue-bd); background:var(--ap-blue-bg); }
+  .tiles .tile[data-a="close"] { order:2; color:var(--ap-text2); border-color:#dcdfe6; } .tiles .tile[data-a="close"] .info { display:none; }
+  .tiles .tile[data-a="checkout"] { order:5; color:#fff; border-color:var(--ap-green-bg); background:var(--ap-green-bg); min-width:150px; }
+  .tiles .tile:hover { filter:brightness(.97); } .tiles .tile.active { border-color:#dcdfe6; }
+  /* right: PRODUCT SEARCH / QUICK ADD headers in AIR POS tab style */
+  .right { background:#fff; border-left:1px solid var(--ap-line); padding:0 12px 10px; }
+  .right h3 { margin:14px 0 8px; font-size:12px; font-weight:700; letter-spacing:.3px; color:var(--ap-text); }
+  .side { border:0; border-radius:0; padding:0; margin-bottom:10px; background:none; }
+  .side h3 { color:var(--ap-blue); border-bottom:1px solid var(--ap-line); padding:12px 0 9px; margin:0 0 10px !important; box-shadow:inset 0 -2px 0 var(--ap-blue); }
+  .side h3 small { color:var(--ap-text3); font-weight:500; }
+  #bulkPanel h3 { white-space:nowrap; gap:8px; } #bulkPanel h3 small { display:flex; min-width:0; white-space:nowrap; } #bulkPanel h3 small .bfhn { overflow:hidden; text-overflow:ellipsis; min-width:0; } #bulkPanel h3 small .bfhk { white-space:pre; flex:none; } /* 1.0.5 open-folder header */
+  .side input { border:1px solid #dcdfe6; border-radius:2px; font-size:13px; padding:7px 10px; }
+  .qsres div.sel, .qsres div:hover { background:var(--ap-blue-bg); }
+  .rgrid, .bulkgrid { gap:8px; }
+  .rbtn { background:#fff; border:1px solid var(--ap-line); border-radius:2px; box-shadow:none; min-height:44px; font-size:12px; font-weight:600; color:var(--ap-text); }
+  .rbtn:hover { border-color:var(--ap-blue-bd); color:var(--ap-blue); background:var(--ap-blue-bg); } .rbtn small { color:var(--ap-text3); } .rbtn.red { color:var(--ap-red); }
+  .bulkgrid .rbtn { background:#fff; color:var(--ap-blue); border-color:var(--ap-blue-bd); }
+  .status { background:#fff; color:var(--ap-text2); border-top:1px solid var(--ap-line); font-size:11.5px; }
+  #login { background:linear-gradient(135deg,#146cff,#0b3d91); } #login .card { border-radius:4px; } #login h1 small.look { font-size:13px; color:var(--ap-blue); font-weight:700; }
+  .top > * { white-space:nowrap; flex-shrink:0; } .top .sub { flex-shrink:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+  @media (max-width:1180px) { .top .apnav, .top .look { display:none; } .top { gap:8px; padding:0 10px; } th, td { padding-left:7px; padding-right:7px; } .tiles .tile { min-width:0; } }
+  /* payment + refund side panel (store 1.2.3) in the AIR POS look (Ari 4:41 PM decision 4). Colours, borders and corners only:
+     sizes, layout, ids, keys and what every button does are the store's. */
+  .modal.fullpay { background:#fff; color:var(--ap-text); border-right:1px solid var(--ap-line); }
+  .modal.fullpay.sidepay { box-shadow:0 12px 48px rgba(0,0,0,.45); }
+  .fullpay .payhead { background:#fff; color:var(--ap-text); border-bottom:1px solid var(--ap-line); box-shadow:inset 0 -2px 0 var(--ap-blue); }
+  .fullpay .payhead h2 { color:var(--ap-blue); font-weight:800; letter-spacing:.3px; font-size:22px; } .fullpay .payhead .note { color:var(--ap-text3); font-size:13px; }
+  .fullpay .paynums .pn { background:var(--ap-gray); border:1px solid var(--ap-line); border-radius:2px; }
+  .fullpay .paynums .pn span { color:var(--ap-text2); font-size:15px; font-weight:600; } .fullpay .paynums .pn b { color:var(--ap-text); }
+  .fullpay .paynums .pn.left { background:var(--ap-blue); border-color:var(--ap-blue); } .fullpay .paynums .pn.left span { color:#dbe8ff; } .fullpay .paynums .pn.left b { color:#fff; }
+  .fullpay .paynums .pn.left.zero { background:var(--ap-green-bg); border-color:var(--ap-green-bg); }
+  .fullpay .paynums .pn.chg { background:#e8f8f4; border-color:#a8e6d6; } .fullpay .paynums .pn.chg b { color:#0f8f7a; }
+  .fullpay .pline { border:1px solid #dcdfe6; border-radius:2px; background:#fff; }
+  .fullpay .pline:hover { border-color:var(--ap-blue-bd); }
+  .fullpay .pline.on { border-color:var(--ap-blue); background:var(--ap-blue-bg); box-shadow:inset 3px 0 0 var(--ap-blue); } .fullpay .pline.on .plbl::before { color:var(--ap-blue); }
+  .fullpay .pline .plbl { color:var(--ap-text); font-weight:700; } .fullpay .pline.on .plbl { color:var(--ap-blue); }
+  .fullpay .pline .pamt { border:1px solid #dcdfe6; border-radius:2px; color:var(--ap-text); } .fullpay .pline.on .pamt { border-color:var(--ap-blue); }
+  .fullpay input.f, .fullpay select { border:1px solid #dcdfe6; border-radius:2px; } .fullpay input.f:focus { border-color:var(--ap-blue); outline:none; box-shadow:0 0 0 2px var(--ap-blue-bg); }
+  .fullpay label.f { color:var(--ap-text2); }
+  .fullpay .quick button { background:#fff; color:var(--ap-blue); border:1px solid var(--ap-blue-bd); border-radius:2px; } .fullpay .quick button:hover { background:var(--ap-blue-bg); border-color:var(--ap-blue); }
+  .fullpay .pbtn { border-radius:2px; background:var(--ap-blue); }
+  .fullpay .pbtn.g { background:var(--ap-green-bg); } .fullpay .pbtn.r { background:#fff; color:var(--ap-red); border:1px solid var(--ap-red-bd); }
+  .fullpay .pbtn.s { background:#fff; color:var(--ap-text2); border:1px solid #dcdfe6; } .fullpay .pbtn:hover { filter:brightness(.97); }
+  .fullpay .cardbox, .fullpay .banner { border-radius:2px; } .fullpay table.mini th { background:var(--ap-gray); }
+  /* refund = the same panel, AIR POS red instead of blue */
+  .refpanel .payhead { background:#fff; box-shadow:inset 0 -2px 0 var(--ap-red); } .refpanel .payhead h2 { color:var(--ap-red); }
+  .refpanel .paynums .pn.left { background:var(--ap-red); border-color:var(--ap-red); } .refpanel .paynums .pn.left span { color:#ffe0e7; }
+  .refpanel .pline.on { border-color:var(--ap-red); background:var(--ap-red-bg); box-shadow:inset 3px 0 0 var(--ap-red); } .refpanel .pline.on .plbl, .refpanel .pline.on .plbl::before { color:var(--ap-red); }
+  .refpanel .pamt { background:#fff; color:var(--ap-red); } .refpanel .pline.on .pamt { border-color:var(--ap-red); }
+  .softnote { border-radius:2px; }
+  /* while the left payment / refund panel is open the sale screen is ~56% wide: keep it inside the screen (no sideways scroll) */
+  body.paying .wrap, body.paying .center, body.paying .gridbox { min-width:0; }
+  body.paying .apfoot .tiles .tile { min-width:0; }
+  .uhid { display:none !important; }
+  /* AirMax 1.0.2: refund panel fit (look only; no ids, keys or logic changed). Refund lines are as tall as the payment lines,
+     the Back / Pay and Back / Refund row is pinned to the bottom of the panel (the list scrolls above it), and on short
+     screens (800px tall or less) lines and buttons are 52px (never under 44px) with smaller totals. */
+  .fullpay #refBody { flex:1; min-height:0; }
+  .sidepay .paygrid { min-height:0; } .sidepay .payact { min-height:0; }
+  .refpanel .pline.refl { padding:0 16px; margin:0; font-size:inherit; }
+  .sidepay .payact > .row2 { position:sticky; bottom:0; background:#fff; margin-top:auto; padding:8px 0 4px; z-index:1; flex-shrink:0; }
+  .sidepay .pline { flex-shrink:0; } .sidepay .pline .pamt { min-height:44px; box-sizing:border-box; }
+  @media (max-height:800px) {
+    .modal.fullpay.sidepay { --pay-tab-h:52px; --pay-num-size:26px; --pay-due-size:40px; --pay-tab-size:18px; --pay-input-size:22px; }
+    .sidepay .paynums .pn { padding:4px 12px; }
+    .fullpay .row2 .pbtn { min-height:52px; padding:10px 22px; font-size:20px; }
+  }
+#awaitpos { position:fixed; top:8px; left:50%; transform:translateX(-50%); z-index:99999; background:#fff3cd; color:#5c4400; border:2px solid #d4a017; border-radius:8px; padding:8px 18px; font-size:16px; font-weight:700; text-align:center; pointer-events:none; box-shadow:0 2px 10px rgba(0,0,0,.25); }
+#awaitpos small { display:block; font-size:12px; font-weight:400; }
+</style>
+<style id="airmax-stripes">
+  /* ===== AirMax 1.0.3 "color stripes" look (Ari approved the mock-up 10/29 8:15 PM). LOOK ONLY: no id, data-a, key, label,
+     setting or behaviour changed; every button and every shortcut label stays visible.
+     White buttons, dark text, an 8px stripe on the LEFT edge by group:
+       green = sale actions   red = returns/refunds   blue = customer   orange = gift cards   gray = everything else
+     No icons, no big cards. Totals: one bold dark bar, big Total in the lighter AIR POS blue (--ap-blue-l).
+     SCANNING INPUT stays at the top and is bigger (Ari 8:17 PM). */
+  :root { --st-green:#18a058; --st-red:#e5243b; --st-blue:var(--ap-blue, #146cff); --st-orange:#ff8800; --st-gray:#b8bfc7;
+          --st-dark:#0d1726; --st-w:8px; }
+
+  /* base: every action button white, dark text, gray stripe unless a group below sets one */
+  .abtn, .abtn.red, .abtn.green, .rbtn, .rbtn.red, .bulkgrid .rbtn, .tiles .tile, .tiles .tile[data-a] {
+    --stripe: var(--st-gray);
+    background:#fff !important; color:#1f2933 !important; border:1px solid #d9dee4 !important; border-radius:3px;
+    box-shadow: inset var(--st-w) 0 0 0 var(--stripe) !important; padding-left: calc(var(--st-w) + 10px) !important; filter:none !important;
+  }
+  .abtn .t { color:#1f2933; font-weight:600; } .abtn .k, .rbtn small, .tiles .tile .k { color:#5f6b78 !important; opacity:1 !important; }
+  .rbtn { text-align:left; align-items:flex-start; font-weight:600; }
+  .abtn:hover, .rbtn:hover, .tiles .tile:hover { background:#f5f7f9 !important; color:#111 !important; }
+  .abtn:active, .rbtn:active, .tiles .tile:active { background:#eef1f4 !important; }
+
+  /* green: sale actions */
+  .abtn[data-a="new-sale"], .abtn[data-a="hold"], .abtn[data-a="load-hold"], .abtn[data-a="open-item"],
+  .rbtn[data-a="open-item"], .rbtn[data-a="discount"], .rbtn[data-a="tax-off"], .rbtn[data-a="promo"], .rbtn[data-a="extra-charge"],
+  .rbtn[data-a="qty-plus"], .rbtn[data-a="qty-minus"], .rbtn[data-a="qty-edit"], .rbtn[data-a="remove"], .rbtn[data-a="item-discount"],
+  .rbtn[data-a="price-check"], .rbtn[data-a="cart-search"], .rbtn[data-a="note"], .bulkgrid .rbtn,
+  .tiles .tile[data-a="checkout"] { --stripe: var(--st-green); }
+  /* red: returns / refunds */
+  .abtn[data-a="return"], .rbtn[data-a="return"], .rgrid .rbtn[data-a="history"] { --stripe: var(--st-red); }
+  /* blue: customer */
+  .abtn[data-a="customer"], .rbtn[data-a="clear-customer"], .tiles .tile[data-a="customer"] { --stripe: var(--st-blue); }
+  /* orange: gift cards */
+  .rbtn[data-a="gift-card"], .rbtn[data-a="gift-multi"], .rbtn[data-a="gift-balance"], .rbtn[data-a="gift-receipt"] { --stripe: var(--st-orange); }
+  /* Checkout keeps its weight (still white) */
+  .tiles .tile[data-a="checkout"] { font-weight:800; border-color:#9fd8b8 !important; }
+
+  /* left column: same text start on every button (the red Return / Log Out used to sit 4px further right) and
+     the two-up Hold / Load Hold buttons keep their labels on one line */
+  .abtn, .abtn.red, .abtn.green { padding-left: calc(var(--st-w) + 6px) !important; }
+  .hgrp .abtn { padding-right:4px !important; } .hgrp .abtn .k { white-space:nowrap; font-size:9.5px; }
+  /* 1.0.10 (Ari): Hold and Load Hold each on their own line (same labels and keys, only the wrapping changes) */
+  .actions .list .hgrp { grid-template-columns:1fr; } .hgrp .abtn .k { font-size:10px; }
+  /* 1.0.10 (Ari): owner's logo in the empty space above the total; only there when a logo is set */
+  .salelogo { flex:none; display:flex; align-items:center; justify-content:center; height:72px; margin:6px 0 8px; background:#fff; border:1px solid #e3e7eb; border-radius:3px; overflow:hidden; }
+  .salelogo[hidden] { display:none; }
+  .salelogo img { max-height:60px; max-width:70%; object-fit:contain; }
+  @media (max-width:1100px) { .salelogo { height:60px; } .salelogo img { max-height:50px; } }
+
+  /* no icons, no big cards */
+  .abtn .ic, .tiles .tile .ic, .cotitle .coico { display:none !important; }
+
+  /* SCANNING INPUT: same place (top), bigger box and text */
+  .scanbar { padding:10px 14px; }
+  .scanrow label { font-size:14px !important; font-weight:800 !important; letter-spacing:.3px; }
+  .scanbar .scanrow input#scanInput { max-width:640px; height:50px; box-sizing:border-box; font-size:21px; font-weight:600; padding:8px 14px; border-width:2px; }
+  .scanbar .scanrow input#scanInput::placeholder { font-weight:400; }
+  @media (max-height:740px) { .scanbar .scanrow input#scanInput { height:46px; font-size:20px; } .scanbar { padding:8px 12px; } }
+
+  /* totals: one bold dark bar */
+  .totals { background:var(--st-dark) !important; border:0 !important; border-radius:4px; padding:10px 18px !important; margin-top:6px;
+    align-items:baseline; gap:4px 22px !important; color:#fff; }
+  .totals div span:first-child { color:#9fb0c4 !important; font-size:13px !important; }
+  .totals div span:last-child { color:#fff !important; font-weight:700; font-size:14px; }
+  .totals .total { margin-left:auto; } .totals .total span:first-child { color:#fff !important; font-size:18px !important; font-weight:800 !important; }
+  .totals .total span:last-child { color:var(--ap-blue-l, #488afd) !important; font-size:34px !important; font-weight:900 !important; line-height:1; }
+  .totals .taxoffline span, .totals .negline span, .totals .neg span:last-child { color:#ff7a8a !important; }
+  /* AirMax Batch 11 (Gordon, Nov 3): a light box around each totals value (Subtotal, Rows, Discount, Quantity, Promo, Before tax, Tax; Total stays as is).
+     Same labels, values, order and colours; the -2px margin cancels the box's padding + border so the bar and the cart keep their 1.0.11 heights. */
+  #totals > div:not(.total) { border:1px solid rgba(255,255,255,.32); border-radius:4px; padding:1px 6px; margin:-2px 0; }
+  #totals { column-gap:8px; }
+
+  /* payment panel: same stripes on the tender lines, flat dark totals strip instead of big coloured cards */
+  .fullpay .pline { --stripe: var(--st-green); box-shadow: inset var(--st-w) 0 0 0 var(--stripe) !important; padding-left:calc(var(--st-w) + 12px) !important; border-color:#d9dee4 !important; background:#fff !important; }
+  .fullpay .pline[data-t="40"] { --stripe: var(--st-orange); }
+  .fullpay .pline[data-t="11"], .fullpay .pline[data-t="50"] { --stripe: var(--st-blue); }
+  .fullpay .pline.on { background:#f3f7ff !important; border-color:#9dbcf5 !important; } .fullpay .pline.on .plbl { color:#111 !important; }
+  .fullpay .paynums .pn, .fullpay .paynums .pn.left, .fullpay .paynums .pn.chg, .fullpay .paynums .pn.left.zero { background:var(--st-dark) !important; border-color:var(--st-dark) !important; border-radius:3px; }
+  .fullpay .paynums .pn span { color:#9fb0c4 !important; } .fullpay .paynums .pn b { color:#fff !important; }
+  .fullpay .paynums .pn.left b { color:var(--ap-blue-l, #488afd) !important; } .fullpay .paynums .pn.chg b { color:#4fd08a !important; }
+  .fullpay .row2 .pbtn.s, .fullpay .row2 .pbtn.g, .fullpay .row2 .pbtn.r { background:#fff !important; color:#1f2933 !important; border:1px solid #d9dee4 !important; box-shadow: inset var(--st-w) 0 0 0 var(--st-gray); }
+  .fullpay .row2 .pbtn.g { box-shadow: inset var(--st-w) 0 0 0 var(--st-green); font-weight:800; }
+  .fullpay .row2 .pbtn.r { box-shadow: inset var(--st-w) 0 0 0 var(--st-red); }
+  /* refund panel = returns group: red stripes on its lines, red amount left */
+  .refpanel .pline, .refpanel .pline[data-t] { --stripe: var(--st-red); }
+  .refpanel .pline.on { background:#fff4f5 !important; border-color:#f3b3bc !important; }
+  .refpanel .paynums .pn.left b { color:#ff7a8a !important; }
+  /* 1.0.5 bulk item FOLDERS (Ari OK 10:46 PM ET Oct 29): one column, folders = green stripe + light tint + "Folder · N items" + OPEN.
+     Only used when at least one folder exists; without folders Quick Add looks exactly like 1.0.4. */
+  #bulkBtns.bfmode { grid-template-columns:1fr; gap:6px; max-height:52vh; overflow-y:auto; padding-right:2px; }
+  #bulkBtns.bfmode .rbtn { min-height:40px; text-align:left; position:relative; }
+  #bulkBtns.bfmode .rbtn small { display:block; font-weight:500; color:#5b6672; }
+  #bulkBtns.bfmode .rbtn .bk { position:absolute; right:8px; top:6px; font-size:11px; color:#7a8590; font-weight:600; }
+  #bulkBtns.bfmode .rbtn.fold { --stripe: var(--st-green); font-weight:800; background:#f3faf6 !important; border-color:#b9dcc7 !important; }
+  #bulkBtns.bfmode .rbtn.fold .open { position:absolute; right:8px; bottom:6px; font-size:11px; font-weight:800; color:var(--st-green); letter-spacing:.04em; }
+  #bulkBtns.bfmode .rbtn.back { --stripe: var(--st-gray); font-weight:800; min-height:34px; }
+  #bulkBtns.bfmode .fpath { font-size:12px; font-weight:800; color:#1f2933; padding:2px 2px 0; letter-spacing:.03em; text-transform:uppercase; }
+  #bulkBtns.bfmode .bfempty { font-size:13px; color:#5b6672; padding:4px 2px; }
+  .bftabs { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0; } .bftabs .pbtn { min-width:0; padding:6px 10px; font-size:14px; }
+  .bftabs .pbtn.on { outline:3px solid var(--st-green); }
+  .bfbar { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:4px 0 6px; } .bfbar input.f { max-width:220px; margin:0; } .bfbar .pbtn { min-width:0; padding:6px 10px; font-size:14px; }
+  .bulkrow.bfrow { grid-template-columns:1.1fr 1.4fr auto auto auto auto; } .bulkrow.bfrow.isf { background:#f3faf6; border-left:6px solid var(--st-green); padding-left:4px; }
+  .bulkrow select.f { font-size:14px; padding:5px; margin:0; }
+  /* 1.0.7 wide Customer add | Items | Checkout boxes across the sale area + customer card (Ari OK 12:30 AM ET Oct 30, option A).
+     Same three buttons, ids, actions and keys; the payment panel keeps its width. */
+  .apfoot { display:grid !important; grid-template-columns:1.5fr .8fr 1.2fr; gap:10px; padding:10px 0 0; justify-content:stretch; }
+  .tiles .tile, .tiles .tile[data-a] { height:auto !important; min-height:82px; min-width:0 !important; width:100%; display:flex !important; flex-direction:column !important;
+    align-items:flex-start !important; justify-content:center !important; gap:2px !important; padding:8px 14px 8px calc(var(--st-w) + 14px) !important;
+    font-size:18px !important; font-weight:800 !important; letter-spacing:.4px; position:relative !important; text-align:left; overflow:hidden; }
+  .tiles .tile .k { position:absolute !important; top:8px; right:12px; font-size:13px !important; font-weight:700 !important; }
+  .tiles .tile .info { order:0 !important; font-size:15px !important; font-weight:600 !important; color:#4b5563 !important; opacity:1 !important; text-transform:none; letter-spacing:0; display:block !important; }
+  .tiles .tile[data-a="checkout"] .info { font-size:26px !important; font-weight:900 !important; color:#18a058 !important; line-height:1.1; }
+  .tiles .tile[data-a="close"] .info { display:block !important; }
+  .tiles .tile[data-a="customer"].hascust { --stripe: var(--st-blue); background:#f3f7ff !important; border-color:#9dbcf5 !important; }
+  .custc { display:grid; grid-template-columns:auto auto auto; gap:2px 22px; width:100%; margin-top:2px; }
+  .custc .nm { grid-column:1 / -1; font-size:21px; font-weight:800; color:#0b3d91; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .custc span { font-size:12px; font-weight:700; color:#5f6b78; text-transform:uppercase; letter-spacing:.3px; white-space:nowrap; }
+  .custc b { display:block; font-size:17px; font-weight:800; color:#1f2933; text-transform:none; letter-spacing:0; }
+  .custc b.bal { color:#18a058; } .custc b.bal.neg { color:#e5243b; }
+  /* 1.0.8: the 1.0.7 "beside the side panel" box sizes are gone; the pop-up covers the sale, which keeps its normal layout */
+  @media (max-width:1100px) { .apfoot { grid-template-columns:1.9fr .7fr 1.15fr; } .custc { gap:2px 12px; } .custc .nm { font-size:18px; } .custc span { font-size:10.5px; } .custc b { font-size:14.5px; } .tiles .tile { font-size:16px !important; padding-right:10px !important; } .tiles .tile[data-a] { font-size:15px !important; } .tiles .tile .k { font-size:11px !important; top:6px !important; right:8px !important; } .tiles .tile[data-a] > .info { margin-top:2px; } .tiles .tile[data-a="checkout"] .info { font-size:22px !important; white-space:nowrap; } }
+  /* AirMax 1.0.9 card on file (Stripe stores only): customer profile "Cards on file" + saved-card picker under Manual Credit */
+  .cofbox { margin:10px 0 4px; border:1px solid #dcdfe6; border-radius:3px; background:#fff; }
+  .cofhead { display:flex; align-items:center; gap:10px; padding:8px 10px; border-bottom:1px solid #e3e7eb; background:#f6f8fa; }
+  .cofhead b { font-size:15px; } .cofhead .note { margin:0; flex:1; font-size:12px; }
+  .cofrow { display:flex; align-items:center; gap:12px; padding:8px 10px; border-bottom:1px solid #eef1f4; font-size:15px; }
+  .cofrow:last-child { border-bottom:0; } .cofrow .cofname { flex:1; font-weight:700; } .cofrow .note { margin:0; font-size:12px; }
+  .cofbrand { display:inline-block; min-width:44px; text-align:center; font:800 11px/20px sans-serif; border-radius:3px; color:#fff; background:#1a1f71; }
+  .cofbrand.mc { background:#eb001b; }
+  .cofempty { padding:12px 10px; color:#6b7b8c; font-size:14px; }
+  .cofstripe { display:flex; align-items:center; gap:14px; min-height:44px; padding:0 12px; border:1px solid #dcdfe6; border-radius:4px; background:#fff; color:#a0a8b3; font-size:17px; }
+  .cofstripe .cn { flex:1; } .cofstripe .lock { font-size:11px; color:#5469d4; font-weight:700; white-space:nowrap; }
+  .cofconsent { display:flex; align-items:flex-start; gap:8px; margin:12px 0 4px; padding:10px; border:1px solid #f0c36d; background:#fffaf0; border-radius:3px; font-size:15px; font-weight:600; }
+  .cofconsent input { width:20px; height:20px; margin:1px 0 0; }
+  .cofpick { flex-direction:column; gap:6px; padding:6px 0 4px 16px; }
+  .cofpick .cofhint { font-size:12px; color:#516170; }
+  .cofopts { display:flex; flex-wrap:wrap; gap:6px; }
+  .cofopt { display:flex; align-items:center; gap:8px; padding:7px 10px; border:1px solid #dcdfe6; border-radius:3px; background:#fff; font-size:15px; font-weight:700; cursor:pointer; }
+  .cofopt.on { border-color:var(--ap-blue, #1677ff); background:var(--ap-blue-bg, #eaf3ff); box-shadow:inset 3px 0 0 var(--ap-blue, #1677ff); }
+  .cofopt .dot { width:12px; height:12px; border-radius:50%; border:2px solid #8a96a3; } .cofopt.on .dot { border-color:var(--ap-blue, #1677ff); background:var(--ap-blue, #1677ff); }
+  #cofSave:disabled { opacity:.45; filter:grayscale(.6); cursor:not-allowed; }
+  .cofstripe.sfield { display:block; padding:12px; color:inherit; }
+  .cofrow.off .cofname, .cofrow.off .cofbrand { opacity:.5; } .cofrow.off .cofbrand { filter:grayscale(1); }
+  .cofopt.off { opacity:.5; cursor:not-allowed; filter:grayscale(1); }
+  .cofpick { display:flex; }
+  #cofChg { font-size:14px; font-weight:700; color:#1d6b35; }
+</style>
+<link rel="stylesheet" href="/topbar.css">
+</head>
+<body>
+<div id="login"><form class="card" id="loginForm" autocomplete="off">
+  <h1>Air Max</h1><p>Sign in with your AIR POS company, user and password.</p>
+  <label class="f" for="lgCompany">Company</label><input class="f" id="lgCompany" autocomplete="off" spellcheck="false">
+  <label class="f" for="lgUser">User</label><input class="f" id="lgUser" autocomplete="off" spellcheck="false">
+  <label class="f" for="lgPw">Password</label><input class="f" id="lgPw" type="password" autocomplete="new-password">
+  <button class="pbtn full" id="lgBtn" type="submit">Log In</button>
+  <div class="msg err" id="lgMsg"></div>
+  <p class="note" id="lgNote" style="margin:10px 0 0">Company and user are remembered on this computer. The password is never saved.</p>
+  <div id="mountLogin"></div>
+</form></div>
+
+<div id="app">
+  <div class="top">
+    <span class="brand" id="brand"><span class="slogo" id="brandLogo" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.8"/><path d="M21 16l-5-5L5 21"/></svg></span><span class="bn"><b class="sname" id="brandName">Air Max</b><small><span id="brandShop"></span><b class="apname">Air Max</b></small></span></span><span id="legacyNav" hidden><span class="apnav">RETAIL SALES</span></span><nav id="tabbar" class="tabbar" aria-label="Sections"><span id="tabs" class="tabs"></span><button class="pill topset" id="setTop" title="Settings (Ctrl+,)" data-tab="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h8M18 6h2M4 12h2M12 12h8M4 18h10M20 18h0"/><circle cx="15" cy="6" r="2.2"/><circle cx="9" cy="12" r="2.2"/><circle cx="17" cy="18" r="2.2"/></svg><span class="tl">Settings</span><kbd>Ctrl+,</kbd></button><span id="tabsEnd" class="tabs"></span></nav><span class="sp"></span><span class="sub" id="subtitle" hidden></span>
+    <span class="pill" id="hwPill" title="Printer / cash drawer">hardware ?</span>
+    <span class="pill" id="sessPill">session ?</span>
+    <span class="pill" id="buildPill"></span>
+    <span class="pill" style="cursor:pointer" id="helpPill">F1 = keys</span>
+  </div>
+  <div class="wrap" id="checkoutView">
+    <div class="sizer" id="sizeL" title="Drag to resize"></div><div class="sizer" id="sizeR" title="Drag to resize"></div><aside class="actions"><h2>Actions</h2><div class="list" id="actions"></div></aside>
+    <section class="center">
+      <div class="cotitle"><span class="coico">&#9636;</span>ORDER CHECKOUT</div>
+      <div class="scanbar">
+        <div class="scanrow"><label for="scanInput">SCANNING INPUT</label><input id="scanInput" placeholder="Scan or input barcode" autocomplete="off" inputmode="none"></div><div class="scanmsg" id="scanMsg" style="display:none" role="status"></div><div class="msg" id="toast"></div><div id="noteLine" class="noteline" style="display:none"></div><div id="giftLine" class="noteline giftline" style="display:none"></div><div id="payStuck" class="paystuck" role="alert" style="display:none"></div>
+      </div>
+      <div class="gridbox">
+        <div class="gridhead" id="gridhead"><span id="gridTitle">Sale</span><span id="gridInfo"></span></div><div id="retLines" style="display:none"></div>
+        <table><thead id="cartHead"></thead><tbody id="cart"></tbody></table>
+      </div>
+      <div class="totals" id="totals"></div>
+      <div class="apfoot"><div class="tiles" id="tiles"></div></div>
+    </section>
+    <aside class="right" id="rightAside">
+      <div class="side" id="qsPanel"><h3>PRODUCT SEARCH <small>Ctrl+Shift+S</small></h3><input id="qsIn" placeholder="Search by keyword, number or UPC" autocomplete="off" spellcheck="false"><div class="qsres" id="qsRes"></div></div>
+      <div class="side" id="bulkPanel"><h3>QUICK ADD <small>bulk items · Alt+1-9</small></h3><div class="bulkgrid" id="bulkBtns"></div></div>
+      <div id="right"></div>
+    </aside>
+  </div>
+  <div id="sectionHost" class="sectionhost" hidden></div>
+  <div class="status"><span id="stNet" class="net">● online</span><span id="stShop"></span><span id="stStation"></span><span id="stUser"></span><span id="stSession"></span><span id="stOrder"></span><span id="stAside"></span><span style="margin-left:auto" id="stZoom"></span><span id="stRdid" class="rdid" style="display:none"></span><span id="stVer"></span><span id="stTime"></span></div>
+</div>
+<div id="modalRoot"></div>
+<script src="/label.js"></script>
+<script src="/labellayouts.js"></script>
+<script src="/shortcut-core.js"></script>
+<script src="/mounts.js"></script>
+<script src="/discline.js"></script>
+<script src="/app.js"></script>
+<script src="/extras.js"></script>
+<script src="/touch.js"></script>
+<script src="/pos.js"></script>
+<script src="/side.js"></script>
+<script src="/dlgkeys.js"></script>
+<script src="/settings.js"></script>
+<script src="/instant.js"></script>
+<script src="/topbar.js"></script>
+<script src="/printlabel.js"></script>
+<script src="/printlabels.js"></script>
+<script src="/orders.js"></script>
+</body>
+</html>

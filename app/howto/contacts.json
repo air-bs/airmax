@@ -1,0 +1,17 @@
+{
+  "_readme": "HAND-MAINTAINED. Who Ask AirMax shows when it cannot fix a problem. Edit this file only; no code change is needed and the how-to build never overwrites it. Every contact value is a placeholder until Gordon provides the real one: a value that is empty or starts with TBD is shown as 'Contact details coming soon'. Do not guess numbers, emails or web addresses. Fields per contact: name, what, phone, email, url, hours, address, note. 'routes' go top to bottom: the first route with a keyword found in the question picks the contact; 'default' is used when none match.",
+  "version": 1,
+  "default": "ak-local",
+  "contacts": [
+    { "id": "ak-local", "name": "AK Local Solutions support", "what": "The AirMax app and anything not listed below", "phone": "TBD - Gordon to provide", "email": "TBD - Gordon to provide", "url": "TBD - Gordon to provide", "hours": "TBD - Gordon to provide" },
+    { "id": "printer-vendor", "name": "Printer vendor", "what": "Receipt printer, label printer, paper and cash drawer problems", "phone": "TBD - Gordon to provide", "email": "TBD - Gordon to provide", "url": "TBD - Gordon to provide", "hours": "TBD - Gordon to provide" },
+    { "id": "card-reader-vendor", "name": "Card reader vendor", "what": "Card reader and card payment device problems", "phone": "TBD - Gordon to provide", "email": "TBD - Gordon to provide", "url": "TBD - Gordon to provide", "hours": "TBD - Gordon to provide" },
+    { "id": "airpos-backoffice", "name": "AIR POS back office", "what": "Products, prices, users, reports and store setup in AIR POS", "phone": "TBD - Gordon to provide", "email": "TBD - Gordon to provide", "url": "TBD - Gordon to provide", "hours": "TBD - Gordon to provide" }
+  ],
+  "routes": [
+    { "keywords": ["card reader", "reader", "terminal", "pin pad", "pinpad", "tap", "chip", "swipe", "stripe", "sola", "declined"], "contact": "card-reader-vendor" },
+    { "keywords": ["printer", "print", "receipt paper", "paper", "label", "drawer", "cash drawer", "star", "epson"], "contact": "printer-vendor" },
+    { "keywords": ["back office", "product", "inventory", "catalog", "price list", "report", "tax", "employee", "user", "store setup", "air pos"], "contact": "airpos-backoffice" },
+    { "keywords": ["airmax", "update", "crash", "freeze", "slow", "screen", "keyboard", "scanner"], "contact": "ak-local" }
+  ]
+}

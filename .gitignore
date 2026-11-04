@@ -1,0 +1,14 @@
+node_modules/
+pkg/out/
+pkg/stage/node/
+app/logs/
+app/journal/
+pkg/stage/app/
+
+# Ask AirMax: never track its key, history or temp files (a dev run without AIRREG_DATA would write them under app/)
+app/ask-airmax*.json
+app/ask-airmax*.log
+*.tmp
+
+# stage-guard: the live store words live outside the repo
+tools/stage-guard.private

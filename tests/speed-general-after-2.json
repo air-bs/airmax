@@ -1,0 +1,192 @@
+{
+ "at": "2026-11-03T07:07:32.706Z",
+ "latencyMs": 150,
+ "runs": 5,
+ "rows": [
+  {
+   "k": "server start (spawn -> first answer)",
+   "median": 99,
+   "ms": [
+    94,
+    104,
+    105,
+    99,
+    91
+   ]
+  },
+  {
+   "k": "login (API)",
+   "median": 912,
+   "ms": [
+    916,
+    912,
+    911,
+    912,
+    911
+   ],
+   "airposCalls": 6
+  },
+  {
+   "k": "page load -> sale screen ready (scan box focused)",
+   "median": 141,
+   "ms": [
+    139,
+    155,
+    141,
+    159,
+    134
+   ],
+   "apiCalls": 3
+  },
+  {
+   "k": "typing lag: key -> next frame, scan box (median of 13 keys)",
+   "median": 17,
+   "ms": [
+    17,
+    17,
+    17,
+    17,
+    17
+   ]
+  },
+  {
+   "k": "quick search: last key -> results",
+   "median": 357,
+   "ms": [
+    355,
+    353,
+    358,
+    357,
+    398
+   ],
+   "airposCalls": 1
+  },
+  {
+   "k": "open Product search (Ctrl+F)",
+   "median": 18,
+   "ms": [
+    18,
+    15,
+    18,
+    18,
+    15
+   ]
+  },
+  {
+   "k": "Product search: last key -> results",
+   "median": 400,
+   "ms": [
+    400,
+    403,
+    400,
+    400,
+    400
+   ],
+   "airposCalls": 1
+  },
+  {
+   "k": "add item: Enter -> line on screen",
+   "median": 346,
+   "ms": [
+    359,
+    342,
+    347,
+    346,
+    345,
+    353,
+    357,
+    341,
+    341,
+    356,
+    352,
+    346,
+    349,
+    336,
+    344
+   ],
+   "airposCalls": 3
+  },
+  {
+   "k": "3 fast scans (scanner, back to back) -> 3 lines on screen",
+   "median": 985,
+   "ms": [
+    991,
+    985,
+    1021,
+    976,
+    973
+   ],
+   "airposCalls": 9
+  },
+  {
+   "k": "60-line sale: background refresh (unchanged sale), layout included",
+   "median": 13,
+   "ms": [
+    13,
+    11,
+    13,
+    10,
+    14
+   ]
+  },
+  {
+   "k": "60-line sale: a key typed during a refresh -> on screen",
+   "median": 16,
+   "ms": [
+    15,
+    17,
+    16,
+    16,
+    16
+   ]
+  },
+  {
+   "k": "open History (Ctrl+L) -> list shown",
+   "median": 174,
+   "ms": [
+    171,
+    173,
+    178,
+    177,
+    174
+   ],
+   "airposCalls": 1
+  },
+  {
+   "k": "open Customer (F3) -> search box",
+   "median": 14,
+   "ms": [
+    20,
+    14,
+    13,
+    8,
+    14
+   ],
+   "airposCalls": 0
+  },
+  {
+   "k": "open Settings (Ctrl+,) -> page shown",
+   "median": 176,
+   "ms": [
+    174,
+    183,
+    176,
+    174,
+    180
+   ],
+   "airposCalls": 1
+  },
+  {
+   "k": "customer lookup: Enter -> result",
+   "median": 486,
+   "ms": [
+    483,
+    486,
+    510,
+    484,
+    492
+   ],
+   "airposCalls": 4
+  }
+ ]
+}

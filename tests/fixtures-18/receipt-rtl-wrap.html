@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><!-- AirMax #18 test fixture (made-up data): a short item name under a header that contains it ("TOY" / "SHOP NAME"), a Hebrew (right-to-left) item name and a long name that wraps onto two lines. Rebuild: google-chrome --headless=new --no-sandbox --no-pdf-header-footer --print-to-pdf=receipt-rtl-wrap.pdf receipt-rtl-wrap.html --><style>
+@page { size: 80mm 140mm; margin: 0; }
+body { margin: 0; padding: 4mm 3mm; font-family: Arial, Helvetica, "DejaVu Sans", sans-serif; font-size: 9pt; width: 74mm; box-sizing: border-box; }
+.c { text-align: center; } .b { font-weight: bold; } .big { font-size: 14pt; }
+.row { display: flex; justify-content: space-between; } hr { border: 0; border-top: 1px dashed #000; margin: 6px 0; }
+.item .l2 { display: flex; justify-content: space-between; font-size: 10pt; } .item .nm { max-width: 60mm; }
+</style></head><body>
+<div class="c b big">SHOP NAME</div><hr>
+<div class="row"><span>Fake shop</span><span>#000007</span></div>
+<div class="row"><span>OP#TESTER</span><span>POS7</span></div><hr>
+<div class="item"><div class="nm">TOY</div><div class="l2"><b>1002</b><span>x1</span><span>$5.00</span><b>$4.00</b></div></div>
+<div class="item"><div class="nm" dir="rtl" style="text-align:left">שוקולד חלב</div><div class="l2"><b>2001</b><span>x2</span><span>$4.50</span><b>$8.10</b></div></div>
+<div class="item"><div class="nm">EXTRA LONG DELUXE REMOTE CONTROL RACING CAR WITH BATTERIES</div><div class="l2"><b>3001</b><span>x1</span><span>$49.99</span><b>$37.49</b></div></div>
+<div class="item"><div class="nm">GIFT BAG</div><div class="l2"><b>1004</b><span>x1</span><span>$1.50</span><b>$1.50</b></div></div>
+<hr>
+<div class="row"><span>Sub Total</span><b>$51.09</b></div><div class="row"><span>Tax</span><b>$4.09</b></div><div class="row"><span>Total</span><b>$55.18</b></div>
+<hr><div class="row"><span>Payment Type</span><span>Card</span></div>
+<div class="c">#ITEMS SOLD: 5 ITEMS</div><div class="c">TR#RO0128</div><div class="c">10/28/2026 08:40</div>
+<div class="c b big">Thank You!</div>
+</body></html>

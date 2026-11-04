@@ -1,0 +1,4 @@
+#!/bin/sh
+# Step 0 measurement only: app/lib/hardware.js starts the helper as `wine <exe> --serve` off Windows (AIRREG_HW_WINE=1).
+# This stand-in runs the fake helper instead (no wine, no .exe).
+exec node "$(dirname "$0")/../fake-hw.js"

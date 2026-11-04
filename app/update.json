@@ -1,0 +1,6 @@
+{
+  "version": "1.0.11",
+  "provider": "generic",
+  "updateFeedUrl": "https://github.com/aklocalsolutions-create/arl-9530061a4d/releases/latest/download/",
+  "checkEveryHours": 6
+}

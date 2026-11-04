@@ -1,0 +1,43 @@
+/* AirMax top bar (Step 0), following design page 01-checkout: 56px bar, store name + logo at the left, bold upper-case tab names with line icons.
+   Only the strip inside the header changes: nothing below it is restyled. The page grid keeps its three rows; a section screen takes the middle row while Checkout is hidden. */
+#app { grid-template-rows:56px 1fr 26px; }
+.top { grid-row:1; } .wrap { grid-row:2; } .status { grid-row:3; }
+.top .brand { display:flex; align-items:center; gap:10px; flex:none; min-width:0; }
+.top .slogo { width:38px; height:38px; border:1.5px dashed #9aa4b2; border-radius:6px; background:#f1f3f6; color:#9aa4b2; display:flex; align-items:center; justify-content:center; flex:none; overflow:hidden; }
+.top .slogo.has { border:0; background:transparent; } .top .slogo img { max-width:100%; max-height:100%; object-fit:contain; display:block; }
+.top .bn { display:flex; flex-direction:column; line-height:1.15; min-width:0; }
+.top .sname { font-size:17px; font-weight:800; color:var(--ap-text); max-width:190px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.top .bn small { font-size:10.5px; font-weight:600; color:var(--ap-text2); letter-spacing:.2px; max-width:190px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.top .bn small .apname { font-size:inherit; font-weight:inherit; color:inherit; }
+.tabbar { align-self:stretch; display:flex; align-items:stretch; margin-left:8px; gap:2px; min-width:0; }
+.tabbar .tabs { display:flex; align-items:stretch; gap:2px; }
+.tabbar .tab, .tabbar #setTop { appearance:none; background:transparent; border:0; border-bottom:3px solid transparent; border-radius:0; margin:0; padding:0 9px; color:var(--ap-text2); font:inherit; font-size:16.5px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; cursor:pointer; display:flex; flex-direction:row; align-items:center; justify-content:center; gap:7px; white-space:nowrap; position:relative; line-height:1.15; }
+.tabbar .tab:hover, .tabbar #setTop:hover { background:var(--ap-blue-bg); color:var(--ap-blue); }
+.tabbar .tab.on, .tabbar #setTop.on { color:var(--ap-blue); border-bottom-color:var(--ap-blue); }
+.tabbar .tab svg { width:19px; height:19px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+.tabbar .tab .tl { display:inline; } .tabbar .tab .tk { display:none; } /* the key is in the tooltip and the F1 list */
+.tabbar .tab .bd { margin-left:2px; min-width:18px; height:18px; padding:0 5px; border-radius:9px; background:#f08a24; color:#fff; font-size:11.5px; font-weight:800; line-height:18px; text-align:center; box-sizing:border-box; letter-spacing:0; }
+.tabbar .tab[aria-disabled="true"] { opacity:.45; cursor:not-allowed; }
+.tabbar .tab[aria-disabled="true"]:hover { background:transparent; color:var(--ap-text2); }
+.tabbar .tab[hidden] { display:none; }
+.tabbar #setTop svg { width:19px; height:19px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex:none; } .tabbar #setTop .tl { display:inline; } .tabbar #setTop kbd { display:none; } /* Settings looks like the other tabs (design 01-checkout); the key stays in the tooltip and the F1 list */
+.tabbar #setTop { border-radius:0; } .tabbar .tab, .tabbar #setTop { text-transform:uppercase; }
+/* named mount slots (mounts.js): an empty slot takes no room */
+.mount:empty, .mount.mount-empty { display:none; } .mountrow { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; } .mountrow.mount-empty { margin:0; }
+.mountbox { display:block; } #mountTx.rgrid.mount-empty { display:none; }
+/* section screens */
+#app .sectionhost { grid-row:2; min-height:0; overflow:auto; background:var(--ap-bg, #f4f6f9); padding:18px 22px; color:var(--ap-text); }
+#app .sectionhost[hidden] { display:none; }
+#app.sec .wrap { display:none; }
+.sectionhost .soon { max-width:520px; margin:12vh auto 0; text-align:center; color:var(--ap-text2); }
+.sectionhost .soon svg { width:44px; height:44px; stroke:var(--ap-blue); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.sectionhost .soon h2 { margin:10px 0 4px; font-size:22px; color:var(--ap-text); } .sectionhost .soon p { margin:0; font-size:14px; }
+
+/* the existing Orders page (orders.js) keeps its own tab button + RETAIL SALES link, hidden here: the bar's Orders / Checkout tabs replace them */
+#legacyNav, .top .obtab { display:none !important; }
+.el-overlay.obwin-ov { top:56px !important; }
+/* room: the labels show at every width. Design size from 1800px; smaller type below so 9 tabs + the status pills fit 1366 */
+.top > .pill { flex-shrink:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+@media (max-width:1799px) { .tabbar .tab, .tabbar #setTop { font-size:14px; padding:0 7px; gap:5px; letter-spacing:.2px; } .tabbar .tab svg, .tabbar #setTop svg { width:17px; height:17px; } .top .sname { font-size:16px; } }
+@media (max-width:1499px) { .top { gap:8px; padding:0 10px; } .tabbar { margin-left:4px; gap:0; } .tabbar .tab, .tabbar #setTop { font-size:12px; padding:0 6px; gap:4px; letter-spacing:0; } .tabbar .tab svg, .tabbar #setTop svg { width:15px; height:15px; } .top .slogo { width:32px; height:32px; } .top .sname { font-size:15px; max-width:120px; } .top .bn small { max-width:120px; font-size:10px; } .top > .pill { font-size:10.5px; padding:2px 7px; } #hwPill { max-width:178px; } }
+@media (max-width:1280px) { .top .slogo { display:none; } .tabbar .tab, .tabbar #setTop { padding:0 5px; font-size:11.5px; } #hwPill { max-width:96px; } }

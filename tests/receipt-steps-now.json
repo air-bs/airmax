@@ -1,0 +1,64 @@
+{
+ "delaysMs": {
+  "printers": 600,
+  "tpl": 400,
+  "pdf": 1000,
+  "drawerJobPrinted": 700,
+  "render": 250,
+  "receiptJobPrinted": 2500
+ },
+ "events": {
+  "templateConfigBack": 401,
+  "drawerDone": 1303,
+  "receiptPdfBack": 1402,
+  "receiptBytesToPrinter": 1654,
+  "receiptPrinted": 4156,
+  "allDone": 4156
+ },
+ "steps": {
+  "templateConfigMs": 401,
+  "receiptPdfMs": 1001,
+  "prefetched": true,
+  "waitForAirposMs": 99,
+  "prints": [
+   {
+    "startAt": 1793576857885,
+    "method": "raw",
+    "methodLookupMs": 0,
+    "printerLookupMs": 1,
+    "printer": "Star TSP100 (raster)",
+    "threshold": 128,
+    "rasterizeMs": 250,
+    "buildCommandsMs": 1,
+    "bytes": 32,
+    "sendAndWaitPrintedMs": 2502,
+    "totalMs": 2754
+   }
+  ],
+  "printStartAt": 1793576857885,
+  "totalMs": 2853,
+  "at": "2026-11-01T23:47:40.639Z"
+ },
+ "results": [
+  {
+   "k": "Drawer and receipt both succeed",
+   "pass": true,
+   "note": "[[\"drawer\",true],[\"receipt\",true]]"
+  },
+  {
+   "k": "Receipt bytes reach the printer",
+   "pass": true,
+   "note": "1654 ms after sale complete"
+  },
+  {
+   "k": "AIR POS receipt PDF fetched while the drawer kicks",
+   "pass": true,
+   "note": "pdf back 1402 ms, drawer done 1303 ms"
+  },
+  {
+   "k": "Each step is timed",
+   "pass": true,
+   "note": "{\"templateConfigMs\":401,\"receiptPdfMs\":1001,\"prefetched\":true,\"waitForAirposMs\":99,\"prints\":[{\"startAt\":1793576857885,\"method\":\"raw\",\"methodLookupMs\":0,\"printerLookupMs\":1,\"printer\":\"Star TSP100 (raster)\",\"threshold\":128,\"rasterizeMs\":250,\"buildCommandsMs\":1,\"bytes\":32,\"sendAndWaitPrintedMs\":2502,\"totalMs\":2754}],\"printStartAt\":1793576857885,\"totalMs\":2853,\"at\":\"2026-11-01T23:47:40.639Z\"}"
+  }
+ ]
+}

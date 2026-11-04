@@ -1,0 +1,21 @@
+{
+ "delaysMs": {
+  "printers": 600,
+  "tpl": 400,
+  "pdf": 1000,
+  "print": 300
+ },
+ "perSaleMs": [
+  1705,
+  1702,
+  1703,
+  1703
+ ],
+ "avgAfterFirstMs": 1703,
+ "calls": {
+  "printers": 2,
+  "tpl": 5,
+  "pdf": 5,
+  "print": 5
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "delaysMs": {
+  "render": 250,
+  "rawWaitThenFail": 800,
+  "driverPrint": 400,
+  "tpl": 50,
+  "pdf": 50
+ },
+ "perReceiptMs": [
+  1555,
+  501,
+  501,
+  501
+ ],
+ "calls": {
+  "raw": 1,
+  "render": 1,
+  "driver": 4
+ },
+ "results": [
+  {
+   "k": "All 4 receipts printed",
+   "pass": true,
+   "note": "{\"raw\":1,\"render\":1,\"driver\":4}"
+  },
+  {
+   "k": "Only the first receipt tries raw; receipts 2-4 go straight to the driver",
+   "pass": true,
+   "note": "{\"raw\":1,\"render\":1,\"driver\":4}"
+  }
+ ]
+}

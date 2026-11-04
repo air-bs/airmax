@@ -1,0 +1,142 @@
+Air Max 1.0.10
+=============
+(Air Max was called "Air Register (AIR POS look)" before Oct 30 2026; same app, same settings.)
+A separate copy of Air Register with the AIR POS 1.9.11 look, called Air Max. It installs next to the
+regular Air Register (own folder, own settings, own updates) but only ONE of the two
+can be open at a time: close the regular Air Register before starting this one.
+
+A fast, keyboard-first register for AIR POS stores. It signs in with your normal
+AIR POS company, user and password and talks to the AIR POS servers directly.
+AIR POS does not need to be installed or open.
+
+Requirements
+- Windows 10/11 with Microsoft Edge.
+- Internet connection.
+- A receipt printer installed in Windows (any 80 mm ESC/POS printer) with the cash
+  drawer cable plugged into it. Air Max prints and opens the drawer itself;
+  the AIR POS hardware service is NOT needed (if it is installed, Air Max can
+  still use it as a backup - see Printer & Drawer settings, Ctrl+,).
+
+What you can do
+- Sales, holds, returns (with or without a receipt), reprints, history.
+- Payments (full screen): Credit Card first, then Cash, then the rest. Enter moves
+  down, + fills the rest, type digits to split, Enter completes when nothing is due.
+  Cash sale = Enter, +, Enter. Quick Exact / $5-$100 buttons under Cash. Card terminal,
+  keyed card (secure Stripe form - Air Max never sees the card number),
+  gift card, check, store credit, split payments.
+- Customers (F3): search by name, phone, e-mail or customer number, add, edit,
+  attach / remove, see past purchases and return from them.
+- Gift cards (right panel): Gift Card (Ctrl+G) sells or reloads one card;
+  Multiple Gift Cards (Ctrl+Shift+G): type the amount once, scan each card,
+  Enter on an empty box to finish - all paid in one checkout. Balance check too.
+- Any receipt printer: Air Max finds the receipt printer by itself, falls
+  back to the Windows default, and opens the drawer through that printer.
+- Open Drawer button (always on screen, one click) + a drawer log in End of Day.
+- Price check, Put Aside / Load Aside, sale notes, calculator, find in sale, zoom.
+- End of day: X / Z reports, cash in / out, clock in / out.
+
+Keys (F1 shows the full list in the app)
+  Scan           Adds the item           Enter (empty)  Payment
+  *5 then Enter  Quantity 5              Delete        Remove line (no popup)
+  F2             Quick search            F3            Customer
+  F5             Tax Off                 F6 / F4       Order / item discount
+  F12 / Ctrl+C   Payment                 Ctrl+Shift+N  New sale
+  Ctrl+D         Open drawer             Ctrl+P        Reprint last receipt
+  Ctrl+H         Hold sale               Ctrl+Shift+H  Load held sale
+  Ctrl+Shift+A   Put Aside               Ctrl+Shift+L  Load Aside
+  Ctrl+R         Return (no receipt)     Ctrl+L        History (reprint / return)
+  Ctrl+F         Product search          Ctrl+I        Price check (+ stock)
+  Ctrl+G         Gift card               Ctrl+Shift+G  Multiple gift cards
+  Ctrl+N         Sale note               Ctrl+Shift+F  Find a line in this sale
+  Ctrl+Shift+C   Calculator              Ctrl+= / - / 0  Zoom in / out / reset
+  F7 / F8 / F9   Unlisted item / fee / promo
+  Ctrl+E         End of day              Ctrl+K        Cash in / out
+  Ctrl+,         Printer & drawer        Ctrl+Shift+X  Clock out
+  Esc            One step back
+  Payment: Enter moves down, + fills the rest, digits split, Enter at $0 completes.
+  Ctrl+W and Ctrl+Shift+R are blocked so the register can't be closed by accident.
+
+Still done in AIR POS back office: products, prices and stock, staff, store
+settings, card-reader setup, and customer points / credit limits.
+
+Settings: Start menu > Air Max > Air Max Settings.
+Logs: %LOCALAPPDATA%\AirRegisterAirposLook\logs (no passwords or card numbers are ever logged).
+Saved on this PC only: parked (Put Aside) sales, sale notes, the drawer log, zoom.
+
+Updates: Air Max checks for a new version every few hours and installs a
+verified update automatically when the register window is closed.
+
+Touch screens: Settings > Touch keypad chooses Air Max keypad, Windows
+keyboard, or Off. The on-screen keypad only opens for boxes that need typing;
+the scan box never pops up a keyboard. Scanner and physical keyboard work as before.
+
+Register Mode (Settings, manager only): full screen, starts at Windows login,
+reopens itself if closed or crashed, and blocks Alt+Tab, Alt+F4 and the
+Windows key. Takes effect the next time Air Max starts (use Restart).
+Exit to Windows (Ctrl+Shift+Q, or tap the top-left corner 5 times) needs a
+manager's AIR POS username and password. Restart / Shut down PC is in the
+Touch & full screen settings (a cashier needs a manager login).
+Ctrl+Alt+Del cannot be blocked by any app; for a fully locked PC use Windows
+Assigned Access / Shell Launcher (needs a Windows admin).
+Remote Help (RustDesk) is never closed or hidden by Register Mode.
+
+Remote Help (RustDesk) is NOT part of this app. It is set up and managed from
+the regular Air Register; this app never installs or removes it.
+When Remote Help is set up on this PC, its ID (ID only, never the password)
+shows at the bottom right, next to the version and the clock:
+"Remote ID 123 456 789". It also shows in big type on the "Reconnecting to
+Air Max..." screen, so it can be read to support while the app is stuck.
+
+Bulk items (Quick Add, right side) can now be grouped in FOLDERS (1.0.5):
+Settings (Ctrl+,) > Bulk items (Ctrl+5): Add folder, then search or scan the
+products to put in it; Rename, Delete (asks first; its buttons move to the top
+level), Move to... and the arrows change the order. Up to 24 spots at the top
+(folders + single buttons, single buttons up to 12) and 24 items per folder.
+On the sale screen tap a folder to open it, "Back to folders" (Alt+Backspace)
+goes back. Alt+1 ... Alt+9, Alt+0, Alt+-, Alt+= press the first 12 spots shown;
+the rest are tap-only (the box scrolls). After a sale, a new sale, Hold or Load
+Hold the box goes back to the top. Saved on this PC only; AIR POS products are
+never changed. Without folders the buttons look and work exactly as before.
+
+A paid sale that AIR POS would not finish (1.0.6):
+On the Payment screen "Back to sale (payments kept)" (Esc) closes the screen
+only; nothing is cancelled or charged again. A red bar on the sale screen then
+says "Paid $X: sale not finished" (and what is still owed) with "Back to
+payment (F12)" and "Check AIR POS again", which reads the sale from AIR POS
+again and finishes it here if AIR POS already has it done. Each time AIR POS
+refuses to finish a sale, the reason is written to the app log.
+
+Customer add box (1.0.7):
+Under the sale, three wide boxes: Customer add (F3), Items (Esc) and Checkout
+(F12). With no customer the first box says "Scan card, phone or tap to add".
+With a customer on the sale it shows the name, the account balance (green, or
+red at $0.00 or less), the phone and the points. The balance is the one AIR
+POS gave when the customer was added to the sale. The small customer tag above
+the cart is still there and still opens the customer. Display only: nothing
+about money, payments or AIR POS changed.
+
+Payment pop-up (1.0.8):
+Checkout (F12) opens Payment as a pop-up in the middle of the screen; the
+sale stays visible but dimmed behind it. Refunds, split payments and "sale
+not finished" use the same pop-up. Tapping the dimmed sale does nothing:
+press Back (Esc) to go back to the items. Buttons and keys are the same.
+
+Cards on file (1.0.9, Stripe stores only):
+Open a customer (Customer, F3) to see "Cards on file". Add card... opens a
+form with the name, address and ZIP filled in from the customer; the card is
+typed into Stripe's secure card box, and Save stays off until "Customer agrees
+to save this card for future purchases" is ticked. Remove asks first. Cards
+are kept by AIR POS and Stripe; Air Max never stores card numbers.
+At checkout, with that customer on the sale, Manual Credit lists the saved
+cards (none is picked for you). Pick one and press Pay to charge it, or type
+a new card as before (a typed card is not saved). Cards saved under another
+payment channel are shown greyed and cannot be charged. Sola stores and
+stores with no card channel do not show cards on file.
+
+Fixes in 1.0.9: Clock In / Clock Out now accept amounts typed like
+"1,250.00" or "$100" (they were counted as $0); anything that is not an
+amount is refused with a message. An order discount in dollars now keeps
+the right tax when items are added or removed after it was given.
+
+Returns without a receipt: Settings > "Refund tax on returns without a
+receipt" (on by default).

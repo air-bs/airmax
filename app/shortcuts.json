@@ -1,0 +1,400 @@
+{
+  "_comment": "Air Register standalone key map (minimum keystrokes, same keys as the AIR POS overlay). local:block = swallowed. F5 = Tax Off (never reloads). Ctrl+R is Return Mode so it can never reload.",
+  "keys": [
+    {
+      "key": "F2",
+      "action": "quick-search",
+      "label": "Quick search: type, Enter adds the first match"
+    },
+    {
+      "key": "F1",
+      "action": "local:help",
+      "label": "Show this key list"
+    },
+    {
+      "key": "Ctrl+Shift+N",
+      "action": "new-sale",
+      "label": "New sale (clears the cart)"
+    },
+    {
+      "key": "F12",
+      "action": "checkout",
+      "label": "Payment (cash, card, gift card, check, store credit, split)"
+    },
+    {
+      "key": "Ctrl+C",
+      "action": "checkout",
+      "label": "Checkout / Payment (when no text is selected)",
+      "when": "noSelection"
+    },
+    {
+      "key": "Ctrl+L",
+      "action": "history",
+      "label": "Order history (reprint, return with receipt)"
+    },
+    {
+      "key": "Ctrl+H",
+      "action": "hold",
+      "label": "Hold"
+    },
+    {
+      "key": "Ctrl+Shift+H",
+      "action": "load-hold",
+      "label": "Load Hold (pick a held order)"
+    },
+    {
+      "key": "Ctrl+D",
+      "action": "drawer",
+      "label": "Open Drawer"
+    },
+    {
+      "key": "Ctrl+R",
+      "action": "return",
+      "label": "Return (no receipt): next scans go in as returns, red; press again to stop"
+    },
+    {
+      "key": "Ctrl+F",
+      "action": "search",
+      "label": "Product search"
+    },
+    {
+      "key": "Ctrl+P",
+      "action": "reprint",
+      "label": "Reprint last receipt (prints straight away)"
+    },
+    {
+      "key": "Ctrl+Alt+P",
+      "action": "reprint-gift",
+      "label": "Gift receipt for the last sale (no prices, prints straight away)"
+    },
+    {
+      "key": "F6",
+      "action": "discount",
+      "label": "Sale discount (order discount)"
+    },
+    {
+      "key": "+",
+      "action": "qty-plus",
+      "label": "Quantity +1 on selected line",
+      "when": "notTyping",
+      "usesRow": true
+    },
+    {
+      "key": "-",
+      "action": "qty-minus",
+      "label": "Quantity -1 on selected line",
+      "when": "notTyping",
+      "usesRow": true
+    },
+    {
+      "key": "*",
+      "action": "qty-star",
+      "label": "Quantity: type * then the number and Enter (e.g. *5) — sets the last / selected line",
+      "when": "notTyping",
+      "usesRow": true
+    },
+    {
+      "key": "Delete",
+      "action": "remove",
+      "label": "Remove selected line",
+      "when": "notTyping",
+      "usesRow": true
+    },
+    {
+      "key": "Escape",
+      "action": "close",
+      "label": "Close window / back to sale"
+    },
+    {
+      "key": "Ctrl+Shift+O",
+      "action": "close",
+      "label": "Back to the sale screen"
+    },
+    {
+      "key": "Ctrl+W",
+      "action": "local:block",
+      "label": "Ctrl+W blocked: it would close the register"
+    },
+    {
+      "key": "Ctrl+Shift+R",
+      "action": "local:block",
+      "label": "Ctrl+Shift+R blocked: reload is not allowed"
+    },
+    {
+      "key": "F5",
+      "action": "tax-off",
+      "label": "Tax Off: no tax on this sale (press again to put tax back). Browser reload stays blocked."
+    },
+    {
+      "key": "Ctrl+Shift+X",
+      "action": "clock-out",
+      "label": "Clock out (count the drawer, then log out)"
+    },
+    {
+      "key": "F3",
+      "action": "customer",
+      "label": "Customer (find, add, edit, remove)"
+    },
+    {
+      "key": "F4",
+      "action": "item-discount",
+      "label": "Item discount / tax for the selected line"
+    },
+    {
+      "key": "F7",
+      "action": "open-item",
+      "label": "Temporary Item: type a price (name optional), Enter adds it"
+    },
+    {
+      "key": "F8",
+      "action": "extra-charge",
+      "label": "Extra charge (fee)"
+    },
+    {
+      "key": "F9",
+      "action": "promo",
+      "label": "Promo code"
+    },
+    {
+      "key": "Ctrl+E",
+      "action": "end-of-day",
+      "label": "End of day: X / Z reports, cash in / out"
+    },
+    {
+      "key": "Ctrl+K",
+      "action": "cash-move",
+      "label": "Cash in / out (choose Pay In or Pay Out)"
+    },
+    {
+      "key": "Ctrl+,",
+      "action": "settings",
+      "label": "Settings"
+    },
+    {
+      "key": "Ctrl+1",
+      "action": "settings-printer",
+      "label": "Settings: Printer & Drawer tab"
+    },
+    {
+      "key": "Ctrl+2",
+      "action": "settings-returns",
+      "label": "Settings: Returns tab"
+    },
+    {
+      "key": "Ctrl+3",
+      "action": "settings-screen",
+      "label": "Settings: Screen tab"
+    },
+    {
+      "key": "Ctrl+4",
+      "action": "settings-touch",
+      "label": "Settings: Touch tab"
+    },
+    {
+      "key": "Ctrl+5",
+      "action": "settings-bulk",
+      "label": "Settings: Bulk items tab"
+    },
+    {
+      "key": "Ctrl+6",
+      "action": "settings-buttons",
+      "label": "Settings: Buttons tab"
+    },
+    {
+      "key": "Ctrl+7",
+      "action": "settings-remote",
+      "label": "Settings: Remote help tab"
+    },
+    {
+      "key": "Ctrl+8",
+      "action": "settings-labels",
+      "label": "Settings: Labels tab (label printer, sticker size, what the label shows)"
+    },
+    {
+      "key": "Ctrl+9",
+      "action": "settings-cards",
+      "label": "Settings: Cards tab (typed cards and cards on file for Sola stores)"
+    },
+    {
+      "key": "Ctrl+Shift+P",
+      "action": "print-label",
+      "label": "Print Label: scan items to print price stickers on the label printer (the sale is not changed)"
+    },
+    {
+      "key": "Ctrl+N",
+      "action": "note",
+      "label": "Sale note (prints under the receipt)"
+    },
+    {
+      "key": "F10",
+      "action": "gift-receipt",
+      "label": "Add Gift Receipt: a no-price gift receipt prints with this sale (press again to remove)"
+    },
+    {
+      "key": "Alt+N",
+      "action": "note",
+      "label": "Sale note (same as Ctrl+N)"
+    },
+    {
+      "key": "Ctrl+I",
+      "action": "price-check",
+      "label": "Price check (shows price and stock, adds nothing)"
+    },
+    {
+      "key": "Ctrl+Shift+A",
+      "action": "aside-put",
+      "label": "Put Aside (park this sale on this PC)"
+    },
+    {
+      "key": "Ctrl+Shift+L",
+      "action": "aside-load",
+      "label": "Load Aside (bring back a parked sale)"
+    },
+    {
+      "key": "Ctrl+Shift+F",
+      "action": "cart-search",
+      "label": "Find a line in this sale"
+    },
+    {
+      "key": "Ctrl+Shift+C",
+      "action": "calculator",
+      "label": "Calculator"
+    },
+    {
+      "key": "Ctrl+G",
+      "action": "gift-card",
+      "label": "Gift card: sell or reload one card (balance check is in the right panel)"
+    },
+    {
+      "key": "Ctrl+Shift+G",
+      "action": "gift-multi",
+      "label": "Sell several gift cards (one amount, scan cards one after another)"
+    },
+    {
+      "key": "Ctrl+=",
+      "action": "zoom-in",
+      "label": "Zoom in (remembered on this PC)"
+    },
+    {
+      "key": "Ctrl+-",
+      "action": "zoom-out",
+      "label": "Zoom out"
+    },
+    {
+      "key": "Ctrl+0",
+      "action": "zoom-reset",
+      "label": "Zoom back to 100%"
+    },
+    {
+      "key": "Ctrl+Alt+=",
+      "action": "zoom-in",
+      "label": "Zoom in"
+    },
+    {
+      "key": "Ctrl+Alt+-",
+      "action": "zoom-out",
+      "label": "Zoom out"
+    },
+    {
+      "key": "Ctrl+Shift+S",
+      "action": "quick-search",
+      "label": "Quick search box in the side panel"
+    },
+    {
+      "key": "Shift+F3",
+      "action": "clear-customer",
+      "label": "Clear customer from this sale"
+    },
+    {
+      "key": "Ctrl+Shift+B",
+      "action": "gift-balance",
+      "label": "Gift card balance"
+    },
+    {
+      "key": "Ctrl+Shift+D",
+      "action": "hw",
+      "label": "Hardware check (printer / drawer)"
+    },
+    {
+      "key": "Ctrl+Shift+U",
+      "action": "logout",
+      "label": "Log out"
+    },
+    {
+      "key": "Ctrl+B",
+      "action": "sidebars",
+      "label": "Hide / show the side panels"
+    },
+    {
+      "key": "Alt+1",
+      "action": "bulk-1",
+      "label": "Bulk item button 1"
+    },
+    {
+      "key": "Alt+2",
+      "action": "bulk-2",
+      "label": "Bulk item button 2"
+    },
+    {
+      "key": "Alt+3",
+      "action": "bulk-3",
+      "label": "Bulk item button 3"
+    },
+    {
+      "key": "Alt+4",
+      "action": "bulk-4",
+      "label": "Bulk item button 4"
+    },
+    {
+      "key": "Alt+5",
+      "action": "bulk-5",
+      "label": "Bulk item button 5"
+    },
+    {
+      "key": "Alt+6",
+      "action": "bulk-6",
+      "label": "Bulk item button 6"
+    },
+    {
+      "key": "Alt+7",
+      "action": "bulk-7",
+      "label": "Bulk item button 7"
+    },
+    {
+      "key": "Alt+8",
+      "action": "bulk-8",
+      "label": "Bulk item button 8"
+    },
+    {
+      "key": "Alt+9",
+      "action": "bulk-9",
+      "label": "Bulk item button 9"
+    },
+    {
+      "key": "Alt+0",
+      "action": "bulk-10",
+      "label": "Bulk item button 10"
+    },
+    {
+      "key": "Alt+-",
+      "action": "bulk-11",
+      "label": "Bulk item button 11"
+    },
+    {
+      "key": "Alt+=",
+      "action": "bulk-12",
+      "label": "Bulk item button 12"
+    },
+    {
+      "key": "Alt+Backspace",
+      "action": "bulk-back",
+      "when": "notTyping",
+      "label": "Bulk items: back to folders"
+    },
+    {
+      "key": "Alt+letter",
+      "action": "local:dialog-button",
+      "label": "In a window: the button marked Alt + that letter"
+    }
+  ]
+}

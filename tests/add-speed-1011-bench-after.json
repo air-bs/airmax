@@ -1,0 +1,46 @@
+{
+ "label": "after-1.0.11-speed.1",
+ "stockNoteStarts": "with the add",
+ "latencies": "lookup 270 / total check 180 / stock search 280 ms",
+ "single": {
+  "lineShown": {
+   "median": 276,
+   "p90": 276
+  },
+  "totalReady": {
+   "median": 454,
+   "p90": 463
+  },
+  "stockNote": {
+   "median": 281,
+   "p90": 282
+  },
+  "everythingDone": {
+   "median": 454,
+   "p90": 463
+  }
+ },
+ "burst10": [
+  {
+   "allLinesShown": 2763,
+   "finalTotal": 2942,
+   "allNotes": 2942,
+   "due": 54.84,
+   "rows": 3
+  },
+  {
+   "allLinesShown": 2748,
+   "finalTotal": 2927,
+   "allNotes": 2927,
+   "due": 54.84,
+   "rows": 3
+  },
+  {
+   "allLinesShown": 2753,
+   "finalTotal": 2933,
+   "allNotes": 2933,
+   "due": 54.84,
+   "rows": 3
+  }
+ ]
+}

@@ -1,0 +1,279 @@
+===== identity.test
+30/30 passed
+exit 0
+===== updater-identity.test
+19/19 passed
+exit 0
+===== backend-frozen.test
+518/518 passed
+exit 0
+===== stress7-109.test
+21/21 passed
+exit 0
+===== stress9-hold-110.test
+8/8 passed
+exit 0
+===== stress10-holddiff-109.test
+15/15 passed
+exit 0
+===== stress7-keyed-109.test
+10/10 passed
+exit 0
+===== sola-cof-109.test
+55/55 passed
+exit 0
+===== keys-unique.test
+exit 0
+===== cart-arrows.test
+13/13 passed
+exit 0
+===== pay-arrows.test
+14/14 passed
+exit 0
+===== drawer-star.test
+16/16 drawer tests passed
+exit 0
+===== print-speed.test
+22/22 print speed tests passed
+exit 0
+===== split-card.test
+16/16 split card tests passed
+exit 0
+===== logout-stock.test
+logout-stock: 20/20 passed
+exit 0
+===== card-refund.test
+20/20 passed
+exit 0
+===== customer-display.test
+ok   payment: paid, amount due and change; no card details passed on
+7/7 passed
+exit 0
+===== customer-welcome-logo.test
+11/11 passed
+exit 0
+===== printcmd.test
+31/31 printer command tests passed
+exit 0
+===== printing.test
+16/16 printing flow tests passed
+exit 0
+===== recovered-notice.test
+7/7 passed
+exit 0
+===== tax-off-manager.test
+7/7 passed
+exit 0
+===== v120.test
+37/37 1.2.0 unit tests passed
+exit 0
+===== fgh.test
+16/16 F/G/H tests passed
+exit 0
+===== gift-receipt.test
+9/9 gift receipt tests passed
+exit 0
+===== onp.test
+onp: 27/27 passed
+exit 0
+===== printer-background.test
+20/20 printer-background / out-of-stock tests passed
+exit 0
+===== receipt-darkness.test
+receipt-darkness: 5/5 passed
+exit 0
+===== receipt-driveronly.test
+receipt-driveronly: 2/2 passed
+exit 0
+===== star-futureprnt.test
+star-futureprnt: 27/27 passed
+exit 0
+===== checkprinters.test
+38/38 check-printers / reprint / gift / label tests passed
+exit 0
+===== hwfit.test
+hwfit: 8/8 passed
+8/8 helper fit-to-width tests passed
+exit 0
+===== hebrew-label.test
+22/22 Hebrew label / quick settings tests passed
+exit 0
+===== hebrew-raster.test
+4/4 Hebrew raster tests passed
+exit 0
+===== stockwarn.test
+stockwarn: 19/19 passed
+exit 0
+===== autoprint.test
+autoprint: 11/11 passed
+exit 0
+===== receipt-speed.test
+receipt-speed: 2/2 passed
+exit 0
+===== receipt-steps.test
+receipt-steps: 4/4 passed
+exit 0
+===== return-account.test
+11/11 return-to-account unit tests passed
+exit 0
+===== side-panel.test
+9/9 passed
+exit 0
+===== bulkfolders-105.test
+11/11 bulk folder (1.0.5) unit tests passed
+exit 0
+===== total-check.test
+10/10 passed
+exit 0
+===== money-109.test
+38/38 passed
+exit 0
+===== small-bugs-109.test
+18/18 passed
+exit 0
+===== custmsg-109.test
+29/29 passed
+exit 0
+===== update-tap.test
+update-tap: 7/7 passed
+exit 0
+===== screenpics-1010.test
+46/46 passed
+exit 0
+===== print-label.test
+31/31 print label tests passed
+exit 0
+===== card-mock
+exit 0
+===== absent-local
+{"drawer":{"ok":false,"message":"Cash drawer did not open (Windows printer (automatic)): built-in helper not available on this system; AIR POS service not running. The sale is saved; you can reprint later. Check: printer on, cable/USB in, the right printer in Settings (Ctrl+,), and the drawer cable in the printer's DK port.","hw":"absent"},"print":{"ok":false,"message":"Could not get the return receipt: Login failed or not logged in"}}
+exit 0
+===== dblpay-109
+ok   repro-keyed {"CASE":"failed-recorded"}: (d) Stripe reported an error but AIR POS recorded it: adopted, not cancelled (1/1 checks)
+72 passed, 0 failed
+exit 0
+===== e2e-120
+55/55 UI e2e (1.2.0) passed
+exit 0
+===== e2e-qr
+25/25 passed
+exit 0
+===== e2e-icon
+8/8 passed
+exit 0
+===== e2e-settings
+44/44 passed
+exit 0
+===== e2e-customer
+27/27 passed
+exit 0
+===== e2e-cart-arrows
+17/17 passed
+exit 0
+===== e2e-pay-arrows
+17/17 passed
+exit 0
+===== e2e-side-panel
+22/22 passed
+exit 0
+===== e2e-refund-panel
+21/21 refund-panel e2e passed
+exit 0
+===== e2e-fit-102
+41 passed, 0 failed
+exit 0
+===== e2e-stripes-103
+37 passed, 0 failed
+exit 0
+===== e2e-rdid-104
+18/18 passed
+exit 0
+===== e2e-bulkfolders-105
+23/23 passed
+exit 0
+===== e2e-stuck-106
+21/21 way-out e2e checks passed (AirMax 1.0.6)
+exit 0
+===== e2e-teamkit-106
+9/9 Team Kit checks passed (AirMax 1.0.6)
+exit 0
+===== e2e-wide-customer-107
+20/20 wide customer box checks passed (AirMax 1.0.7)
+exit 0
+===== e2e-popup-108
+29/29 payment pop-up checks passed (AirMax 1.0.8)
+exit 0
+===== e2e-card-on-file-109
+42/42 card on file checks passed
+exit 0
+===== e2e-sola-cof-109
+34/34 Sola card on file checks passed
+exit 0
+===== e2e-clock-amount-109
+7/7 passed
+exit 0
+===== e2e-lowrisk-1091
+7/7 passed
+exit 0
+===== e2e-tempitem-search
+18/18 passed
+exit 0
+===== e2e-stress7-ui-109
+8/8 passed
+exit 0
+===== e2e-stress9-cash2-110
+7/7 passed
+exit 0
+===== e2e-gift-receipt
+11/11 passed
+exit 0
+===== e2e-fghi
+19/19 F/G/H/I e2e passed
+exit 0
+===== e2e-gc-enter
+9/9 gift card Enter e2e passed
+exit 0
+===== e2e-kl
+16/16 K/L e2e passed
+exit 0
+===== e2e-final
+e2e-final: 18/18 passed
+exit 0
+===== e2e-one-enter
+e2e-one-enter: 10/10 passed
+exit 0
+===== e2e-one-enter-stockon
+e2e-one-enter: 3/3 passed
+exit 0
+===== e2e-customer-enter
+e2e-customer-enter: 11/11 passed
+exit 0
+===== e2e-split-card
+e2e-split-card: 10/10 passed
+exit 0
+===== e2e-total-check
+8/8 passed
+exit 0
+===== e2e-update-tap
+e2e-update-tap: 9/9 passed
+exit 0
+===== e2e-ui-1010
+34/34 passed
+exit 0
+===== e2e-custmsg-109
+15/15 passed
+exit 0
+===== e2e-print-label
+30/30 passed
+exit 0
+===== settings-parity
+10/10 passed
+exit 0
+===== e2e-totals-parity
+9/9 passed
+exit 0
+===== e2e-look
+19/19 passed
+exit 0
+ALLDONE
+SUITE_EXIT 0

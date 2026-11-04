@@ -1,0 +1,1569 @@
+{
+ "S1 plain taxed items, cash with change": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 10.8,
+     "tax": 0.8,
+     "itemAmount": 10,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 21.6,
+     "tax": 1.6,
+     "itemAmount": 20,
+     "lines": [
+      [
+       "iA",
+       2,
+       0,
+       8
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 24.3,
+     "tax": 1.8,
+     "itemAmount": 22.5,
+     "lines": [
+      [
+       "iA",
+       2,
+       0,
+       8
+      ],
+      [
+       "iB",
+       1,
+       0,
+       8
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 24.3,
+   "tax": 1.8,
+   "itemAmount": 22.5,
+   "lines": [
+    [
+     "iA",
+     2,
+     0,
+     8
+    ],
+    [
+     "iB",
+     1,
+     0,
+     8
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 24.3,
+    "change": 25.7
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 10,
+     "amount": 24.3,
+     "receive": 50,
+     "give": 25.7
+    }
+   ],
+   "completes": 1,
+   "cards": {},
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S2 mixed tax rates (0, 8, 8.875, 6.5), exact cash": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 1.25,
+     "tax": 0,
+     "itemAmount": 1.25,
+     "lines": [
+      [
+       "iC",
+       1,
+       0,
+       0
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 9.95,
+     "tax": 0.71,
+     "itemAmount": 9.24,
+     "lines": [
+      [
+       "iC",
+       1,
+       0,
+       0
+      ],
+      [
+       "iD",
+       1,
+       0,
+       8.875
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 36.56,
+     "tax": 2.33,
+     "itemAmount": 34.23,
+     "lines": [
+      [
+       "iC",
+       1,
+       0,
+       0
+      ],
+      [
+       "iD",
+       1,
+       0,
+       8.875
+      ],
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 39.26,
+     "tax": 2.53,
+     "itemAmount": 36.73,
+     "lines": [
+      [
+       "iB",
+       1,
+       0,
+       8
+      ],
+      [
+       "iC",
+       1,
+       0,
+       0
+      ],
+      [
+       "iD",
+       1,
+       0,
+       8.875
+      ],
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 39.26,
+   "tax": 2.53,
+   "itemAmount": 36.73,
+   "lines": [
+    [
+     "iB",
+     1,
+     0,
+     8
+    ],
+    [
+     "iC",
+     1,
+     0,
+     0
+    ],
+    [
+     "iD",
+     1,
+     0,
+     8.875
+    ],
+    [
+     "iE",
+     1,
+     0,
+     6.5
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 39.26,
+    "change": 0
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 10,
+     "amount": 39.26,
+     "receive": 39.26,
+     "give": 0
+    }
+   ],
+   "completes": 1,
+   "cards": {},
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S3 line discount percent + amount": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 10.8,
+     "tax": 0.8,
+     "itemAmount": 10,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 37.41,
+     "tax": 2.42,
+     "itemAmount": 34.99,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ],
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 33.42,
+     "tax": 2.18,
+     "itemAmount": 31.24,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ],
+      [
+       "iE",
+       1,
+       3.75,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 31.26,
+     "tax": 2.02,
+     "itemAmount": 29.24,
+     "lines": [
+      [
+       "iA",
+       1,
+       2,
+       8
+      ],
+      [
+       "iE",
+       1,
+       3.75,
+       6.5
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 31.26,
+   "tax": 2.02,
+   "itemAmount": 29.24,
+   "lines": [
+    [
+     "iA",
+     1,
+     2,
+     8
+    ],
+    [
+     "iE",
+     1,
+     3.75,
+     6.5
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 31.26,
+    "change": 68.74
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 10,
+     "amount": 31.26,
+     "receive": 100,
+     "give": 68.74
+    }
+   ],
+   "completes": 1,
+   "cards": {},
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S4 order discount percent 10": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 10.8,
+     "tax": 0.8,
+     "itemAmount": 10,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 19.5,
+     "tax": 1.51,
+     "itemAmount": 17.99,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ],
+      [
+       "iD",
+       1,
+       0,
+       8.875
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 28.2,
+     "tax": 2.22,
+     "itemAmount": 25.98,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ],
+      [
+       "iD",
+       2,
+       0,
+       8.875
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 25.38,
+     "tax": 1.9980000000000002,
+     "itemAmount": 25.98,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ],
+      [
+       "iD",
+       2,
+       0,
+       8.875
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 25.38,
+   "tax": 1.9980000000000002,
+   "itemAmount": 25.98,
+   "lines": [
+    [
+     "iA",
+     1,
+     0,
+     8
+    ],
+    [
+     "iD",
+     2,
+     0,
+     8.875
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 25.38,
+    "change": 34.62
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 10,
+     "amount": 25.38,
+     "receive": 60,
+     "give": 34.62
+    }
+   ],
+   "completes": 1,
+   "cards": {},
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S5 order discount amount 5 + line discount": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 26.61,
+     "tax": 1.62,
+     "itemAmount": 24.99,
+     "lines": [
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 53.23,
+     "tax": 3.25,
+     "itemAmount": 49.98,
+     "lines": [
+      [
+       "iE",
+       2,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 55.93,
+     "tax": 3.45,
+     "itemAmount": 52.48,
+     "lines": [
+      [
+       "iB",
+       1,
+       0,
+       8
+      ],
+      [
+       "iE",
+       2,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 55.66,
+     "tax": 3.43,
+     "itemAmount": 52.23,
+     "lines": [
+      [
+       "iB",
+       1,
+       0.25,
+       8
+      ],
+      [
+       "iE",
+       2,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 50.33,
+     "tax": 3.1016446486693474,
+     "itemAmount": 52.23,
+     "lines": [
+      [
+       "iB",
+       1,
+       0.25,
+       8
+      ],
+      [
+       "iE",
+       2,
+       0,
+       6.5
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 50.33,
+   "tax": 3.1016446486693474,
+   "itemAmount": 52.23,
+   "lines": [
+    [
+     "iB",
+     1,
+     0.25,
+     8
+    ],
+    [
+     "iE",
+     2,
+     0,
+     6.5
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 50.33,
+    "change": 29.67
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 10,
+     "amount": 50.33,
+     "receive": 80,
+     "give": 29.67
+    }
+   ],
+   "completes": 1,
+   "cards": {},
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S6 Tax Off (manager): tax 0, change due": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 10.8,
+     "tax": 0.8,
+     "itemAmount": 10,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 19.5,
+     "tax": 1.51,
+     "itemAmount": 17.99,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ],
+      [
+       "iD",
+       1,
+       0,
+       8.875
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 17.99,
+     "tax": 0,
+     "itemAmount": 17.99,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       0
+      ],
+      [
+       "iD",
+       1,
+       0,
+       0
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 17.99,
+   "tax": 0,
+   "itemAmount": 17.99,
+   "lines": [
+    [
+     "iA",
+     1,
+     0,
+     0
+    ],
+    [
+     "iD",
+     1,
+     0,
+     0
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 17.99,
+    "change": 2.01
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 10,
+     "amount": 17.99,
+     "receive": 20,
+     "give": 2.01
+    }
+   ],
+   "completes": 1,
+   "cards": {},
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S7 Tax Off then back on": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 26.61,
+     "tax": 1.62,
+     "itemAmount": 24.99,
+     "lines": [
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 24.99,
+     "tax": 0,
+     "itemAmount": 24.99,
+     "lines": [
+      [
+       "iE",
+       1,
+       0,
+       0
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 26.61,
+     "tax": 1.62,
+     "itemAmount": 24.99,
+     "lines": [
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 26.61,
+   "tax": 1.62,
+   "itemAmount": 24.99,
+   "lines": [
+    [
+     "iE",
+     1,
+     0,
+     6.5
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 26.61,
+    "change": 0
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 10,
+     "amount": 26.61,
+     "receive": 26.61,
+     "give": 0
+    }
+   ],
+   "completes": 1,
+   "cards": {},
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S8 Tax Off + order discount": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 10.8,
+     "tax": 0.8,
+     "itemAmount": 10,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 37.41,
+     "tax": 2.42,
+     "itemAmount": 34.99,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ],
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 34.99,
+     "tax": 0,
+     "itemAmount": 34.99,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       0
+      ],
+      [
+       "iE",
+       1,
+       0,
+       0
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 27.99,
+     "tax": 0,
+     "itemAmount": 34.99,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       0
+      ],
+      [
+       "iE",
+       1,
+       0,
+       0
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 27.99,
+   "tax": 0,
+   "itemAmount": 34.99,
+   "lines": [
+    [
+     "iA",
+     1,
+     0,
+     0
+    ],
+    [
+     "iE",
+     1,
+     0,
+     0
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 27.99,
+    "change": 12.01
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 10,
+     "amount": 27.99,
+     "receive": 40,
+     "give": 12.01
+    }
+   ],
+   "completes": 1,
+   "cards": {},
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S9 gift card pays part, cash the rest": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 26.61,
+     "tax": 1.62,
+     "itemAmount": 24.99,
+     "lines": [
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 35.31,
+     "tax": 2.33,
+     "itemAmount": 32.98,
+     "lines": [
+      [
+       "iD",
+       1,
+       0,
+       8.875
+      ],
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 46.11,
+     "tax": 3.13,
+     "itemAmount": 42.98,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ],
+      [
+       "iD",
+       1,
+       0,
+       8.875
+      ],
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 46.11,
+   "tax": 3.13,
+   "itemAmount": 42.98,
+   "lines": [
+    [
+     "iA",
+     1,
+     0,
+     8
+    ],
+    [
+     "iD",
+     1,
+     0,
+     8.875
+    ],
+    [
+     "iE",
+     1,
+     0,
+     6.5
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": false,
+    "remaining": 26.11
+   },
+   {
+    "ok": true,
+    "completed": true,
+    "due": 46.11,
+    "change": 3.89
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 40,
+     "amount": 20,
+     "receive": 0,
+     "give": 0
+    },
+    {
+     "t": 10,
+     "amount": 26.11,
+     "receive": 30,
+     "give": 3.89
+    }
+   ],
+   "completes": 1,
+   "cards": {
+    "gc0": 0
+   },
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S10 gift card pays the whole sale (2 cards, one payment), balances left": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 10.8,
+     "tax": 0.8,
+     "itemAmount": 10,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 13.5,
+     "tax": 1,
+     "itemAmount": 12.5,
+     "lines": [
+      [
+       "iA",
+       1,
+       0,
+       8
+      ],
+      [
+       "iB",
+       1,
+       0,
+       8
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 13.5,
+   "tax": 1,
+   "itemAmount": 12.5,
+   "lines": [
+    [
+     "iA",
+     1,
+     0,
+     8
+    ],
+    [
+     "iB",
+     1,
+     0,
+     8
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 13.5,
+    "change": 0
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 40,
+     "amount": 13.5,
+     "receive": 0,
+     "give": 0
+    }
+   ],
+   "completes": 1,
+   "cards": {
+    "gc0": 0,
+    "gc1": 3.5
+   },
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S11 gift card + discounts + tax off, cash change": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 26.61,
+     "tax": 1.62,
+     "itemAmount": 24.99,
+     "lines": [
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 35.31,
+     "tax": 2.33,
+     "itemAmount": 32.98,
+     "lines": [
+      [
+       "iD",
+       1,
+       0,
+       8.875
+      ],
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 34.44,
+     "tax": 2.26,
+     "itemAmount": 32.18,
+     "lines": [
+      [
+       "iD",
+       1,
+       0.8,
+       8.875
+      ],
+      [
+       "iE",
+       1,
+       0,
+       6.5
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 32.18,
+     "tax": 0,
+     "itemAmount": 32.18,
+     "lines": [
+      [
+       "iD",
+       1,
+       0.8,
+       0
+      ],
+      [
+       "iE",
+       1,
+       0,
+       0
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 29.18,
+     "tax": 0,
+     "itemAmount": 32.18,
+     "lines": [
+      [
+       "iD",
+       1,
+       0.8,
+       0
+      ],
+      [
+       "iE",
+       1,
+       0,
+       0
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 29.18,
+   "tax": 0,
+   "itemAmount": 32.18,
+   "lines": [
+    [
+     "iD",
+     1,
+     0.8,
+     0
+    ],
+    [
+     "iE",
+     1,
+     0,
+     0
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": false,
+    "remaining": 14.18
+   },
+   {
+    "ok": true,
+    "completed": true,
+    "due": 29.18,
+    "change": 5.82
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 40,
+     "amount": 15,
+     "receive": 0,
+     "give": 0
+    },
+    {
+     "t": 10,
+     "amount": 14.18,
+     "receive": 20,
+     "give": 5.82
+    }
+   ],
+   "completes": 1,
+   "cards": {
+    "gc0": 0
+   },
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ },
+ "S12 quantity changes then discount": {
+  "steps": [
+   {
+    "ok": true,
+    "snap": {
+     "due": 2.7,
+     "tax": 0.2,
+     "itemAmount": 2.5,
+     "lines": [
+      [
+       "iB",
+       1,
+       0,
+       8
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 16.2,
+     "tax": 1.2,
+     "itemAmount": 15,
+     "lines": [
+      [
+       "iB",
+       6,
+       0,
+       8
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 17.45,
+     "tax": 1.2,
+     "itemAmount": 16.25,
+     "lines": [
+      [
+       "iB",
+       6,
+       0,
+       8
+      ],
+      [
+       "iC",
+       1,
+       0,
+       0
+      ]
+     ]
+    }
+   },
+   {
+    "ok": true,
+    "snap": {
+     "due": 17.39,
+     "tax": 1.2,
+     "itemAmount": 16.19,
+     "lines": [
+      [
+       "iB",
+       6,
+       0,
+       8
+      ],
+      [
+       "iC",
+       1,
+       0.06,
+       0
+      ]
+     ]
+    }
+   }
+  ],
+  "start": {
+   "ok": true
+  },
+  "beforePay": {
+   "due": 17.39,
+   "tax": 1.2,
+   "itemAmount": 16.19,
+   "lines": [
+    [
+     "iB",
+     6,
+     0,
+     8
+    ],
+    [
+     "iC",
+     1,
+     0.06,
+     0
+    ]
+   ]
+  },
+  "pay": [
+   {
+    "ok": true,
+    "completed": true,
+    "due": 17.39,
+    "change": 7.61
+   }
+  ],
+  "server": {
+   "begins": [
+    {
+     "t": 10,
+     "amount": 17.39,
+     "receive": 25,
+     "give": 7.61
+    }
+   ],
+   "completes": 1,
+   "cards": {},
+   "savedAmounts": [
+    [
+     null,
+     null,
+     null
+    ]
+   ]
+  }
+ }
+}

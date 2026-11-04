@@ -1,0 +1,214 @@
+{
+ "left": [
+  [
+   "⊕NewCtrl + Shift + N",
+   "new-sale"
+  ],
+  [
+   "🧾HistoryCtrl + L",
+   "history"
+  ],
+  [
+   "🕒HoldCtrl + H",
+   "hold"
+  ],
+  [
+   "👥Load HoldCtrl + Shift + H",
+   "load-hold"
+  ],
+  [
+   "💵Open DrawerCtrl + D",
+   "drawer"
+  ],
+  [
+   "↩ReturnCtrl + R",
+   "return"
+  ],
+  [
+   "🏷Print LabelCtrl + Shift + P",
+   "print-label"
+  ],
+  [
+   "🎁Add Gift ReceiptF10",
+   "gift-receipt"
+  ],
+  [
+   "✎Temporary ItemF7",
+   "open-item"
+  ],
+  [
+   "＄Price ChangeManager · New price",
+   "price-change"
+  ],
+  [
+   "≡Print QuoteEstimate · not a sale",
+   "quote"
+  ],
+  [
+   "👤CustomerF3",
+   "customer"
+  ],
+  [
+   "📊End of DayCtrl + E",
+   "end-of-day"
+  ],
+  [
+   "⏱Clock OutCtrl + Shift + X",
+   "clock-out"
+  ],
+  [
+   "⏻Log OutCtrl + Shift + U",
+   "logout"
+  ]
+ ],
+ "right": [
+  [
+   "H:Transaction Actions",
+   ""
+  ],
+  [
+   "Temporary ItemF7",
+   "open-item"
+  ],
+  [
+   "ReturnCtrl + R",
+   "return"
+  ],
+  [
+   "Take Returnreceipt · Ctrl + L",
+   "history"
+  ],
+  [
+   "Reprint ReceiptCtrl + P",
+   "reprint"
+  ],
+  [
+   "Gift ReceiptCtrl + Alt + P",
+   "reprint-gift"
+  ],
+  [
+   "Open FinderCtrl + F",
+   "search"
+  ],
+  [
+   "Sale DiscountF6",
+   "discount"
+  ],
+  [
+   "Tax OffF5",
+   "tax-off"
+  ],
+  [
+   "Promo CodeF9",
+   "promo"
+  ],
+  [
+   "Extra ChargeF8",
+   "extra-charge"
+  ],
+  [
+   "Clear CustomerShift + F3",
+   "clear-customer"
+  ],
+  [
+   "H:Gift Cards",
+   ""
+  ],
+  [
+   "Gift CardCtrl + G",
+   "gift-card"
+  ],
+  [
+   "Multiple Gift CardsCtrl + Shift + G",
+   "gift-multi"
+  ],
+  [
+   "Gift Card BalanceCtrl + Shift + B",
+   "gift-balance"
+  ],
+  [
+   "H:Lookups",
+   ""
+  ],
+  [
+   "Price CheckCtrl + I",
+   "price-check"
+  ],
+  [
+   "Find in SaleCtrl + Shift + F",
+   "cart-search"
+  ],
+  [
+   "Sale NoteCtrl + N / Alt + N",
+   "note"
+  ],
+  [
+   "CalculatorCtrl + Shift + C",
+   "calculator"
+  ],
+  [
+   "ZoomCtrl + 0 · Ctrl + = / −",
+   "zoom-reset"
+  ],
+  [
+   "H:Items",
+   ""
+  ],
+  [
+   "Qty ++",
+   "qty-plus"
+  ],
+  [
+   "Qty −−",
+   "qty-minus"
+  ],
+  [
+   "Set Qty* then number",
+   "qty-edit"
+  ],
+  [
+   "Remove LineDel",
+   "remove"
+  ],
+  [
+   "Item DiscountF4",
+   "item-discount"
+  ],
+  [
+   "H:Register",
+   ""
+  ],
+  [
+   "Cash In / OutCtrl + K",
+   "cash-move"
+  ],
+  [
+   "SettingsCtrl + ,",
+   "settings"
+  ],
+  [
+   "KeysF1",
+   "local:help"
+  ],
+  [
+   "Hardware checkCtrl + Shift + D",
+   "hw"
+  ]
+ ],
+ "tiles": [
+  [
+   "F3👤Customer addScan card, phone or tap to add",
+   "customer"
+  ],
+  [
+   "Esc🛒Items",
+   "close"
+  ],
+  [
+   "F12💳Checkout",
+   "checkout"
+  ]
+ ],
+ "help": "F1 = keys",
+ "set": "⚙ Settings Ctrl+,"
+}

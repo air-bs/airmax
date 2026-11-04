@@ -1,0 +1,32 @@
+{
+ "note": "AIR POS calls of tests/e2e-instant-scan.js scenario A (login + sale) on master 34ca5b2, fake server, recorded Nov 3 2026 | release branch: +2 /Orders/RetailOrderGet (before Receive and before Complete) come from the 1.0.11 candidate multi-gift-card read-back (b791c8b, mgc1011), not from instant scan; all master calls still appear in the same order.",
+ "calls": [
+  "/Hardwares/GetDeviceInfo",
+  "/Identities/Login",
+  "/Home/Index",
+  "/Commons/RetailDiscountConfigGet",
+  "/RetailSessions/SessionCheck",
+  "/Commons/RetailReceiveChannelGet",
+  "/Orders/RetailOrderSubGetByScan",
+  "/Orders/RetailOrderPromotionGet",
+  "/Orders/RetailOrderSubGetByScan",
+  "/Orders/RetailOrderPromotionGet",
+  "/Orders/RetailOrderSubGetByScan",
+  "/Orders/RetailOrderPromotionGet",
+  "/Products/ProductPaged",
+  "/Orders/RetailOrderPromotionGet",
+  "/Orders/RetailOrderPromotionGet",
+  "/Orders/RetailOrderPromotionGet",
+  "/Orders/RetailOrderAuthorizationCheck",
+  "/Orders/RetailOrderPromotionGet",
+  "/Orders/RetailOrderSave",
+  "/Orders/RetailOrderGet",
+  "/Orders/RetailOrderReceiveBegin",
+  "/Orders/RetailOrderGet",
+  "/Orders/RetailOrderComplete",
+  "/Commons/RetailBillTemplateConfigGet",
+  "/Hardwares/OpenCashbox",
+  "/Orders/RetailOrderBillContentGet",
+  "/Hardwares/PrintBillContent"
+ ]
+}
