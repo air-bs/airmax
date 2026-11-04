@@ -2,7 +2,7 @@
 // Batch 3: Users and operators (AirMax API plugin; loaded by the Step 0 plugin loader, nothing else edited).
 // AIR POS calls: 144 RetailOperatorPaged, 145 RetailOperatorGet, 146 RetailOperatorCreate, 147 RetailOperatorChange (retail host)
 //                and 20 UserPaged (base host, through api.call('base', ...), the login picker for Add Operator).
-// Design B (Gordon OK, Nov 3): a cashier cannot manage operators, so the screen is opened with a MANAGER session that lives only in
+// Design B (approved, Nov 3): a cashier cannot manage operators, so the screen is opened with a MANAGER session that lives only in
 // memory here: a second AirPos instance (same class, app/lib untouched) logged in with the manager's own user name and password.
 // The register's own cashier session is never changed. If the register is already logged in as a manager (isManager) that session is used
 // and no password is asked. The session is never written to disk; the password is used once for the login and dropped; no body, token or

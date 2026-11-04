@@ -1,7 +1,7 @@
 // AirMax API batch 1 (calls 11, 14-19), browser side: the section file app/public/sections/lookups.js. OFFLINE fake AIR POS only.
 //   FAKE_PORT=5180 node tests/e2e-api-1-lookups.js        (SHOTS_DIR=<folder> also saves screenshots; none by default)
 // The two read-only panels are drawn into a test element through the named slots (settings.store.terminal / settings.store.lists): the real Settings layout
-// does not draw them yet (needs Gordon's OK). Checks: AirMaxLookups.load answers + cache, manager sees the panels, a cashier sees one plain line and
+// does not draw them yet (needs the owner's OK). Checks: AirMaxLookups.load answers + cache, manager sees the panels, a cashier sees one plain line and
 // no AIR POS call, the Settings tab still opens the OLD Settings dialog (nothing registered for `settings`), Checkout untouched.
 'use strict';
 const puppeteer = require('puppeteer-core');

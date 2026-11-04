@@ -27,12 +27,12 @@ const ZERO = '00000000-0000-0000-0000-000000000000';
   r = LD.forSale([sub('a')], [row('a', { promotionType: 1 }), row('gone', { promotionType: 1 })], 5);
   rec('A6 an answer that names a promoted line no longer on the sale is out of date: no amounts', r[0].promoAmount === 0 && r.length === 1, JSON.stringify(r));
   r = LD.forSale([sub('a'), sub('b')], [row('a', { promotionType: 1, promotionId: 'p1', discountName: 'Sale' }), row('b', { promotionType: 2, promotionId: 'p2', discountName: 'Multi-buy' })], 3);
-  rec('A6b two DIFFERENT promotions on one sale (Gordon Nov 3): each line shows its name AND its dollars, split by line amount (1.50 + 1.50 of 3)', r[0].promoName === 'Sale' && r[1].promoName === 'Multi-buy' && r[0].promoAmount === 1.5 && r[1].promoAmount === 1.5, JSON.stringify(r));
+  rec('A6b two DIFFERENT promotions on one sale (the owner Nov 3): each line shows its name AND its dollars, split by line amount (1.50 + 1.50 of 3)', r[0].promoName === 'Sale' && r[1].promoName === 'Multi-buy' && r[0].promoAmount === 1.5 && r[1].promoAmount === 1.5, JSON.stringify(r));
   r = LD.forSale([sub('a'), sub('b')], [row('a', { promotionType: 1, promotionId: 'p1', price: 10 }), row('b', { promotionType: 1, promotionId: 'p1', price: 30 })], 2);
   rec('A6c the same promotion on two lines: split by line amount (0.50 + 1.50)', r[0].promoAmount === 0.5 && r[1].promoAmount === 1.5, JSON.stringify(r.map(x => x.promoAmount)));
   r = LD.forSale([sub('a'), sub('b')], [row('a', { promotionType: 1 })], 3);
   rec('A7 a line the answer has no row for (just scanned, total check on its way) shows nothing', r[1].promoName === '' && r[1].promoAmount === 0, JSON.stringify(r[1]));
-  // --- Gordon Nov 3: mixed promotions, every promoted line gets dollars. PROVISIONAL rule: per-line signal (originalPrice/retailPrice over price) else proportional split, largest-remainder cents
+  // --- the owner Nov 3: mixed promotions, every promoted line gets dollars. PROVISIONAL rule: per-line signal (originalPrice/retailPrice over price) else proportional split, largest-remainder cents
   const P = (id, o = {}) => row(id, { promotionType: 1, promotionId: 'p-' + id, discountName: 'N' + id, ...o }), amts = x => x.map(y => y.promoAmount), sum2 = x => c2(x.reduce((a, y) => a + y, 0));
   r = LD.forSale([sub('a'), sub('b'), sub('c')], [P('a', { price: 10 }), P('b', { price: 2 }), P('c', { price: 4.5 })], 3.2);
   rec('A8 mixed promotions, rounding remainder: 3.20 over 10 : 2 : 4.5 gives 1.94 + 0.39 + 0.87 (floors 193/38/87, the 2 spare cents go to the biggest fractions .94 and .79)', JSON.stringify(amts(r)) === '[1.94,0.39,0.87]' && sum2(amts(r)) === 3.2, JSON.stringify(amts(r)));

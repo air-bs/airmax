@@ -600,7 +600,7 @@ function discCell(r, i) {
   const sz = own ? '−' + money(r.discountAmount) + (r.custom && r.discount ? ` (${r.discount}%)` : '') : '';
   return parts.length ? `${sz ? `<div class="dsz" aria-hidden="true">${esc(sz)}</div>` : ''}<div class="dc" title="${esc(plain.join(' '))}">${parts.join(' ')}</div>` : '';
 }
-// Batch 11 (Gordon, Nov 3): Qty and Price edited right in the cell. A click turns the cell into a number box with the value selected; Enter applies it through the
+// Batch 11 (owner, Nov 3): Qty and Price edited right in the cell. A click turns the cell into a number box with the value selected; Enter applies it through the
 // SAME calls as the windows: Qty = act('qty') like qtyDialog, Price = price-approve (+ the manager login for a cashier, never for a logged-in manager) then
 // price-change like lineDialog's New price (this sale only, only lower: the server refuses a higher price with the window's own message). Esc, a click away or a
 // change of the sale cancels; a value that is not a number puts the old one back. Not while paying, not in return mode. A scanner typing into the box
@@ -662,7 +662,7 @@ function customerNoteAlert() {
   });
 }
 // Selected line: discount (% or $), tax rate
-// Store request #23/#6 (Gordon Nov 3): Price Change is manager-only. A manager opens the window at once; a cashier gets the manager login first (same dialog as Tax Off).
+// Store request #23/#6 (the owner Nov 3): Price Change is manager-only. A manager opens the window at once; a cashier gets the manager login first (same dialog as Tax Off).
 async function priceChangeButton() {
   if (S.mode === 'return') return toast('Not in return mode', false);
   if (!S.cart[selectedRow ?? 0]) return toast('Select a line first', false);
@@ -1236,13 +1236,13 @@ async function refresh() {
   const rows = ret ? S.ret.subs : S.cart, all = rows.length + mx.lines.length;
   if (selectedRow != null && selectedRow >= all) selectedRow = all ? all - 1 : null;
   putHtml($('cartHead'), `<tr><th>#</th><th>Lookup Code</th><th>Name</th><th class="n">Qty</th><th class="n">Price</th><th class="n">${ret ? 'Max' : 'Discount'}</th><th class="n">Total</th></tr>`);
-  // AirMax Step 0 (Gordon OK 1:26 PM ET Nov 3): the NEWEST scanned item is the BOTTOM line and line 1 stays at the top. Display only: the register still lists
+  // AirMax Step 0 (approved 1:26 PM ET Nov 3): the NEWEST scanned item is the BOTTOM line and line 1 stays at the top. Display only: the register still lists
   // newest first, so row i is drawn at place n-i. data-row, selectedRow and every action keep the register's own row number (see lineNo / moveCartSel).
   putHtml($('cart'), all ? rows.map((r, i) => `<tr class="row ${i === (selectedRow ?? 0) ? 'sel' : ''}" data-row="${i}"><td>${rows.length - i}</td><td>${esc(!ret && (r.type === 30 || r.type === 40) ? maskNo(r.number) : r.number)}</td><td>${esc(r.name)}${!ret && (r.type === 20 || r.type === 40) ? ` <span class="tag">${r.type === 20 ? 'charge' : 'reload'}</span>` : ''}${ret ? '' : discLineHtml(r)}</td><td class="n"${ret ? '' : ' data-c="qty"'}>${r.quantity}</td><td class="n"${ret ? '' : ' data-c="price"'}>${money(r.price)}</td><td class="n"${ret ? '' : ' data-c="disc"'}>${ret ? (r.max ?? '') : discCell(r, i)}${ret ? '' : orderDiscTag(r)}</td><td class="n">${money(ret ? r.price * r.quantity : r.total)}</td></tr>`).reverse().join('')
       + mx.lines.map((r, j) => { const i = rows.length + j; return `<tr class="row neg ${i === (selectedRow ?? 0) ? 'sel' : ''}" data-row="${i}"><td>${i + 1}</td><td>${esc(r.number)}</td><td>${esc(r.name)} <span class="tag">return</span></td><td class="n">−${r.quantity}</td><td class="n">${money(r.price)}</td><td class="n"></td><td class="n">−${money(-r.total)}</td></tr>`; }).join('')
     : mx.lines.length ? '' : `<tr><td colspan="7" class="empty">${ret ? 'Return' : ''}</td></tr>`);
-  // AirMax Step 0b C1 / C2 (Gordon request, Nov 3; screenshots to Gordon before any merge): a click on a line's Discount cell opens the item discount (same window as F4).
-  // Batch 11 (Gordon, Nov 3): a click on its Qty or Price cell edits the value right in the cell (cellEditStart: same rules and code paths as the Quantity / Price Change windows).
+  // AirMax Step 0b C1 / C2 (the owner request, Nov 3; screenshots to the owner before any merge): a click on a line's Discount cell opens the item discount (same window as F4).
+  // Batch 11 (owner, Nov 3): a click on its Qty or Price cell edits the value right in the cell (cellEditStart: same rules and code paths as the Quantity / Price Change windows).
   // The click selects THAT line first (data-row = the register's own row, see C3). Any other cell just selects the line, as before. Return mode has no data-c cells.
   document.querySelectorAll('#cart tr.row').forEach(tr => tr.onclick = e => {
     if (e && e.target && e.target.closest && e.target.closest('input.ced')) return; // a click inside the box being edited

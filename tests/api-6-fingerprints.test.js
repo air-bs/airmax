@@ -1,4 +1,4 @@
-// AirMax Batch 6 (Gordon OK Nov 3 2026): fingerprint enrolment (148-152, 160, 162) and manager approval by fingerprint (8, 163, 162).
+// AirMax Batch 6 (approved Nov 3 2026): fingerprint enrolment (148-152, 160, 162) and manager approval by fingerprint (8, 163, 162).
 // OFFLINE: starts its OWN fake AIR POS servers + a FAKE reader service (made-up "templates" only), no real AIR POS, no real reader, no browser.
 // NOT tested because NOT built: fingerprint login / unlock (7, 161, useFingerprint:true).
 //   node tests/api-6-fingerprints.test.js     (ports: API6_PORT app M default 5263 (+hook 5264, reader 5267), cashier C 5265 (reader 5268), no-reader U 5266 (reader port 5269 left empty))
@@ -160,7 +160,7 @@ const waitUp = async (port) => { for (let i = 0; i < 60; i++) { try { await fetc
     await C.post('logout'); await C.post('login', { company: 'fake shop', user: 'tester', password: 'x' });
     const lo = await C.post('price-approve', { user: '@fingerprint', password: ok3.tokens[0] });
     rec('36 a token does not survive a logout / new login', ok3.state === 'ok' && lo.ok === false, lo.message);
-    // Gordon's rule: no fingerprint on Exit to Windows. Refused before managerCheck, so the token is not even used up.
+    // the owner's rule: no fingerprint on Exit to Windows. Refused before managerCheck, so the token is not even used up.
     await hwC('reset'); await C.post('fp-mgr-start');
     const okx = await wait(C, 'fp-mgr-status', {}, r => r.state === 'ok');
     const ex1 = await C.post('exit-windows', { user: '@fingerprint', password: okx.tokens[0] });

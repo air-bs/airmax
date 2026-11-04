@@ -1,6 +1,6 @@
 # F4 New price on multi-buy and weighed items (branch `claude/f4-multibuy`)
 
-Gordon OK Nov 3 2026 (frozen-file exception for `app/lib/register.js`, this fix only). Not merged, not released.
+approved Nov 3 2026 (frozen-file exception for `app/lib/register.js`, this fix only). Not merged, not released.
 
 ## Problem (found by the 2,640-combination sweep, Nov 3)
 F4 "New price" was kept as a percent of the line. When the quantity crossed a multi-buy price point the per-item base price
@@ -39,7 +39,7 @@ fractional and weighed quantities with a multi-buy, the multi-buy winning when i
 refused $ off / % off / blank price keep the new price, back to the original price clears it, other lines untouched, nothing
 new sent to AIR POS or written to aside.json, and a restore never changes a price by itself.
 
-**Bug found (one cause, 3 places), FIXED in `d22df6e` (Gordon OK Nov 3, 1.0.11):** the typed price was kept only on the line in
+**Bug found (one cause, 3 places), FIXED in `d22df6e` (approved Nov 3, 1.0.11):** the typed price was kept only on the line in
 memory, so it was lost whenever the sale's lines were rebuilt, and the next quantity change went back to the old % rule:
 Put Aside -> Load Aside ($8 at qty 1, then qty 3 = $21.60, not $24; a $9.50 price beaten by the multi-buy came back at the full
 $10), restart / crash recovery (lines from the journal), Hold -> Load Hold (lines from AIR POS).

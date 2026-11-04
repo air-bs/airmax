@@ -1,4 +1,4 @@
-// F4 New price on multi-buy and weighed items (Gordon OK Nov 3, branch claude/f4-multibuy). The typed new price per item is now kept
+// F4 New price on multi-buy and weighed items (approved Nov 3, branch claude/f4-multibuy). The typed new price per item is now kept
 // when the quantity changes, also when it crosses a multi-buy price point (was: kept as a % of the line, so $8 at qty 1 became $7.20
 // each at the 3-for-$27 price, line $21.60 instead of $24), and the target is worked out in whole cents (1.5 lb at $3.99 = $5.99, was
 // $5.98). Still sent as the existing $-off line discount; the item price is never changed; nothing new is sent to AIR POS.

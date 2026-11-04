@@ -4,7 +4,7 @@
 // What the discount is (read-only research, Nov 3): `discount` on the customer record, a percent 0-100 (AIR POS's own customer form: "Member Discount", % suffix, 0-100).
 // AIR POS's Checkout (and AirMax's) does NOT apply it to a sale (a price check with a 10% customer gave no discount), so the screen calls it "customer record".
 // Who may use it: the same as the credit save: the AIR POS "Member Management" menu AND the manager flag (RetailManager), checked here on the server. A cashier gets "forbidden".
-// A logged-in manager is not asked for a password again (Gordon, Nov 3). The screen asks first (old -> new); the server insists on confirmed:true.
+// A logged-in manager is not asked for a password again (owner, Nov 3). The screen asks first (old -> new); the server insists on confirmed:true.
 // The save reads the customer fresh, sends the WHOLE record back (the same 19 fields AIR POS's own customer form sends) with only `discount` changed, then reads it back.
 // Log: one line, "discount changed" + the customer id. Never the name, the values or anything else. One save at a time (`once`). app/lib is not touched.
 'use strict';

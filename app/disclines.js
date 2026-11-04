@@ -514,7 +514,7 @@ function plan(ex, lines, items) {
   // two lines with the same name but different discounts cannot be told apart on the paper: those go in the end block
   const byName = new Map(); its.forEach(it => byName.set(it.nn, (byName.get(it.nn) || []).concat(it)));
   for (const g of byName.values()) if (g.length > 1 && new Set(g.map(x => x.text || '')).size > 1) g.forEach(x => { x.ambiguous = true; });
-  // #18 printed once (Gordon, Nov 3): when the store's AIR POS template already prints this item's discount (its $ amount or its %,
+  // #18 printed once (owner, Nov 3): when the store's AIR POS template already prints this item's discount (its $ amount or its %,
   // with a discount word or a minus sign, e.g. "Discount -$9.90", "You saved $9.90", "-33%"), Air Max adds nothing for that item.
   const mentions = (it, l) => {
     const t = l.text, a = it.amt >= 0.01 && new RegExp('(^|[^0-9.,])' + it.amt.toFixed(2).replace('.', '[.,]') + '(?![0-9])').test(t);
@@ -750,7 +750,7 @@ class DiscLines {
     }));
     this.keep.set(String(orderId), items); return items;
   }
-  // #19 (Gordon): the gift cards of this sale for the main receipt: each card's last 4 (masked, as on the slip), what it paid / was
+  // #19 (the owner): the gift cards of this sale for the main receipt: each card's last 4 (masked, as on the slip), what it paid / was
   // loaded with, and the balance AIR POS gave after Complete ("check at counter" when it gave none, as on the slip). Nothing else.
   giftFor(orderId) {
     const g = typeof this.reg.giftsAll === 'function' ? this.reg.giftsAll()[String(orderId)] : null; if (!g) return null;

@@ -70,7 +70,7 @@ const start = async (l, np) => { const t = mk(l); await t.reg.recalc(); if (np !
   t = await start(MB, 8); await t.reg.setQty(0, 3); const sub = t.reg.saveSubmit(false).subs[0];
   rec('E20 what is saved to AIR POS is the plain $-off line (no f4 field, price unchanged)', !Object.keys(sub).some(k => /f4/i.test(k)) && sub.price === 9 && r2(sub.discountAmount) === 3, JSON.stringify({ price: sub.price, discountAmount: sub.discountAmount, discountMethod: sub.discountMethod }));
 
-  // ---- Gordon OK Nov 3: the typed price survives the sale being rebuilt (was lost: the next qty change went back to the % rule)
+  // ---- approved Nov 3: the typed price survives the sale being rebuilt (was lost: the next qty change went back to the % rule)
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'airreg-f4k-'));
   const at = (l, d) => { const t = mk(l); if (d) { t.reg.dataDir = d; t.reg.journal.dir = d; } return t; };
   const restart = (d, l) => { const t = mk(l); t.reg.dataDir = d; t.reg.subs = []; return t.reg; }; // a new Air Max process on the same PC (same data folder), empty sale

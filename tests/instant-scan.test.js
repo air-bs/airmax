@@ -1,4 +1,4 @@
-// 1.0.11 instant scan (Gordon, approved for 1.0.11): offline unit checks (no AIR POS, no server). Run: node tests/instant-scan.test.js
+// 1.0.11 instant scan (approved for 1.0.11): offline unit checks (no AIR POS, no server). Run: node tests/instant-scan.test.js
 'use strict';
 const fs = require('fs'), os = require('os'), path = require('path');
 const { Register } = require('../app/lib/register');

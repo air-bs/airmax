@@ -1,5 +1,5 @@
 'use strict';
-// AirMax 1.0.11 instant scan (Gordon, approved for 1.0.11; Nov 3 2026). Settings > "Instant scan", OFF by default.
+// AirMax 1.0.11 instant scan (approved for 1.0.11; Nov 3 2026). Settings > "Instant scan", OFF by default.
 //  OFF: nothing here runs. No product list is downloaded or saved, no AIR POS call is added; scan and search are exactly as before.
 //  ON : 1. when the app opens (the first login of this run, or when the setting is switched on), the store's product list is read
 //          from AIR POS (ProductPaged, page by page, in the background; the register never waits for it) and saved in the app data
@@ -12,7 +12,7 @@
 //       3. the checks run in the register's own request queue, so anything after the scan (F4, quantity, Pay, Hold, Complete) waits
 //          for them; the totals are then AIR POS's answer for the confirmed lines (recalc). lib/register.js refuses Pay / Complete /
 //          Hold while any line is still unconfirmed (tagged "// is1011+" lines), so an unchecked price can never be charged.
-//       The list is NOT refreshed during the day (Gordon: only when the app opens). A saved list is used only when this run's
+//       The list is NOT refreshed during the day (owner: only when the app opens). A saved list is used only when this run's
 //       download failed and the saved one is under 24 h old.
 const fs = require('fs'), path = require('path'), crypto = require('crypto');
 

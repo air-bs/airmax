@@ -1,4 +1,4 @@
-// AirMax "Ask AirMax" (screen side). Plain script, loaded by topbar.js after login. Design: ASK-AIRMAX-DESIGN.md + Gordon's later changes. New file only: no shared file is edited.
+// AirMax "Ask AirMax" (screen side). Plain script, loaded by topbar.js after login. Design: ASK-AIRMAX-DESIGN.md + the owner's later changes. New file only: no shared file is edited.
 //  1. A "? Ask AirMax" button inserted right after the "F1 = keys" pill, only while the switch is On (Settings > Ask AirMax; default Off = no button for anyone).
 //  2. A side panel BESIDE the screen: while it is open the Checkout screen (or any other screen) is narrowed by the panel width (a body class + one CSS rule from this
 //     file); nothing is covered and nothing is renamed or moved. Closing removes the class and the layout is exactly as before. No new keyboard shortcut.

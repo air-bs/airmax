@@ -134,11 +134,11 @@ chrome; FENV="AIRREG_DEV_PROBE=1 AIRMAX_LABEL_SINK=${LOGP}labels2 FAKE_SALE=1" s
 chrome; FENV="FAKE_ORDERS=1" start $FP; run e2e-orders-tab FAKE_PORT=$FP node tests/e2e-orders-tab.js
 # AirMax #18 (Ari, Nov 2 2026): "33% off -$9.90" under each discounted item, green on the screen + on the printed receipt (fake real-receipt PDFs, display / print only)
 chrome; FENV="FAKE_REAL_RECEIPT=1" start $FP; run e2e-disc-line-18 FAKE_PORT=$FP node tests/e2e-disc-line-18.js
-# #18 printed once (Gordon, Nov 3): each item discount exactly once on real fake receipts, 4 template styles x %/$/multi-buy/sale discount/return/reprint (no browser)
+# #18 printed once (owner, Nov 3): each item discount exactly once on real fake receipts, 4 template styles x %/$/multi-buy/sale discount/return/reprint (no browser)
 stopf; FENV="FAKE_REAL_RECEIPT=1" start $FP; run e2e-disc-once-18 FAKE_PORT=$FP node tests/e2e-disc-once-18.js
-# #19 (Gordon review pending): gift card last 4 + balance on the main receipt's print copy; no separate slip when stamped, slip when not (no browser)
+# #19 (owner review pending): gift card last 4 + balance on the main receipt's print copy; no separate slip when stamped, slip when not (no browser)
 stopf; FENV="FAKE_REAL_RECEIPT=1 FAKE_PRINT_LOG=1" start $FP; run e2e-gift-receipt-19 FAKE_PORT=$FP node tests/e2e-gift-receipt-19.js
-# 1.0.11 instant scan (Gordon): setting OFF = same AIR POS calls as master; ON = list from the app opening, background check, Pay waits (fresh fake, no browser)
+# 1.0.11 instant scan (the owner): setting OFF = same AIR POS calls as master; ON = list from the app opening, background check, Pay waits (fresh fake, no browser)
 stopf; start $FP; run e2e-instant-scan FAKE_PORT=$FP node tests/e2e-instant-scan.js
 chrome; start $FP; run e2e-instant-ui FAKE_PORT=$FP node tests/e2e-instant-ui.js
 # 38,000 made-up products, 50 ms AIR POS round trip: paged startup download, disk, memory, scan and search times

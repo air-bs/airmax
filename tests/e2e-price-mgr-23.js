@@ -1,4 +1,4 @@
-// Store request #23/#6 (Gordon, Nov 3 2026): the left-column "Price Change" button is MANAGER-ONLY. A cashier who presses it gets the manager login
+// Store request #23/#6 (owner, Nov 3 2026): the left-column "Price Change" button is MANAGER-ONLY. A cashier who presses it gets the manager login
 // (same dialog as Tax Off); the sale is unchanged until a manager approves; wrong login is refused; a manager's login lets the cashier change THIS line's
 // price (lower only); the server refuses without approval even when the screen is skipped. A logged-in manager goes straight through. OFFLINE fake AIR POS only:
 // FAKE_PORT = manager fake, CASHIER_PORT = FAKE_CASHIER=1 fake (manager login "boss" / "boss-pw"). Run via tests/run-all-look.sh.

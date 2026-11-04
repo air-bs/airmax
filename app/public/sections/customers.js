@@ -119,7 +119,7 @@
           $('cuCrNote').innerHTML = `Set Credit Amount to ${E(fmt(amt))} and Allow Credit Payment to ${al.checked ? 'On' : 'Off'} for ${E(m.name || 'this customer')}? <button class="cu-btn pri" data-yes>Save</button> <button class="cu-btn" data-no>Cancel</button>`;
           $('cuCrNote').querySelector('[data-no]').onclick = () => showCredit(m);
           $('cuCrNote').querySelector('[data-yes]').onclick = async () => {
-            // Gordon (Nov 3): a logged-in manager (RetailManager) is never asked for the manager password again; the confirm above is enough
+            // the owner (Nov 3): a logged-in manager (RetailManager) is never asked for the manager password again; the confirm above is enough
             if (perm && perm.manager) {
               const w = await ctx.api('cust-credit-save', { retailMemberId: m.id, allow: al.checked, amount: Number(amt), confirmed: true });
               if (w && w.ok) { ctx.toast(w.message || 'Saved', true); if (alive && cur && cur.id === m.id) showCredit(m); }
@@ -182,7 +182,7 @@
         box.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => ask(m, rows.find(f => f.id === b.dataset.rm), b.closest('tr')));
       };
 
-      // Remove asks first (AIR POS's own screen does not; AirMax does, by Gordon's decision)
+      // Remove asks first (AIR POS's own screen does not; AirMax does, by the owner's decision)
       const ask = (m, f, tr) => {
         if (!f || !tr) return;
         tr.classList.add('cu-ask');

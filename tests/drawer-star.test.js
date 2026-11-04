@@ -84,7 +84,7 @@ const kinds = c => c.map(x => x.k + (x.ch ? ':' + x.ch : '')).join(',') || '(non
   rec('D15 drawer 2 (pin 5) uses the Control letter d', d.ok && kinds(t.calls) === 'drawerDriver:d', kinds(t.calls));
   const sj = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'app', 'shortcuts.json'), 'utf8')).keys.filter(k => k.action === 'drawer');
   rec('D16 Open Drawer keeps its key and label (Ctrl+D)', sj.length === 1 && sj[0].key === 'Ctrl+D' && /Open Drawer/.test(html), JSON.stringify(sj.map(k => k.key + ' ' + k.label)));
-  // ---- #1/#7 (Gordon, Nov 3): the drawer NEVER opens before AIR POS has completed the sale (cdr1011 early kick withdrawn) ----
+  // ---- #1/#7 (owner, Nov 3): the drawer NEVER opens before AIR POS has completed the sale (cdr1011 early kick withdrawn) ----
   { t = mk(); const ev = []; const c0 = t.reg.api.complete; t.reg.api.complete = async x => { ev.push('complete>'); await new Promise(z => setTimeout(z, 150)); ev.push('complete<'); return c0(x); };
     const req0 = t.reg.hw.request; t.reg.hw.request = async (k, a) => { if (k === 'drawerDriver') ev.push('drawer'); return req0(k, a); };
     r = await sell(t, [{ type: 10, tendered: 10 }]);

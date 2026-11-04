@@ -136,7 +136,7 @@ function make(opts = {}) {
     // ---- remove key ----
     { const d = make(); await d.r['ask-config-save']({ key: KEY, on: true }); const x = await d.r['ask-config-save']({ removeKey: true }); const f = JSON.parse(fs.readFileSync(d.file, 'utf8'));
       rec('45 Remove saved key: key gone from the file, switch goes Off', x.ok && x.keySet === false && x.on === false && f.key === '' && f.on === false, ''); }
-    // ---- SAVED HISTORY (Gordon, Nov 3: persists; redacted before it is written; Clear history; capped; never uploaded or logged) ----
+    // ---- SAVED HISTORY (owner, Nov 3: persists; redacted before it is written; Clear history; capped; never uploaded or logged) ----
     { const HF = d => path.join(d, 'ask-airmax-history.json'), read = d => JSON.parse(fs.readFileSync(HF(d), 'utf8')).entries;
       const h = make(); await h.r['ask-config-save']({ key: KEY, on: true }); rst();
       rec('50 HISTORY starts empty (no file yet, ask-history returns no entries)', !fs.existsSync(HF(h.dir)) && (await h.r['ask-history']()).entries.length === 0, '');

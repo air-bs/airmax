@@ -1,4 +1,4 @@
-// AirMax 1.0.11 instant scan (Gordon, approved for 1.0.11): the Settings > "Instant scan" switch (OFF by default, this PC), a grey
+// AirMax 1.0.11 instant scan (approved for 1.0.11): the Settings > "Instant scan" switch (OFF by default, this PC), a grey
 // "checking" look on sale lines AIR POS has not confirmed yet, a quick refresh until they are, and AIR POS's corrections / removals as
 // short notes. Everything else on the screen (labels, keys, buttons) is unchanged. Server side: app/instantscan.js.
 'use strict';

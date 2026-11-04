@@ -204,7 +204,7 @@ function cardsTab() { // sola109+
 ST_BUILD.cards = cardsTab; // sola109+
 // ---------- AirMax Batch 1 begin (tests/settings-parity.test.js leaves this block out) ----------
 // AirMax Batch 1: the page has a left section menu (Sales & Checkout, Receipts & Printing, Hardware & Screen, Payments & Tax, Store & Account, Users & Permissions)
-// as in Gordon's 1.0.11 reference picture; every old tab keeps its name, its Ctrl+1..9 key and its builder. New sections: Terminal switches (calls 11 + 12), Payment types,
+// as in the owner's 1.0.11 reference picture; every old tab keeps its name, its Ctrl+1..9 key and its builder. New sections: Terminal switches (calls 11 + 12), Payment types,
 // Tax kinds, Account, Store lists, Roles & permissions (calls 14-19 + store rules): shown to a manager login, except Terminal switches (a cashier needs a manager password to save).
 // ---------- the left section menu (AirMax Batch 1) ----------
 // tags: pc = "this PC" (saved on this register), air = "AIR POS" (saved to AIR POS for the store), new = a new section.

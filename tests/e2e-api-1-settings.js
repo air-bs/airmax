@@ -1,4 +1,4 @@
-// AirMax API batch 1: the new Settings page (left section menu, as in Gordon's 1.0.11 reference picture) as a MANAGER login. OFFLINE fake AIR POS only.
+// AirMax API batch 1: the new Settings page (left section menu, as in the owner's 1.0.11 reference picture) as a MANAGER login. OFFLINE fake AIR POS only.
 //   FAKE_PORT=5180 node tests/e2e-api-1-settings.js        (SHOTS_DIR=<folder> also saves one screenshot per section; none by default)
 'use strict';
 const puppeteer = require('puppeteer-core');

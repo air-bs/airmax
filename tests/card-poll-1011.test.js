@@ -1,4 +1,4 @@
-// #1/#7 (Gordon OK Nov 3, branch claude/work): the receipt prints right after the card machine approves. AirMax learns of the
+// #1/#7 (approved Nov 3, branch claude/work): the receipt prints right after the card machine approves. AirMax learns of the
 // approval at its next AIR POS Receive Check; checks now run every 0.5 s for the first 60 s of a card wait (was 10 s, then 1 s)
 // and the gap is counted from the START of the previous check (was from its answer: 0.5 s + round trip). Read-only checks only:
 // a payment is never sent again. Offline: Register with a mocked AIR POS (200 ms per check), made-up data, no card, no printer.

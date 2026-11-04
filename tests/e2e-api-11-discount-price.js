@@ -84,7 +84,7 @@ const CANDY = 'Bulk candy (lb)', ROPE = 'Rope (ft)', GIFT = 'Gift bag';
       await esc();
     }
     rec('E14 closing the window changes nothing (totals the same)', JSON.stringify((await M.state()).totals) === base && !(await modal()).trim(), '');
-    // ---- Batch 11 (Gordon): Qty and Price are edited right in the cell
+    // ---- Batch 11 (the owner): Qty and Price are edited right in the cell
     const ced = () => p.$eval('#cart input.ced', e => ({ v: e.value, sel: e.selectionStart === 0 && e.selectionEnd === e.value.length, focus: document.activeElement === e, row: +e.closest('tr').dataset.row, col: e.closest('td').dataset.c })).catch(() => null);
     const typeIn = async v => { await p.keyboard.down('Control'); await p.keyboard.press('a'); await p.keyboard.up('Control'); for (const ch of v) { await p.keyboard.type(ch); await sleep(60); } };
     for (const [label, place] of [['first', top], ['a middle', mid], ['the newest', bot]]) {

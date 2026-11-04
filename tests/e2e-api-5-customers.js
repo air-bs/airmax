@@ -99,7 +99,7 @@ const SHOTS = process.env.B5_SHOTS || '';
     rec('E22 Cancel puts back the saved values (Allow off, 0.00), nothing sent', await p.evaluate(() => !document.getElementById('cuAllow').checked && document.getElementById('cuAmt').value === '0.00') && (await hook('/cust-hist')).creditSaves === 0, '');
     await p.click('#cuAllow'); await p.evaluate(() => { const a = document.getElementById('cuAmt'); a.value = '250.00'; a.dispatchEvent(new Event('input')); }); await p.click('#cuCrSave'); await sleep(200); await p.click('#cuCrNote [data-yes]'); await sleep(600);
     await sleep(900);
-    // Gordon (Nov 3): a logged-in manager is never asked for the manager password again; the confirm above is enough
+    // the owner (Nov 3): a logged-in manager is never asked for the manager password again; the confirm above is enough
     rec('E22b a logged-in manager: Save after the confirm goes straight through, no manager password window', await p.evaluate(() => !document.getElementById('mlU') && !document.getElementById('mlP')), '');
     const hs1 = await hook('/cust-hist');
     rec('E23 Save (confirmed, logged-in manager, no password): AIR POS got the whole record with Allow on + 250; the box reloads showing them; no malformed call', hs1.creditSaves === 1 && hs1.lastCredit.allow === true && hs1.lastCredit.amount === 250 && hs1.lastCredit.keys === 19 && hs1.bad.length === 0 && await p.evaluate(() => document.getElementById('cuAllow').checked && document.getElementById('cuAmt').value === '250.00'), JSON.stringify(hs1.lastCredit));

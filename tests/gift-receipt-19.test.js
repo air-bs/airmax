@@ -1,4 +1,4 @@
-// AirMax #19 (Gordon review pending): the gift card's last 4 and its balance on the main receipt's PRINT COPY (app/disclines.js, the #18
+// AirMax #19 (owner review pending): the gift card's last 4 and its balance on the main receipt's PRINT COPY (app/disclines.js, the #18
 // stamping), and no separate gift slip when that worked (lib/extras.js gc19 block). Offline: no AIR POS, no printer, made-up cards only.
 // Run: node tests/gift-receipt-19.test.js
 'use strict';

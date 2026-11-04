@@ -8,7 +8,7 @@
 //   11 /Commons/RetailTerminalConfigGet        -> terminal-config-get
 //   lookups-all                                -> 14 + 15 + 16 + 17 + 18 + 19 in one call (for Items / Customers forms)
 //   settings-access                            -> who may see the Store & Account part of Settings (same rule as the old Settings "manager only" items)
-//   12 /Commons/RetailTerminalConfigSave       -> terminal-config-save  (the ONLY write here; Security; Gordon OK'd Batch 1 on Nov 3. See below.)
+//   12 /Commons/RetailTerminalConfigSave       -> terminal-config-save  (the ONLY write here; Security; approved Batch 1 on Nov 3. See below.)
 //   /Commons/RetailConfigGet (company + store rules) -> store-settings-get  (manager only, read only; whitelisted yes/no switches and numbers, no keys, no secrets)
 // Every reply is "bare" on the real server (an array / object with no success wrapper); a failure is { success:false, message }. Both are handled.
 // Call 12 sends exactly what AIR POS's own Settings screen sends: { id, checkoutAutoPrint, returnAutoPrint, autoOpenCashDrawer, soundAlerts, useVirtualKeyboard, cashCheckoutConfirm, printerName }.
@@ -133,7 +133,7 @@ module.exports = ctx => {
     if (out.loggedOut) return { ok: false, loggedOut: true, message: 'Signed out. Log in again.' };
     return out;
   };
-  // Who may open the Store & Account part of Settings and (later, with Gordon's OK) change it? AIR POS has no "settings" menu entry in the register's menus
+  // Who may open the Store & Account part of Settings and (later, with the owner's OK) change it? AIR POS has no "settings" menu entry in the register's menus
   // (reg.home.menus: Dashboard, Retail Sales, Basic Data, Reports, Other Functions) and no separate permission code: the only flags are the login's superAdmin
   // and the authority code RetailManager. That is the same rule the existing Settings use for their "manager only" items (reg.isManager()). AIR POS itself still has the last word on a save.
   const settingsAccess = async () => {

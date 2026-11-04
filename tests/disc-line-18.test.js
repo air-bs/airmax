@@ -149,7 +149,7 @@ print(json.dumps({ 'width': A.size[0] == B.size[0], 'grow': B.size[1] - A.size[1
     await F.reg.scan('1001'); await F.reg.lineDiscount(0, 'percent', 10); await F.reg.startPay(); const r = await F.reg.tender({ type: 10, tendered: 20 }); const jobs = r && r.hwJob ? await r.hwJob : [];
     rec('D11 if the receipt step itself fails, the AIR POS receipt still prints (the sale is never held up)', r.completed && F.printed[0] && F.printed[0].b64 === F.bill(F.saved[F.saved.length - 1]), JSON.stringify(jobs).slice(0, 120)); }
 
-  // ---------------- F. printed once (Gordon, Nov 3), on both printer kinds: the real print path (printing.js, raw picture) with a fake
+  // ---------------- F. printed once (owner, Nov 3), on both printer kinds: the real print path (printing.js, raw picture) with a fake
   // helper; the PDF handed to the helper is read back, and the printer bytes are checked for the right command set
   const shows = (lines, amt, pct) => lines.filter(t => (new RegExp('(^|[^0-9.])' + amt.toFixed(2).replace('.', '\\.') + '(?!\\d)').test(t) && /-|discount|save|off/i.test(t)) || new RegExp('(^|[^0-9.])' + pct + '\\s?%').test(t));
   for (const type of ['star', 'generic']) for (const tpl of [false, true]) {

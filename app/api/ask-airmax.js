@@ -1,5 +1,5 @@
 // AirMax "Ask AirMax": in-app help from the Grok API (xAI). Server side only: the key never reaches the screen.
-// Design: ASK-AIRMAX-DESIGN.md + Gordon's later changes (Nov 3): saved history, web fallback, learned answers, Show me, Do it for me.
+// Design: ASK-AIRMAX-DESIGN.md + the owner's later changes (Nov 3): saved history, web fallback, learned answers, Show me, Do it for me.
 // New files only (app/lib untouched). The question path (ask) never calls AIR POS and never reads the sale; only the "Do it for me" routes use ctx.reg,
 // and only through app/ask-airmax/actions.js (a fixed allowlist: local settings + printer / drawer test; never money, customers, users or AIR POS).
 // Routes (POST /api/<name>): ask-status, ask, ask-history, ask-history-clear, ask-unhelpful, ask-action-plan / -run / -undo / -cancel (any login),
@@ -14,7 +14,7 @@
 'use strict';
 const fs = require('fs'), os = require('os'), path = require('path'), crypto = require('crypto');
 
-// ---- easy-to-change defaults (the open questions for Gordon). All the numbers you may want to change are in this block ----
+// ---- easy-to-change defaults (the open questions for the owner). All the numbers you may want to change are in this block ----
 const CONFIG = {
   TOKEN_BUDGET: 500000,                         // tokens (input + output) per register per day: the ENFORCED limit. About 100 questions: each one sends the ~4,500-token how-to text. Editable in Settings.
   UNLOCK_EXTRA_TOKENS: 250000,                  // added for that day only by one manager unlock (about 50 more questions). Editable in Settings.
@@ -296,7 +296,7 @@ function plugin(ctx) {
   const cfile = () => (testMode && process.env.AIRMAX_CONTACTS_FILE ? process.env.AIRMAX_CONTACTS_FILE : path.join(__dirname, '..', 'howto', 'contacts.json')); // the override exists in test mode only
   const PLACE = v => { const t = String(v == null ? '' : v).trim(); return !t || /^TBD\b/i.test(t); };
   const CLABEL = { phone: 'Phone', email: 'Email', url: 'Web', hours: 'Hours', address: 'Address', note: 'Note' };
-  const FALLBACK_CONTACT = { id: 'ak-local', name: 'AK Local Solutions support', what: 'The AirMax app', phone: 'TBD - Gordon to provide' };
+  const FALLBACK_CONTACT = { id: 'ak-local', name: 'AK Local Solutions support', what: 'The AirMax app', phone: 'TBD - owner to provide' };
   function readContacts() { // -> { default, contacts[], routes[], valid } ; bad parts are skipped, an unusable file falls back to one placeholder contact
     let j, valid = true;
     try { j = JSON.parse(fs.readFileSync(cfile(), 'utf8')); } catch (e) { return { default: FALLBACK_CONTACT.id, contacts: [FALLBACK_CONTACT], routes: [], valid: false }; }

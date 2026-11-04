@@ -95,7 +95,7 @@ const gBegins = srv => srv.begins.filter(b => b.paymentType === 40);
     assert.strictEqual(srv.begins.length, 1); assert.strictEqual(srv.completes, 0, 'never tried to finish on a payment AIR POS did not keep');
     assert.ok(logs.some(l => /PAYMENT NOT KEPT/.test(l)));
   });
-  // M1 (Gordon OK Nov 3): a payment AIR POS reported complete is NEVER dropped. After 5 order reads that still do not list it, it is kept as paid,
+  // M1 (approved Nov 3): a payment AIR POS reported complete is NEVER dropped. After 5 order reads that still do not list it, it is kept as paid,
   // flagged (t.unconfirmed + log + journal), nothing is re-sent; Complete's own total check is the guard. (Partial keeps, below, still show the server amount.)
   await t('AIR POS answers OK but the order never lists the payment (cash): KEPT as paid and flagged, not dropped, nothing re-sent', async () => {
     const { reg, srv, logs } = make(); reg.keptRetryMs = 0; reg.subs = [item('A', 5)]; await reg.recalc(); srv.drop = 1;

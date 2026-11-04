@@ -51,7 +51,7 @@ function makeLib(ctx, name) {
   };
   const audit = (file, entry) => { try { fs.appendFileSync(path.join(dir, file), JSON.stringify({ at: new Date().toISOString(), ...entry }) + '\n'); } catch (e) { ctx.log('GIFT audit write failed: ' + (e && e.message)); } };
   const readLines = file => { try { return fs.readFileSync(path.join(dir, file), 'utf8').split('\n').filter(Boolean).map(l => { try { return JSON.parse(l); } catch (e) { return null; } }).filter(Boolean); } catch (e) { return []; } };
-  // manager gate (Gordon's rule): the caller is a manager, or the body carries a manager's name + password that AIR POS verifies. The password is never kept.
+  // manager gate (the owner's rule): the caller is a manager, or the body carries a manager's name + password that AIR POS verifies. The password is never kept.
   const needMgr = async (b, what) => {
     if (ctx.isManager() && !(b && b.password)) return { ok: true, by: String((reg.identity && reg.identity.userName) || 'manager').slice(0, 40), typed: false };
     if (!b || (!b.user && !b.password)) return { ok: false, needManager: true, message: what + ' needs a manager. A manager types their password to approve it.' };
@@ -69,7 +69,7 @@ function makeLib(ctx, name) {
 const plugin = ctx => {
   const L = makeLib(ctx, 'gift'), { api, reg } = L;
   const SET = path.join(ctx.dataDir, 'gift-settings.json');
-  // Gordon 2026-11-03: free credit has NO per-credit limit; expired cards are blocked. "Expired" is ONLY AIR POS's own
+  // the owner 2026-11-03: free credit has NO per-credit limit; expired cards are blocked. "Expired" is ONLY AIR POS's own
   // `expired` flag on the card (AIR POS sets it from the expireDate it stores, which exists only when the store's expiry
   // setting is on). AirMax never invents, computes or defaults an expiry date and has no expiry setting of its own.
   const settings = () => { let s = {}; try { s = JSON.parse(fs.readFileSync(SET, 'utf8')); } catch (e) { /* defaults */ } return { allowCardEdit: s.allowCardEdit === true, allowCardPay: s.allowCardPay === true }; };

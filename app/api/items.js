@@ -7,7 +7,7 @@
 //   34 DashboardModelGet               /Dashboards/DashboardModelGet                  items-dashboard   (manager only: it shows sales totals)
 //  143 RetailEslGet                    /Esls/RetailEslGet                             items-esl-get     (manager only, and only when the ESL setting is on)
 // plus two helpers: items-access (what this login may see / do on the Items tab) and items-find (existing ProductPaged search, to pick an item to open).
-// WRITES (Gordon OK, Nov 3 2026, proposal PROPOSAL-item-writes.md): a logged-in manager WITH the AIR POS "Product Management" menu is enough (no extra password).
+// WRITES (approved, Nov 3 2026, proposal PROPOSAL-item-writes.md): a logged-in manager WITH the AIR POS "Product Management" menu is enough (no extra password).
 //   25 ProductAdd (items-add)  26 ProductUpdate (items-update, items-disable)  27 ProductPriceSave (items-price-preview, items-price: confirm + re-read via 23 first)
 //   29 QuickSellingProductAdd (items-quick-add)  30 QuickSellingProductRemove (items-quick-remove)
 //   The add / edit form's pick-lists (departments, origins, tax kinds) are NOT read here: the screen uses Batch 1's route lookups-all.

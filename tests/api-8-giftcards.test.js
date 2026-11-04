@@ -179,7 +179,7 @@ const wipe = async () => { await S.hk('/gc-reset'); await S.hk('/fault-clear'); 
     // settings
     const g0 = await S.post('gc-settings', {}), g1 = await S.post('gc-settings', { set: { freeCreditLimit: 20, allowExpired: true } });
     const big = await S.post('gc-free-credit', { number: C1, amount: 500, amount2: 500, reason: 'large credit, no limit' }); const stBig = await S.st();
-    rec('32 no per-credit limit and no AirMax expiry setting: settings carry no limit / allowExpired / pending fields, a set is refused, $500 free credit goes through exactly once', g0.j.ok && !('freeCreditLimit' in g0.j.settings) && !('allowExpired' in g0.j.settings) && !('pendingGordon' in g0.j.settings) && !g1.j.ok && big.j.ok && card(stBig, C1).balance === 520 && stBig.counters.complete - sv1.complete === 1, JSON.stringify([big.j.ok, card(stBig, C1).balance, stBig.counters.complete, sv1.complete]).slice(0, 260));
+    rec('32 no per-credit limit and no AirMax expiry setting: settings carry no limit / allowExpired / pending fields, a set is refused, $500 free credit goes through exactly once', g0.j.ok && !('freeCreditLimit' in g0.j.settings) && !('allowExpired' in g0.j.settings) && !('pendingOwner' in g0.j.settings) && !g1.j.ok && big.j.ok && card(stBig, C1).balance === 520 && stBig.counters.complete - sv1.complete === 1, JSON.stringify([big.j.ok, card(stBig, C1).balance, stBig.counters.complete, sv1.complete]).slice(0, 260));
     await wipe();
     // expiry comes ONLY from AIR POS: no expireDate -> never expires; a date but AIR POS says not expired -> allowed; AIR POS expired flag -> blocked
     await S.hk('/gc-card?id=gcard-5&expired=0&expireDate=');

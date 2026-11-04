@@ -1,5 +1,5 @@
 'use strict';
-// Store request #26 (Gordon approved, Nov 3): a printout of the sale on screen that is clearly NOT a sale.
+// Store request #26 (approved, Nov 3): a printout of the sale on screen that is clearly NOT a sale.
 // "QUOTE / ESTIMATE - NOT A SALE - NOT PAID". It only READS what is on screen (reg.state(): cart + totals) and prints a short slip with
 // reg.printSlip (the same path as the note slip / gift pick slip: no drawer kick). It never saves, holds, completes or pays anything in
 // AIR POS, never touches the sale, never writes to disk and never logs item names, prices or customer data.

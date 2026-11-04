@@ -2,7 +2,7 @@
 // Batch 6: fingerprints (AirMax API plugin; loaded by the Step 0 plugin loader, no other app file edited except the one tagged block in app/lib/kiosk.js).
 // AIR POS calls (retail host): 148 FingerprintsGet, 149 FingerprintSelect, 150 FingerPrintRegister, 151 FingerprintClear, 152 FingerprintRemove, 8 ManagerFingerprintSelect.
 // Local reader service (this PC, port env AIRMAX_FP_HW_PORT, default 20001): 160 FingerPrintInput, 162 FingerPrintRegistStop, 163 ManagerAuthorization.
-// NOT in this batch (Gordon, Nov 3): no fingerprint login or unlock (7 FingerprintSelectByUserName, 161 FingerPrintVerification, useFingerprint:true).
+// NOT in this batch (owner, Nov 3): no fingerprint login or unlock (7 FingerprintSelectByUserName, 161 FingerPrintVerification, useFingerprint:true).
 //
 // Two jobs:
 //  1) Users > Fingerprints (enrolment). Routes fp-list / fp-mine / fp-enroll-start / fp-enroll-status / fp-enroll-cancel / fp-enroll-save / fp-clear / fp-remove.

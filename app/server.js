@@ -102,7 +102,7 @@ const routes = {
   'resume': needLogin(b => reg.resume(b.orderId)),
   'void-held': needLogin(b => reg.voidHeld(b.orderId)),
   'line-discount': needLogin(b => reg.lineDiscount(b.row, b.kind, b.value)),
-  // Store request #23/#6 (Gordon, Nov 3 2026): the left-column Price Change button is manager-only. An AIR POS manager goes straight through; a cashier needs a manager's
+  // Store request #23/#6 (owner, Nov 3 2026): the left-column Price Change button is manager-only. An AIR POS manager goes straight through; a cashier needs a manager's
   // login (same check as Tax Off / Restart PC, reg.managerCheck), verified HERE on every call (the screen is not trusted). Still this sale only, lower price only (reg.lineDiscount 'price').
   'price-approve': needLogin(async b => priceManagerOk(b)),
   'price-change': needLogin(async b => { const m = await priceManagerOk(b); return m.ok ? reg.lineDiscount(b.row, 'price', b.value) : m; }),

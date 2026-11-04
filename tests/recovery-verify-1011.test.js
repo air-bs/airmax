@@ -1,4 +1,4 @@
-// Recovery verify (Gordon OK 6:41 PM ET Nov 3 2026, branch fix/recovery-receive-verify): after a crash, when recovery's order read (RetailOrderGet)
+// Recovery verify (approved 6:41 PM ET Nov 3 2026, branch fix/recovery-receive-verify): after a crash, when recovery's order read (RetailOrderGet)
 // lists NO receive for the payment the journal says was being sent, recovery asks AIR POS about that one payment with RetailOrderReceiveCheck
 // (read-only) before it says "nothing was paid yet". Done = adopted (never re-sent); pending card = existing wait; no clear answer = sale stays
 // blocked (recoveryPending) with a "not known whether it was paid" notice. Recovery never sends a ReceiveBegin. Offline AIR POS-like fake, in-process.

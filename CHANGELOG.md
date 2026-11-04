@@ -1,6 +1,6 @@
 # Changelog
 
-## AirMax 1.0.11 (release candidate, NOT published; version 1.0.11 in app/update.json; Gordon/Ari OKs Nov 1-2 2026)
+## AirMax 1.0.11 (release candidate, NOT published; version 1.0.11 in app/update.json; owner/Ari OKs Nov 1-2 2026)
 
 Branch release/1.0.11-candidate. Not tagged, not on any download link or update feed.
 - Ctrl+Shift+P (and the left Print Label button) opens the several-items Print Labels screen (pick a layout, label price; changes the printout only). Ctrl+Alt+L is gone. Button and shortcut label text unchanged.

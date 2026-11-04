@@ -1,4 +1,4 @@
-// 1.0.11 instant scan, store size (Gordon: about 38,000 items). OFFLINE fake AIR POS with FAKE_PRODUCTS=38000 (made-up products) and
+// 1.0.11 instant scan, store size (owner: about 38,000 items). OFFLINE fake AIR POS with FAKE_PRODUCTS=38000 (made-up products) and
 // a simulated AIR POS round trip (FAKE_LATENCY_MS). Measures: startup download (paged, in the background), pages, size on disk,
 // server memory, scan time (instant vs the old AIR POS lookup), search time; and checks scans go the old way until the list is complete.
 //   AIRREG_DEV_PROBE=1 FAKE_PRODUCTS=38000 FAKE_LATENCY_MS=150 FAKE_PORT=5180 node tests/look-fake.js &   FAKE_PORT=5180 node tests/instant-38k.js

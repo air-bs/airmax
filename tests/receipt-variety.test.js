@@ -1,4 +1,4 @@
-// Receipt variety (Gordon, Nov 3; tests + fake server only): every receipt prints EXACTLY ONCE and its totals match what AirMax charged
+// Receipt variety (owner, Nov 3; tests + fake server only): every receipt prints EXACTLY ONCE and its totals match what AirMax charged
 // or refunded. The REAL app/server.js on the OFFLINE fake AIR POS (tests/look-fake.js, FAKE_RECEIPT_TEXT=1: receipts are small text PDFs
 // drawn from what the fake AIR POS recorded - the saved order and its payments, or the recorded return and its refund), printed through
 // the fake AIR POS print service. Made-up items and a made-up gift card, no card machine, no real card, no printer. Own ports.
@@ -67,7 +67,7 @@ const kind = L => L[0];
     const gs = x.docs.filter(d => /^GIFT CARDS USED/.test(d[0]));
     rec('5 gift card payment: exactly one receipt; total = charged; Gift card $3.00 + Cash $7.80', v.ok && x.r.completed && x.docs.filter(d => kind(d) === 'SALE RECEIPT').length === 1 && kind(L) === 'SALE RECEIPT' && amt(L, 'Total') === x.r.due && JSON.stringify(paid(L, 'Paid')) === JSON.stringify([['Gift card', 3], ['Cash', r2(x.r.due - 3)]]), JSON.stringify({ L, due: x.r.due, m: x.r.message }));
 
-    // #19 (Gordon OK Nov 3): the gift card last 4 + balance are now ON the receipt's print copy, so the separate slip no longer prints (before #19: a second 'GIFT CARDS USED' slip)
+    // #19 (approved Nov 3): the gift card last 4 + balance are now ON the receipt's print copy, so the separate slip no longer prints (before #19: a second 'GIFT CARDS USED' slip)
     rec('5 gift card payment: ONE document (the receipt) shows the masked card, $3.00 paid and $5.00 left; no separate slip, no full card number (#19)', x.docs.length === 1 && gs.length === 0 && L.includes('Gift card **** 8888 paid $3.00') && L.includes('Balance left $5.00') && !L.join(' ').includes('7000000000008888'), JSON.stringify(x.docs));
 
     // 6. split tender: card machine $5 (made-up, approved at once by the fake) + cash for the rest

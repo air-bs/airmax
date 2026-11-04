@@ -7,7 +7,7 @@ const fs = require('fs'), os = require('os'), path = require('path'), { spawn, e
 const STORE = process.env.STORE_SRC || '/workspace/air-register-1.2.3-release';
 const OURS = path.join(__dirname, '..'), P_OURS = Number(process.env.PARITY_OURS_PORT || 5180), P_STORE = Number(process.env.STORE_PARITY_PORT || 5186);
 // Known, approved identity differences (NOT settings): Remote Help tab body (RustDesk belongs to the store app).
-// AirMax Batch 1 (Gordon OK Nov 3, via the parent): the Settings left section menu. Allowed: the block between the `AirMax Batch 1 begin/end` comments in settings.js
+// AirMax Batch 1 (approved Nov 3, via the parent): the Settings left section menu. Allowed: the block between the `AirMax Batch 1 begin/end` comments in settings.js
 // (menu data, styles, six new section builders) and the two functions that draw the page, stDecorate and settingsPage. No setting, default or shortcut changes.
 const ALLOWED_FN_DIFF = { 'settings.js': ['remoteTab', 'stDecorate', 'settingsPage'] };
 const noAb1 = src => src.replace(/\/\/ -{10} AirMax Batch 1 begin[\s\S]*?\/\/ -{10} AirMax Batch 1 end -{10}\n/, '');
@@ -35,7 +35,7 @@ const noSolaKeys = j => { if (Array.isArray(j)) return j.filter(x => !(x && SOLA
 // the Ctrl+Alt+P reprint-gift shortcut, and in settingsDialog the two "Print receipt after every sale / return" selects, the
 // "Warn before selling below zero stock" checkbox (seSW/seSWnote), the Check printers button (seChk) and the new auto-print note.
 // L2_SD maps each exact local.2 text back to the store text; anything else must still be identical.
-// 1.0.11 instant scan (Gordon, approved for 1.0.11): one AirMax-only setting, Settings > Printer & Drawer "Instant scan" (OFF by default).
+// 1.0.11 instant scan (approved for 1.0.11): one AirMax-only setting, Settings > Printer & Drawer "Instant scan" (OFF by default).
 // It is NOT a register setting: it lives in its own file (DATA/instant-scan.json), its switch is drawn by public/instant.js, and loadSettings /
 // saveSettings / settingsDialog / settings.js are unchanged, so the comparisons below see no difference. Allowed difference, by approval.
 const INSTANT_TOGGLE = { file: 'public/instant.js', id: 'seIS', default: false };

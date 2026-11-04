@@ -9,7 +9,7 @@
 // PROVISIONAL (not yet seen with a real Sale / Multi-buy / promo code, TestShop has none and the back-office right is missing):
 //   (1) which row counts as "promoted": promotionType > 0 or a real promotionId (not all zeros)       -> isPromoRow()
 //   (2) the name shown: the row's discountName, else its promotionTypeName                              -> promoName()
-//   (3) the line's amount (Gordon, Nov 3: with several promotions on one sale every promoted line shows its dollars too)         -> promoAmounts() / forSale()
+//   (3) the line's amount (owner, Nov 3: with several promotions on one sale every promoted line shows its dollars too)         -> promoAmounts() / forSale()
 //       a) a per-line signal when the row has one: originalPrice (or retailPrice) above price, times quantity = what that line was marked down;
 //       b) the rest of the sale-level totalPromotionDiscountAmount is split over the lines WITHOUT a signal in proportion to each line's pre-promo
 //          amount (price x quantity), cents fixed by largest remainder so the lines add up to the total exactly (one promoted line = the whole rest);

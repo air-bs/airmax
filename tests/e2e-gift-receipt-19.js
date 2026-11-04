@@ -1,4 +1,4 @@
-// AirMax #19 (Gordon review pending) on the OFFLINE fake AIR POS (made-up items and made-up gift cards, nothing charged, no browser):
+// AirMax #19 (owner review pending) on the OFFLINE fake AIR POS (made-up items and made-up gift cards, nothing charged, no browser):
 // the gift card's last 4 digits and its balance (read from AIR POS after the sale) are stamped onto the main sale receipt's PRINT COPY
 // (same server-side stamping as #18, app/disclines.js); when that worked, the separate GIFT CARDS slip is not printed. When the receipt PDF
 // cannot be stamped (the fake's plain receipt), the slip prints exactly as before. Nothing extra is sent to AIR POS; no full card number printed.

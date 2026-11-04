@@ -64,7 +64,7 @@ const out = []; const rec = (k, pass, note) => { out.push({ k, pass: !!pass }); 
     rec('8 the lower price is applied (the second approval, same fingerprint approval, is accepted)', Math.abs(l.total - target * l.quantity) < 0.005, `orig ${orig} new ${target} line total ${l.total}`);
     const html8 = await p.evaluate(() => document.documentElement.innerHTML);
     rec('8b no token (48 hex) is left anywhere in the page, and none was put on the screen', !/[0-9a-f]{48}/.test(html8), '');
-    // Gordon's rule: no fingerprint block on the Exit to Windows manager pop-up (it shares the pop-up code and slot)
+    // the owner's rule: no fingerprint block on the Exit to Windows manager pop-up (it shares the pop-up code and slot)
     await hw('reset'); await p.keyboard.press('Escape'); await sleep(300);
     for (const [ttl, open] of [['Exit to Windows', () => managerLogin('Exit to Windows', 'A manager logs in to close Air Max and go back to Windows.', async () => null)]]) {
       await p.evaluate(open); await sleep(1500);

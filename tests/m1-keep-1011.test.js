@@ -1,4 +1,4 @@
-// M1 fix (Gordon OK Nov 3 10:38 AM ET, branch fix/m1-payment-keep): a cash/check/gift/store credit payment that AIR POS reported COMPLETE is never
+// M1 fix (approved Nov 3 10:38 AM ET, branch fix/m1-payment-keep): a cash/check/gift/store credit payment that AIR POS reported COMPLETE is never
 // dropped because ONE order read does not list it yet. The order is read up to 5 times (0.8 s apart); only if every read still lacks it, it is KEPT
 // as paid and flagged (never dropped). Offline AIR POS-like fake in-process (same as multigift-1011). Run: node tests/m1-keep-1011.test.js
 'use strict';

@@ -1,4 +1,4 @@
-// 1.0.11 fixes for the instant scan / receipt prefetch review (docs/REVIEW-instant-scan-prefetch.md; Gordon OK Nov 3 2026 8:58 AM ET).
+// 1.0.11 fixes for the instant scan / receipt prefetch review (docs/REVIEW-instant-scan-prefetch.md; approved Nov 3 2026 8:58 AM ET).
 // The repros of tests/review-instant-prefetch.test.js, run against THIS tree: every check must PASS.
 //   F5  an error answer to the early receipt-template request: the receipt is still asked for WITH the store template
 //   F1  a queued qty / Delete / F4 acts on the line the cashier chose (line id), not on whatever sits in that row later

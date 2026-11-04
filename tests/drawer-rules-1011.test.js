@@ -1,4 +1,4 @@
-// #2/#10/#8 (Gordon OK Nov 3, branch claude/work): the cash drawer opens fast and reliably with the right command for each printer,
+// #2/#10/#8 (approved Nov 3, branch claude/work): the cash drawer opens fast and reliably with the right command for each printer,
 // ONLY after a cash sale (or check, per the store setting "When cash or a check was taken"), a cash return, or Ctrl+D (and the Sale
 // complete screen's own Open Drawer button), and NEVER for card, customer account, a refused sale, or reprints. It never opens before
 // AIR POS has completed the sale. Runs the REAL app/server.js on the OFFLINE fake AIR POS (tests/measure/latency-fake.js, no added

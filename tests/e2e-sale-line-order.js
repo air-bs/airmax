@@ -1,4 +1,4 @@
-// AirMax Step 0 (Gordon OK 1:26 PM ET Nov 3): the newest scanned item is the BOTTOM line, line 1 stays at the top, and every
+// AirMax Step 0 (approved 1:26 PM ET Nov 3): the newest scanned item is the BOTTOM line, line 1 stays at the top, and every
 // action (Qty + / *N, F4 discount, Edit tax, Delete, arrows, return lines, Find in sale) hits the right underlying line.
 // Also the top bar (8 tabs, coming soon, section register, permission check, Esc back, Ctrl+Shift+N).
 // OFFLINE fake AIR POS only.   FAKE_PORT=5180 node tests/e2e-sale-line-order.js   (Chrome on CHROME_URL, default 9433)

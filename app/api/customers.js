@@ -133,7 +133,7 @@ module.exports = ctx => {
       if (!isFinite(amount) || amount < 0 || amount > 9999999 || Math.abs(amount * 100 - Math.round(amount * 100)) > 1e-6) return { ok: false, message: 'Credit Amount must be a number from 0 to 9,999,999 with at most 2 decimals' };
       if (b.confirmed !== true) return { ok: false, needsConfirm: true, message: 'Confirm before changing credit' };
       // the manager unlocks the change by typing their AIR POS user name + password (checked by AIR POS, same as manager approvals; no PIN here). Never logged.
-      // Gordon (Nov 3): the session user is a manager -> no password re-check; anyone else must still pass the manager check
+      // the owner (Nov 3): the session user is a manager -> no password re-check; anyone else must still pass the manager check
       const mc = ctx.isManager() ? { ok: true } : await reg.managerCheck({ user: b.user, password: b.password });
       if (!mc || !mc.ok) return { ok: false, needManager: true, message: (mc && mc.message) || 'Manager login failed' };
       const r = await reg.api.memberGet(b.retailMemberId), m = val(r);

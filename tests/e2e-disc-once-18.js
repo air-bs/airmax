@@ -1,4 +1,4 @@
-// AirMax #18 "printed once" (Gordon, Nov 3 2026): a discounted item's discount must appear on the receipt EXACTLY ONCE, under the item:
+// AirMax #18 "printed once" (owner, Nov 3 2026): a discounted item's discount must appear on the receipt EXACTLY ONCE, under the item:
 // either the Air Max line ("33% off -$9.90") or, when the store's own AIR POS template already prints it, only the template's line.
 // Real receipt PDFs from the OFFLINE fake AIR POS (FAKE_REAL_RECEIPT), made-up items, cash only (no card is ever charged). For each
 // template style (none / "Discount -$x" / "You saved $x" / "-33% -$x") it rings up: % item discount, $ item discount, a multi-buy

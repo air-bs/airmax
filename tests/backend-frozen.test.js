@@ -243,15 +243,15 @@ const MNY109 = [
   // drw1011 (1.0.11 drawer fix #10, built Nov 2 at Ari's request on claude/step0-measure; APPROVED by Ari Nov 3 2026, branch only until merged, printing only, no money):
   // Star futurePRNT queue: driver drawer first on Automatic too; "queue refuses raw" note saved across restarts (30 days).
   ['drw1011', '1.0.11 drawer fix: Star futurePRNT driver drawer first + raw-refused note kept (printing.js only, no money)', { 'printing.js': ["    if (b.printerName !== undefined || b.printerType !== undefined || b.printMethod !== undefined || b.printerConn !== undefined) { this._rawRejected = null; this._drawerViaDriver = null; } // star110+","  rawRejected() { const x = this._rawRejected; return x && x.for === this.printerName() ? x : null; }, // star110+","    const line = `printer ${this.printerName() || '(automatic)'} refuses raw jobs; it uses the Windows driver (receipts) and the driver drawer signal (Star) for the rest of this session. ${why}`; // star110+","  starDrawerViaDriver(p) { const ps = this.printerSettings(); return p.type === 'star' && ps.printerConn === 'windows' && ps.printMethod !== 'raw' && (ps.printMethod === 'driver' || !!this.rawRejected() || (this._drawerViaDriver && this._drawerViaDriver.for === this.printerName())); }, // star110+"] }, { 'printing.js': 14 }],
-  // rcp1011 (#1/#7 receipt right after card approval, Gordon OK Nov 3, branch claude/work; card status checks only, no money): every 0.5 s for the first
+  // rcp1011 (#1/#7 receipt right after card approval, approved Nov 3, branch claude/work; card status checks only, no money): every 0.5 s for the first
   // 60 s of a card wait (was 10 s) and the gap counted from the start of the previous check (was from its answer). Never sends a payment.
   ['rcp1011', '1.0.11 card approval seen sooner: 0.5 s checks for 60 s, gap from check start (read-only checks, no money)', { 'register.js': ["const POLL = { fast: 500, slow: 1000, idle: 2000, fastFor: 10000, warnAfter: 120000 };", "      this.cardTimer = setTimeout(once, el < POLL.fastFor ? POLL.fast : (el < POLL.warnAfter ? POLL.slow : POLL.idle));"] }, { 'register.js': 1 }],
-  // f4m1011 (F4 New price on multi-buy and weighed items, Gordon OK Nov 3, branch claude/f4-multibuy; line discount amount only, item price never changed):
+  // f4m1011 (F4 New price on multi-buy and weighed items, approved Nov 3, branch claude/f4-multibuy; line discount amount only, item price never changed):
   // the typed price per item is kept when the quantity changes (also across a multi-buy price point) and worked out in whole cents.
-  // Gordon OK Nov 3 (1.0.11): the typed price also survives Put Aside / Load Aside, Hold / Load Hold and a restart: kept on this PC in
+  // approved Nov 3 (1.0.11): the typed price also survives Put Aside / Load Aside, Hold / Load Hold and a restart: kept on this PC in
   // f4-prices.json (line id -> price; no customer data, never sent to AIR POS). Same 1 changed line; 20 added lines (was 4).
   ['f4m1011', '1.0.11 F4 New price kept per item across qty / multi-buy changes, whole-cent target (line discount amount only)', { 'register.js': ["    if (kind === 'price') { const per = sub.quantity * sub.rate, orig = per > 0 ? round(amt / per, 2) : 0, raw = arguments[2], np = round(Number(raw), 2); if (raw === '' || raw == null || !Number.isFinite(Number(raw))) return fail('Type the new price'); if (np < 0) return fail('The new price cannot be below $0.00'); if (np > orig + 0.004) return fail(`New price ${money(np)} is higher than the original ${money(orig)}. A new price can only lower the price.`); if (np >= orig - 0.004) { if (sub.isCustomDiscount) { sub.isCustomDiscount = false; sub.discountMethod = DiscountMethod.Percentage; this.applySubDiscount(sub); await this.recalc(); } return { ok: true, message: `${sub.name}: same as the original price ${money(orig)}, no discount` }; } kind = 'amount'; value = round(amt - np * per, 2); } // New price (F4): discount = original - new, sent as the existing $-off line discount; item price never changed // f4p1011+"] }, { 'register.js': 20 }],
-  // is1011 (1.0.11 instant scan, Gordon, approved for 1.0.11): 4 ADDED guard lines, one at the top of startPay, tender, finishSale and hold:
+  // is1011 (1.0.11 instant scan, approved for 1.0.11): 4 ADDED guard lines, one at the top of startPay, tender, finishSale and hold:
   // while any sale line is still unconfirmed by AIR POS (app/instantscan.js), they refuse with a retry message. No line changed.
   ['is1011', '1.0.11 instant scan: Pay / payment / Complete / Hold refused while a line is unconfirmed (guards only)', { 'register.js': [] }, { 'register.js': 4 }],
   // rp1011 (1.0.11 receipt prefetch, speed only, no money): finishSale asks AIR POS for the receipt template list WHILE Complete runs (1 added
@@ -261,7 +261,7 @@ const MNY109 = [
   // together after Home/Index (4 changed lines in login, store text below); customer search starts the shop-points setting read at the same time
   // as the search (1 added + 1 changed line in findMembers; its store text is the mny109e line, stripped next).
   ['su1011', '1.0.11 startup / search speed: independent reads run together (no value changed)', { 'register.js': ["    const dc = await this.api.discountConfigGet(); this.discountConfig = (val(dc) && val(dc).subs) ? val(dc) : { subs: [] };","    if (!this.retailCfg().extraChargeSetting) { const rc = val(await this.api.retailConfigGet()); if (rc && this.home) this.home.retailConfig = { ...rc, ...this.retailCfg() }; }","    await this.checkSession();","    await this.loadKeyed();"], 'extras.js': ["    const shop = await this.pointByShop(); // mny109e~"] }, { 'register.js': 0, 'extras.js': 1 }],
-  // rcv1011 (Gordon OK 6:41 PM ET Nov 3 2026; branch fix/recovery-receive-verify): recoverSale, when the order read lists no receive for the payment the
+  // rcv1011 (approved 6:41 PM ET Nov 3 2026; branch fix/recovery-receive-verify): recoverSale, when the order read lists no receive for the payment the
   // journal says was being sent, asks AIR POS about that one payment with RetailOrderReceiveCheck (read-only) before saying nothing was paid. Done = adopted
   // (never re-sent); pending card = existing wait/poll; unclear answer = sale stays blocked + notice. Never a ReceiveBegin. Added lines only (12).
   ['rcv1011', '1.0.11 recovery verifies a journaled payment with ReceiveCheck when the order read does not list it (added lines only)', { 'recovery.js': [] }, { 'recovery.js': 12 }],
@@ -311,7 +311,7 @@ function strip18(f, text, record) {
   }
   return out.join('\n');
 }
-// #19 (Gordon, Nov 2026; print only, not merged until he approves): gift card last 4 + balance on the receipt's print copy. extras.js
+// #19 (owner, Nov 2026; print only, not merged until he approves): gift card last 4 + balance on the receipt's print copy. extras.js
 // printGiftSlip gets ONE tagged block "// gc19+" ... "// gc19-" around ONE added line (no slip when that receipt was stamped). Blocks only
 // add lines: taking them out, markers included, must give the file exactly as before. No other app/lib file has them; the added line
 // makes no AIR POS call and touches no total, payment or cart field. Stripped first (newest change).
@@ -332,7 +332,7 @@ function stripGc19(f, text, record) {
   }
   return out.join('\n');
 }
-// #fp6 (AirMax Batch 6, Gordon OK Nov 3 2026): manager approval by fingerprint. kiosk.js managerCheck gets ONE tagged block "// fp6+" ... "// fp6-"
+// #fp6 (AirMax Batch 6, approved Nov 3 2026): manager approval by fingerprint. kiosk.js managerCheck gets ONE tagged block "// fp6+" ... "// fp6-"
 // around ONE added line: a body with the user name "@fingerprint" is approved only when this.fpApproval (set by app/api/fingerprints.js, which asked
 // the AIR POS server and the :20001 service itself) knows the one-time token sent as the password. Blocks only add lines: taking them out, markers
 // included, must give the file exactly as before. No other app/lib file has them; the added line makes no AIR POS call and touches no total,

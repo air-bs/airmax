@@ -1,4 +1,4 @@
-// 1.0.11 instant scan (Gordon, approved for 1.0.11) against the OFFLINE fake AIR POS (made-up products, cash only, no card ever charged):
+// 1.0.11 instant scan (approved for 1.0.11) against the OFFLINE fake AIR POS (made-up products, cash only, no card ever charged):
 //  A. setting OFF (default): no list downloaded or saved, and a whole sale makes exactly the AIR POS calls master makes
 //  B. setting ON: list loads in pages when switched on; scans go the old way until it is complete
 //  C. scan speed before (off) / after (on) with a 150 ms AIR POS round trip

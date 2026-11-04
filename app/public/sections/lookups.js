@@ -2,7 +2,7 @@
 // 1. window.AirMaxLookups: one place where every screen reads the lookup lists (tax kinds, payment types, sub-types, origins, categories, regions)
 //    and this terminal's settings. Items / Customers / Orders batches call  AirMaxLookups.load('taxKinds')  etc.; answers are kept in memory for
 //    5 minutes per login (never written to disk) and  { refresh: true }  asks AIR POS again.
-// 2. Two named mount slots the Settings layout draws when it is built (batch 1 owns settings.js; the left-menu layout waits for Gordon's OK):
+// 2. Two named mount slots the Settings layout draws when it is built (batch 1 owns settings.js; the left-menu layout waits for the owner's OK):
 //      settings.store.terminal  -> "Terminal settings" (view only)
 //      settings.store.lists     -> "Lists" (view only)
 //    Until a Settings screen draws those slots nothing shows anywhere: this file does NOT register the `settings` tab (that would replace the
